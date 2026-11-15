@@ -2,115 +2,90 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Connect-Radar V2 Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect-Radar V2 — One-Stop Shop</title>
 <style>
-  * { box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 12px;
-    background: #0f0f0f;
-    color: #f0f0f0;
-    line-height: 1.4;
-  }
-  h1 { font-size: 1.4rem; margin: 0 0 4px 0; }
-  .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 16px; }
-  h2 { font-size: 1rem; margin: 20px 0 8px 0; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
-  .card {
-    background: #1a1a1a;
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 10px;
-  }
-  .progress-wrap { background: #333; border-radius: 8px; height: 10px; overflow: hidden; margin: 8px 0; }
-  .bar { background: linear-gradient(90deg, #2d7ff9, #5dade2); height: 100%; width: 15%; border-radius: 8px; }
-  .btn {
-    display: block;
-    width: 100%;
-    background: #2d7ff9;
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 10px;
-    margin: 6px 0;
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .btn:active { background: #1a6ae0; }
-  .btn.secondary { background: #333; }
-  .status { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; }
+  body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 16px; background: #111; color: #eee; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.2em; }
+  h2 { font-size: 1.1rem; margin-top: 1.5em; border-bottom: 1px solid #333; padding-bottom: 4px; }
+  .card { background: #1e1e1e; border-radius: 8px; padding: 12px; margin: 8px 0; }
+  .progress { background: #333; border-radius: 6px; height: 18px; overflow: hidden; margin: 8px 0; }
+  .bar { background: #2d7ff9; height: 100%; width: 15%; }
+  .status { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
   .on { background: #c0392b; }
   .off { background: #27ae60; }
-  .muted { color: #777; font-size: 0.85rem; }
-  ul, ol { margin: 8px 0; padding-left: 20px; }
-  li { margin: 4px 0; }
-  a { color: #5dade2; text-decoration: none; }
-  .phase { font-size: 0.95rem; }
+  .btn { background: #2d7ff9; color: white; border: none; padding: 8px 14px; border-radius: 6px; margin: 4px 4px 4px 0; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn:hover { background: #1a6ae0; }
+  a { color: #5dade2; }
+  .muted { color: #888; font-size: 0.9rem; }
 </style>
 </head>
 <body>
-<h1>Connect-Radar V2 Hub</h1>
-<p class="subtitle">Status, decisions, and actions. Works in Tesla and any browser.</p>
+<h1>Connect-Radar V2 — One-Stop Shop</h1>
+<p class="muted">Central hub. Updated by CoS and bots. Freeze is ON.</p>
 
 <h2>Progress</h2>
 <div class="card">
-  <p class="phase"><strong>Pre-development</strong></p>
-  <div class="progress-wrap"><div class="bar"></div></div>
-  <p class="muted">~15% complete — Master List and environment still open</p>
-  <p>Freeze: <span class="status on">ON</span></p>
-  <p class="muted">Critical path: M1 → M2 → M4 → M5 → M7</p>
+  <p><strong>Overall:</strong> Pre-development</p>
+  <div class="progress"><div class="bar"></div></div>
+  <p class="muted">~15% — Master List + environment still open</p>
+  <p><strong>Critical path:</strong> M1 CI → M2 staging → M4 prod → M5 USN → M7 cutover</p>
+  <p>Freeze: <span class="status on">ON</span> &nbsp; Cloud Agents: build pending</p>
 </div>
 
-<h2>Actions</h2>
+<h2>Start a Task</h2>
 <div class="card">
-  <a class="btn" href="https://github.com/Connect-Radar/connect-radar-v2/issues/new">New Issue</a>
+  <p>These open the right place. Freeze still blocks actual coding.</p>
+  <a class="btn" href="https://github.com/Connect-Radar/connect-radar-v2/issues/new">New GitHub Issue</a>
   <a class="btn" href="https://linear.app/connect-radar">Open Linear</a>
-  <a class="btn secondary" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Architecture & Decisions</a>
-  <a class="btn secondary" href="https://app.notion.com/p/40f57419b0fb81bca692ee70fd1eb2ef">Roadmap</a>
-  <a class="btn secondary" href="https://github.com/Connect-Radar/connect-radar-v2">V2 Repo</a>
+  <a class="btn" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Architecture & Decisions</a>
+  <a class="btn" href="https://app.notion.com/p/40f57419b0fb81bca692ee70fd1eb2ef">Roadmap</a>
+  <a class="btn" href="https://github.com/Connect-Radar/connect-radar-v2">V2 Repo</a>
 </div>
 
-<h2>Decisions Waiting</h2>
+<h2>1. Decisions Waiting</h2>
 <div class="card">
   <p><strong>None pending</strong></p>
-  <p class="muted">When a decision is ready, options will appear here.</p>
+  <p class="muted">When CoS adds one, options will appear here as buttons.</p>
 </div>
 
-<h2>Blockers</h2>
+<h2>2. Blockers</h2>
 <div class="card">
-  <p>Cloud Agent build failed</p>
-  <p class="muted">Missing .cursor/environment.json</p>
+  <p>Cloud Agent environment build failed — missing <code>.cursor/environment.json</code></p>
+  <p class="muted">Owner: Shyam / Dev chat</p>
 </div>
 
-<h2>Ready for You</h2>
+<h2>3. Ready for Me</h2>
 <div class="card">
-  <p>Commit environment.json and trigger build</p>
-  <p>Finish Master List decisions</p>
+  <p>Commit environment.json and trigger Cloud Agent build</p>
+  <p>Finalize remaining Master List decisions</p>
 </div>
 
-<h2>Next Actions</h2>
-<div class="card">
-  <ol>
-    <li>Add environment.json and trigger Cloud Agent build</li>
-    <li>Lock remaining Master List items</li>
-    <li>Tell CoS to surface real decisions here</li>
-  </ol>
-</div>
-
-<h2>Recent</h2>
+<h2>4. Recent Activity</h2>
 <div class="card">
   <ul>
-    <li>Hub page published</li>
-    <li>Cloud Agent environment exists (build pending)</li>
-    <li>Usage paused</li>
+    <li>Public hub page published (GitHub Pages)</li>
+    <li>Cloud Agent environment exists; build not yet successful</li>
+    <li>Usage paused after earlier spikes</li>
   </ul>
 </div>
 
-<p class="muted" style="text-align:center; margin-top:24px;">Last updated 2026-11-15 · CoS keeps this current</p>
+<h2>5. Next 3 Actions</h2>
+<div class="card">
+  <ol>
+    <li>Add <code>.cursor/environment.json</code> and trigger build</li>
+    <li>Finish Master List decisions</li>
+    <li>Tell CoS to start surfacing real decisions here</li>
+  </ol>
+</div>
+
+<h2>Quick Links</h2>
+<div class="card">
+  <p><a href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Notion mirror</a></p>
+  <p><a href="https://github.com/Connect-Radar/connect-radar-v2">V2 repo</a></p>
+  <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
+</div>
+
+<p class="muted">Last updated: 2026-11-15. CoS should keep this current.</p>
 </body>
 </html>
