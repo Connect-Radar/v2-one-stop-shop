@@ -39,7 +39,8 @@
 <div class="card">
   <p><strong>Overall:</strong> 3% — 30 of 1,054 Master List items complete</p>
   <div class="progress"><div class="bar"></div></div>
-  <p class="muted">Source: Master List = <a href="https://app.notion.com/p/41457419b0fb81f7990ff6b4a081e893">Connect-Radar V2 Development Blueprint</a> v1.2 (Nov 12, 2026, 10:55 PM CT). 1,054 items: 29 Done + 1 Obsolete = 30 complete; 1,024 open (1,019 Open, 2 Decision needed, 3 Deferred). Linear (separate): 0 of 36 V2 issues done. GitHub: 89 open issues. Checked 1:35 PM CT, Nov 15, 2026.</p>
+  <p class="muted">GitHub: 89 open issues in connect-radar-v2 (as of 2:16 PM CT)</p>
+  <p class="muted">Source: Master List = <a href="https://app.notion.com/p/41457419b0fb81f7990ff6b4a081e893">Connect-Radar V2 Development Blueprint</a> v1.2 (Nov 12, 2026, 10:55 PM CT). 1,054 items: 29 Done + 1 Obsolete = 30 complete; 1,024 open (1,019 Open, 2 Decision needed, 3 Deferred). Linear (separate): 0 of 36 V2 issues done. Checked 1:35 PM CT, Nov 15, 2026.</p>
   <p><strong>Phase:</strong> Pre-development, freeze ON</p>
   <p><strong>Critical path:</strong> M1 CI → M2 staging/security → M4 prod/DR → M5 USN parity → M7 cutover</p>
   <p>
@@ -49,6 +50,19 @@
   </p>
 </div>
 
+
+<h2>Master List — Next 5</h2>
+<div class="card">
+  <p>Next unfinished items in Blueprint execution order. Source: <a href="https://app.notion.com/p/41457419b0fb81f7990ff6b4a081e893">Connect-Radar V2 Development Blueprint</a> v1.2.</p>
+  <ul>
+    <li><strong>BP-001</strong> — Epic M0 tracker: gates & access waiting on Shyam (#147)<br /><span class="muted">Status: Open (items: Open 1, Done 1, Obsolete 1) · Phase: P0 — Governance, decisions & access</span></li>
+    <li><strong>BP-002</strong> — Confirm app install scope is connect-radar-v2 only.<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions & access</span></li>
+    <li><strong>BP-003</strong> — Draft bot git author/committer + 'Bot: <name>' trailer + PR label config.<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions & access</span></li>
+    <li><strong>BP-004</strong> — Migrate bots to the app, one batch at a time.<br /><span class="muted">Status: Open (items: Open 3) · Phase: P0 — Governance, decisions & access</span></li>
+    <li><strong>BP-005</strong> — Test PR/issue/comment show as connect-radar-grokbot-app[bot].<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions & access</span></li>
+  </ul>
+</div>
+
 <h2>Usage Predictions</h2>
 <div class="card">
   <p><strong>Current week:</strong> 49.4% of the weekly limit used (shared with other apps on the Super plan)</p>
@@ -56,6 +70,12 @@
   <p><strong>Extra credits:</strong> $0 left. Grok Bot stops if included usage runs out.</p>
   <p><strong>Prediction:</strong> While the freeze is on, usage is mostly status and logging work; no measured forecast yet.</p>
   <p class="muted">All bot routines are paused.</p>
+</div>
+
+<h2>Ask CoS</h2>
+<div class="card">
+  <p>Send a request to Chief of Staff. Opens a pre-filled GitHub issue in the hub repo.</p>
+  <a class="btn" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Ask%20CoS&body=Request%3A%0A%0APriority%20%28now%2Ftoday%2Fthis%20week%29%3A%0A%0ASent%20from%20the%20V2%20One-Stop%20Shop.%20Chief%20of%20Staff%20will%20pick%20this%20up.">Ask CoS</a>
 </div>
 
 <h2>Start a Task</h2>
@@ -161,6 +181,20 @@
   <p class="muted">Or tell CoS in chat or Tesla.</p>
 </div>
 
+
+<h2>Decision history</h2>
+<div class="card">
+  <p><strong>Via the hub buttons:</strong> None yet via the hub. No issues with the “decision” label in <a href="https://github.com/Connect-Radar/v2-one-stop-shop">v2-one-stop-shop</a>.</p>
+  <p><strong>Recently locked on Architecture & Decisions (Nov 14–15):</strong></p>
+  <ul>
+    <li>Nov 15, 12:24 PM CT — Granted CoS write access to the hub only (t1023).</li>
+    <li>Nov 15, 10:24 AM CT — Closed 20 older exceptions; t582 kept open (t1017).</li>
+    <li>Nov 14, 8:13 PM CT — Closed t1004, t854, t857, t907, t918 (t1012).</li>
+    <li>Nov 14, 2:10 PM CT — Locked 7 V1 parity decisions as Linear CON-41 (t1004).</li>
+  </ul>
+  <p class="muted">Nov 15 (t1029): Progress source on this hub switched to the Master List.</p>
+</div>
+
 <h2>2. Blockers</h2>
 <div class="card">
   <div class="item">
@@ -204,35 +238,31 @@
 </div>
 
 
-<h2>Master List — Next 5</h2>
+<h2>Cloud Agent / PR feed</h2>
 <div class="card">
-  <p class="muted">From the Blueprint (next unfinished items). CoS keeps this current.</p>
-  <ol>
-    <li>M0: Gates & access waiting on Shyam</li>
-    <li>M1: CI pipeline green and enforced</li>
-    <li>Lift development freeze (decision)</li>
-    <li>Start signed-in staging crawl (t912)</li>
-    <li>Close eleven documentation gaps (t925)</li>
-  </ol>
-  <p><a href="https://app.notion.com/p/41457419b0fb81f7990ff6b4a081e893">Open full Blueprint</a></p>
-</div>
-
-<h2>Decision History</h2>
-<div class="card">
-  <p>None recorded via the hub yet.</p>
-  <p class="muted">Approved / deferred / modified decisions will appear here once you use the buttons or tell CoS.</p>
-</div>
-
-<h2>Ask CoS</h2>
-<div class="card">
-  <a class="btn" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Ask%20CoS&body=Request%3A%0A%0AContext%3A%0A%0AFrom%20V2%20One-Stop%20Shop">One-tap Ask CoS</a>
-  <p class="muted">Opens a pre-filled issue. CoS will see it and respond.</p>
-</div>
-
-<h2>GitHub Issues (secondary)</h2>
-<div class="card">
-  <p><strong>89 open</strong> issues in <a href="https://github.com/Connect-Radar/connect-radar-v2/issues">connect-radar-v2</a></p>
-  <p class="muted">Separate from Master List progress. CoS updates this count.</p>
+  <p><strong>Last Cloud Agent run:</strong> <a href="https://cursor.com/agents/bc-0f8cc665-bfab-5ff2-833e-80534c009c58">Fix staging critical-alerts SNS policy (#95)</a> — finished. Opened <a href="https://github.com/Connect-Radar/connect-radar-v2/pull/160">PR #160</a>, merged Nov 4, 2026, 3:25 AM CT.</p>
+  <p><strong>Earlier:</strong> <a href="https://cursor.com/agents/bc-16d425e2-11e7-4f18-b000-75e7b8942436">Initial dev environment</a> — finished. No agents are running now.</p>
+  <p><strong>Open draft PRs:</strong> None.</p>
+  <p><strong>Open PRs in connect-radar-v2</strong> (16, none are drafts):</p>
+  <ul>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/170">#170</a> — chore(deps): bump the all-others group across 1 directory with 49 updates <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/169">#169</a> — chore(deps-dev): bump aws-cdk from 2.1147.0 to 2.1148.0 in the aws-cdk group <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/167">#167</a> — chore(deps): bump the react group with 5 updates <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/166">#166</a> — chore(deps): bump @tanstack/react-query from 5.100.14 to 5.105.1 in the tanstack group <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/165">#165</a> — chore(deps): bump the actions-updates group with 9 updates <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/164">#164</a> — chore(deps): bump the aws-sdk group with 15 updates <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/163">#163</a> — fix(e2e): Cognito sign-in helper + per-account password secrets for functional spec <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/159">#159</a> — ci(deploy): remove no-op auto-rollback step; document manual rollback (review only — do not auto-merge) <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/72">#72</a> — fix(scripts): contract check handles multi-line optional Zod fields (appointments false positive) <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/71">#71</a> — fix(backend): timezone-safe maintenance nextDueDate (UTC) + real-helper test <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/70">#70</a> — test(frontend): raise coverage above thresholds (upload, vitals, usePageTitle, useTour) <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/69">#69</a> — chore: prettier pass over packages/*/src with eslint-disable fixes <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/68">#68</a> — perf(frontend): lazy-load heavy tabs and split vendor chunks under 500KB <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/67">#67</a> — fix(db): idempotent 0055 reconcile migration for 0031/0033 (fresh runs pass; committed migrations untouched) <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/66">#66</a> — fix(security): bump vulnerable transitive deps to clear Trivy scan <span class="muted">(not a draft)</span></li>
+    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/64">#64</a> — docs(roadmap): add V2 Game Plan (decisions, M0–M7, readiness additions, review gaps) <span class="muted">(not a draft)</span></li>
+  </ul>
+  <p><strong>Can a new agent start?</strong> No — development freeze is ON (needs Shyam to lift it).</p>
 </div>
 
 <h2>5. Recent Activity</h2>
@@ -272,6 +302,6 @@
   <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
 </div>
 
-<p class="muted">Last updated: 2026-11-15 1:35 PM CT by Chief of Staff.</p>
+<p class="muted">Last updated: 2026-11-15 2:16 PM CT by Chief of Staff.</p>
 </body>
 </html>
