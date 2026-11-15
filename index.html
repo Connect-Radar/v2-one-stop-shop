@@ -6,26 +6,48 @@
 <title>Connect-Radar V2 — One-Stop Shop</title>
 <style>
   body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 16px; background: #111; color: #eee; }
-  h1 { font-size: 1.5rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.2em; }
   h2 { font-size: 1.1rem; margin-top: 1.5em; border-bottom: 1px solid #333; padding-bottom: 4px; }
   .card { background: #1e1e1e; border-radius: 8px; padding: 12px; margin: 8px 0; }
+  .progress { background: #333; border-radius: 6px; height: 18px; overflow: hidden; margin: 8px 0; }
+  .bar { background: #2d7ff9; height: 100%; width: 15%; transition: width 0.3s; }
   .status { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
   .on { background: #c0392b; }
   .off { background: #27ae60; }
-  button { background: #2d7ff9; color: white; border: none; padding: 8px 14px; border-radius: 6px; margin: 4px 4px 4px 0; cursor: pointer; }
-  button:hover { background: #1a6ae0; }
+  button, .btn { background: #2d7ff9; color: white; border: none; padding: 8px 14px; border-radius: 6px; margin: 4px 4px 4px 0; cursor: pointer; text-decoration: none; display: inline-block; }
+  button:hover, .btn:hover { background: #1a6ae0; }
   a { color: #5dade2; }
   .muted { color: #888; font-size: 0.9rem; }
+  .phase { font-size: 0.95rem; }
 </style>
 </head>
 <body>
 <h1>Connect-Radar V2 — One-Stop Shop</h1>
-<p class="muted">Central hub for decisions, blockers, and status. Updated by CoS and bots.</p>
+<p class="muted">Central hub. Updated by CoS and bots. Freeze is ON.</p>
+
+<h2>Progress</h2>
+<div class="card">
+  <p class="phase"><strong>Overall:</strong> Pre-development</p>
+  <div class="progress"><div class="bar" style="width:15%"></div></div>
+  <p class="muted">~15% — Master List + environment still open</p>
+  <p><strong>Critical path:</strong> M1 CI → M2 staging → M4 prod → M5 USN → M7 cutover</p>
+  <p>Freeze: <span class="status on">ON</span> &nbsp; Cloud Agents: build pending</p>
+</div>
+
+<h2>Start a Task</h2>
+<div class="card">
+  <p>These open the right place or tell CoS what to do. Freeze still blocks actual coding.</p>
+  <a class="btn" href="https://github.com/Connect-Radar/connect-radar-v2/issues/new">New GitHub Issue</a>
+  <a class="btn" href="https://linear.app/connect-radar">Open Linear</a>
+  <a class="btn" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Architecture & Decisions</a>
+  <a class="btn" href="https://app.notion.com/p/40f57419b0fb81bca692ee70fd1eb2ef">Roadmap</a>
+  <p class="muted" style="margin-top:12px;">Or tell CoS in chat: “Add decision: [your question]”</p>
+</div>
 
 <h2>1. Decisions Waiting</h2>
 <div class="card">
   <p><strong>None pending</strong></p>
-  <p class="muted">When a decision is ready, options will appear here as buttons.</p>
+  <p class="muted">When CoS adds one, options appear here as buttons.</p>
 </div>
 
 <h2>2. Blockers</h2>
@@ -40,43 +62,29 @@
   <p>Finalize remaining Master List decisions</p>
 </div>
 
-<h2>4. Current Phase</h2>
-<div class="card">
-  <p><strong>Phase:</strong> Pre-development / Freeze ON</p>
-  <p><strong>Critical path:</strong> M1 CI → M2 staging/security → M4 prod/DR → M5 USN parity → M7 cutover</p>
-  <p><strong>Next:</strong> Lock Master List + environment build</p>
-</div>
-
-<h2>5. Recent Activity</h2>
+<h2>4. Recent Activity</h2>
 <div class="card">
   <ul>
+    <li>Public hub page published (GitHub Pages)</li>
     <li>Cloud Agent environment exists; build not yet successful</li>
     <li>Usage paused after earlier spikes</li>
-    <li>Cooking skill added to Health & Fitness</li>
   </ul>
 </div>
 
-<h2>6. Usage & Freeze</h2>
-<div class="card">
-  <p>Freeze: <span class="status on">ON</span></p>
-  <p>Bot automations: <span class="status on">Paused</span></p>
-  <p>Cloud Agents: Environment ready, build pending</p>
-</div>
-
-<h2>7. Next 3 Actions</h2>
+<h2>5. Next 3 Actions</h2>
 <div class="card">
   <ol>
     <li>Add <code>.cursor/environment.json</code> and trigger build</li>
     <li>Finish Master List decisions</li>
-    <li>Confirm CoS is routing updates to this page</li>
+    <li>Tell CoS to start surfacing real decisions here</li>
   </ol>
 </div>
 
-<h2>8. Quick Links</h2>
+<h2>Quick Links</h2>
 <div class="card">
   <p><a href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Notion mirror</a></p>
-  <p><a href="https://github.com/Connect-Radar/connect-radar-v2">GitHub repo</a></p>
-  <p><a href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Architecture & Decisions</a></p>
+  <p><a href="https://github.com/Connect-Radar/connect-radar-v2">V2 repo</a></p>
+  <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
 </div>
 
 <p class="muted">Last updated: 2026-11-15. CoS should keep this current.</p>
