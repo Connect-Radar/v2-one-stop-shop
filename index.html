@@ -29,11 +29,11 @@
 </head>
 <body>
 <h1>Connect-Radar V2 — One-Stop Shop</h1>
-<p class="muted">Central hub. Updated by CoS and bots.</p>
+<p class="muted">Central hub. Tesla voice chats and CoS point here. CoS keeps it current.</p>
 
 <h2>Progress</h2>
 <div class="card">
-  <p><strong>Overall:</strong> Pre-development <span class="muted">(CoS updates this %)</span></p>
+  <p><strong>Overall:</strong> Pre-development</p>
   <div class="progress"><div class="bar"></div></div>
   <p class="muted">~15% — Master List + environment still open</p>
   <p><strong>Critical path:</strong> M1 CI → M2 staging → M4 prod → M5 USN → M7 cutover</p>
@@ -47,14 +47,12 @@
 <h2>Usage Predictions</h2>
 <div class="card">
   <p><strong>Current week:</strong> Paused after earlier spikes</p>
-  <p><strong>Forecast (if freeze stays on):</strong> Low — mostly CoS status checks</p>
-  <p><strong>Forecast (if freeze lifts + normal bot activity):</strong> Medium–High</p>
-  <p class="muted">CoS: update these numbers from actual usage data when available.</p>
+  <p><strong>Forecast (freeze stays on):</strong> Low — mostly CoS status checks</p>
+  <p><strong>Forecast (freeze lifts):</strong> Medium–High</p>
 </div>
 
 <h2>Start a Task</h2>
 <div class="card">
-  <p>These open the right place. Freeze still blocks actual coding.</p>
   <a class="btn" href="https://github.com/Connect-Radar/connect-radar-v2/issues/new">New GitHub Issue</a>
   <a class="btn" href="https://linear.app/connect-radar">Open Linear</a>
   <a class="btn" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Architecture & Decisions</a>
@@ -70,12 +68,12 @@
       <div class="muted">Options: Keep Linear · Switch to GitHub Issues · Defer</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="#">Approve Linear</a>
-      <a class="btn small modify" href="#">Modify</a>
-      <a class="btn small defer" href="#">Defer</a>
+      <a class="btn small approve" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Approve Linear</a>
+      <a class="btn small modify" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Modify</a>
+      <a class="btn small defer" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Defer</a>
     </div>
   </div>
-  <p class="muted" style="margin-top:8px;">CoS: replace this example with real decisions and wire the buttons to record the choice.</p>
+  <p class="muted">Clicking opens Architecture & Decisions. Tell CoS your choice in chat (or Tesla) and it will be recorded.</p>
 </div>
 
 <h2>2. Blockers</h2>
@@ -85,9 +83,7 @@
       <strong>Cloud Agent environment build failed</strong>
       <div class="muted">Missing .cursor/environment.json</div>
     </div>
-    <div class="actions">
-      <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
-    </div>
+    <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
   </div>
 </div>
 
@@ -95,31 +91,26 @@
 <div class="card">
   <div class="item">
     <div class="item-text">Commit environment.json and trigger Cloud Agent build</div>
-    <div class="actions">
-      <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
-    </div>
+    <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
   </div>
   <div class="item">
     <div class="item-text">Finalize remaining Master List decisions</div>
-    <div class="actions">
-      <a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Start</a>
-    </div>
+    <a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Start</a>
   </div>
 </div>
 
 <h2>4. Cloud Agent Status</h2>
 <div class="card">
   <p>Last build: <strong>Failed</strong> (missing environment.json)</p>
-  <p class="muted">Open draft PRs: none yet</p>
-  <p class="muted">CoS: update this section when a build runs or a PR opens.</p>
+  <p class="muted">Open draft PRs: none</p>
 </div>
 
 <h2>5. Recent Activity</h2>
 <div class="card">
   <ul>
-    <li>Public hub page published (GitHub Pages)</li>
-    <li>Cloud Agent environment exists; build not yet successful</li>
-    <li>Usage paused after earlier spikes</li>
+    <li>Hub published and CoS given write access</li>
+    <li>Cloud Agent environment exists; build pending</li>
+    <li>Usage paused</li>
   </ul>
 </div>
 
@@ -127,15 +118,15 @@
 <div class="card">
   <div class="item">
     <div class="item-text">1. Add .cursor/environment.json and trigger build</div>
-    <div class="actions"><a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a></div>
+    <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
   </div>
   <div class="item">
     <div class="item-text">2. Finish Master List decisions</div>
-    <div class="actions"><a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Start</a></div>
+    <a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Start</a>
   </div>
   <div class="item">
-    <div class="item-text">3. Tell CoS to surface real decisions here</div>
-    <div class="actions"><a class="btn small" href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Start</a></div>
+    <div class="item-text">3. Record any pending decisions with CoS</div>
+    <a class="btn small" href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Start</a>
   </div>
 </div>
 
@@ -146,6 +137,6 @@
   <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
 </div>
 
-<p class="muted">Last updated: 2026-11-15. CoS should keep progress, usage predictions, decisions, Cloud Agent status, and freeze/usage current.</p>
+<p class="muted">Last updated: 2026-11-15. Tesla voice and CoS refer here. CoS keeps this page current.</p>
 </body>
 </html>
