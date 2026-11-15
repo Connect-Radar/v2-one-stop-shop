@@ -14,8 +14,14 @@
   .status { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
   .on { background: #c0392b; }
   .off { background: #27ae60; }
-  .btn { background: #2d7ff9; color: white; border: none; padding: 8px 14px; border-radius: 6px; margin: 4px 4px 4px 0; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn { background: #2d7ff9; color: white; border: none; padding: 6px 12px; border-radius: 6px; margin: 2px 4px 2px 0; cursor: pointer; text-decoration: none; display: inline-block; font-size: 0.9rem; }
   .btn:hover { background: #1a6ae0; }
+  .btn.small { padding: 4px 10px; font-size: 0.85rem; }
+  .btn.approve { background: #27ae60; }
+  .btn.modify { background: #f39c12; }
+  .btn.defer { background: #7f8c8d; }
+  .item { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 8px 0; }
+  .item-text { flex: 1; }
   a { color: #5dade2; }
   .muted { color: #888; font-size: 0.9rem; }
 </style>
@@ -45,20 +51,30 @@
 
 <h2>1. Decisions Waiting</h2>
 <div class="card">
-  <p><strong>None pending</strong></p>
-  <p class="muted">When CoS adds one, options will appear here as buttons.</p>
+  <p class="muted">No decisions pending right now.</p>
 </div>
 
 <h2>2. Blockers</h2>
 <div class="card">
-  <p>Cloud Agent environment build failed — missing <code>.cursor/environment.json</code></p>
-  <p class="muted">Owner: Shyam / Dev chat</p>
+  <div class="item">
+    <div class="item-text">
+      <strong>Cloud Agent environment build failed</strong>
+      <div class="muted">Missing .cursor/environment.json</div>
+    </div>
+    <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
+  </div>
 </div>
 
 <h2>3. Ready for Me</h2>
 <div class="card">
-  <p>Commit environment.json and trigger Cloud Agent build</p>
-  <p>Finalize remaining Master List decisions</p>
+  <div class="item">
+    <div class="item-text">Commit environment.json and trigger Cloud Agent build</div>
+    <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
+  </div>
+  <div class="item">
+    <div class="item-text">Finalize remaining Master List decisions</div>
+    <a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Start</a>
+  </div>
 </div>
 
 <h2>4. Recent Activity</h2>
@@ -72,11 +88,18 @@
 
 <h2>5. Next 3 Actions</h2>
 <div class="card">
-  <ol>
-    <li>Add <code>.cursor/environment.json</code> and trigger build</li>
-    <li>Finish Master List decisions</li>
-    <li>Tell CoS to start surfacing real decisions here</li>
-  </ol>
+  <div class="item">
+    <div class="item-text">1. Add .cursor/environment.json and trigger build</div>
+    <a class="btn small" href="https://github.com/Connect-Radar/connect-radar-v2">Start</a>
+  </div>
+  <div class="item">
+    <div class="item-text">2. Finish Master List decisions</div>
+    <a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Start</a>
+  </div>
+  <div class="item">
+    <div class="item-text">3. Tell CoS to surface real decisions here</div>
+    <a class="btn small" href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Start</a>
+  </div>
 </div>
 
 <h2>Quick Links</h2>
@@ -86,6 +109,6 @@
   <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
 </div>
 
-<p class="muted">Last updated: 2026-11-15. CoS should keep this current.</p>
+<p class="muted">Last updated: 2026-11-15. CoS should keep this current and add Approve / Modify / Defer buttons on decisions.</p>
 </body>
 </html>
