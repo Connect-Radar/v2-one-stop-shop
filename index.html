@@ -58,7 +58,19 @@
   <p class="muted">Freeze lifted on Nov 15, 2026; no blocker work has started yet; each item waits for Shyam's go-ahead.</p>
 </div>
 
-
+<h2>Unlocked next (each waiting for Shyam's go-ahead)</h2>
+<div class="card">
+  <ol>
+    <li><strong>Stop prod deploy from PRs.</strong> Shyam approved the fix. The branch and commit are ready: one file changed, the workflow linter passes. The pull request into stage is waiting on Shyam pressing Submit in the V2 Infra Engineer chat. Nothing merges without Shyam.</li>
+    <li><strong>Fix nightly CI failures.</strong> The failures from Nov 5 to 15 are sorted into 9 groups (A to I). The group A fix draft (API tests login, about 30 failures a night) is ready, with no pushes. 3 decisions are waiting for Shyam: supersede old PR #163 or fix it, use a dedicated E2E test user or Shyam's own account, and confirm freshly rotated test passwords. Shyam picks the next group after A.</li>
+    <li><strong>Stage is idle and healthy:</strong> no merges since Nov 4 (nothing has been approved to merge), the stack is in a good state, nothing to fix. A small CI Postgres version bump to match Aurora 17.9 is noted for later.</li>
+    <li><strong>AI help Bedrock.</strong> Security review draft done. The Infra fix draft is paused until the deploy-gate PR is opened. No AWS changes. A few items need Shyam's read-only AWS go-ahead to check.</li>
+    <li>Onboarding auto-configure route</li>
+    <li>Email unsubscribe (CAN-SPAM)</li>
+    <li>Stripe/QuickBooks key verification</li>
+    <li>Owners for 41 unassigned issues</li>
+  </ol>
+</div>
 
 <h2>Open Draft PRs</h2>
 <div class="card">
@@ -68,7 +80,7 @@
 <h2>Auto Status</h2>
 <div class="card">
   <p>CoS checks for new decision issues and updates this page on a short cadence. Freeze lifted on Nov 15, 2026; no blocker work has started yet; each item waits for Shyam's go-ahead.</p>
-  <p class="muted">Last CoS check: see timestamp at bottom.</p>
+  <p class="muted">Last CoS check: Nov 15, ~10 PM CT status refresh. See timestamp at bottom.</p>
 </div>
 <h2>Master List — Next 5</h2>
 <div class="card">
@@ -84,7 +96,7 @@
 
 <h2>Usage Predictions</h2>
 <div class="card">
-  <p><strong>Current week:</strong> 49.4% of the weekly limit used (shared with other apps on the Super plan)</p>
+  <p><strong>Current week:</strong> 65.6% of the weekly limit used (shared with other apps on the Super plan), checked 10:08 PM CT, Nov 15, 2026</p>
   <p><strong>Resets:</strong> Thu Nov 19, 2026, 9:24 PM CT</p>
   <p><strong>Extra credits:</strong> $0 left. Grok Bot stops if included usage runs out.</p>
   <p><strong>Prediction:</strong> Freeze lifted on Nov 15, 2026; no blocker work has started yet; usage is still mostly status and logging work; no measured forecast yet.</p>
@@ -103,7 +115,7 @@
 
 <h2 id="decisions">1. Decisions Waiting</h2>
 <p class="muted">Sorted by priority: Breaking first, then Should-fix, then Nice-to-have (Auditor Production Readiness Plan buckets). Buckets are CoS-assigned unless the Auditor's plan sets one; tell CoS to change any.</p>
-<p class="muted">Buttons are being switched to a no-login option. Until then, reply to Chief of Staff in Grok Bot chat.</p>
+<p class="muted">These buttons open a GitHub login and are not used; answer decisions in the Chief of Staff chat. Removal is waiting on Shyam.</p>
 <div class="card">
   <h3 class="bucket">Should-fix</h3>
   <div class="item" id="decision-staging-crawl">
@@ -194,6 +206,7 @@
   <p><strong>Via the hub buttons:</strong> None recorded via the hub yet.</p>
   <p><strong>Recently locked (Nov 14–15):</strong></p>
   <ul>
+    <li>Nov 15, ~10 PM CT status refresh — Stage is idle and healthy; deploy-gate waiting on Submit in the V2 Infra Engineer chat; nightly CI sorted into 9 groups (group A draft ready); AI help security review draft done.</li>
     <li>Nov 15, 12:24 PM CT — Granted Chief of Staff write access to the hub only.</li>
     <li>Nov 15, 10:24 AM CT — Closed 20 older exceptions; one earlier item kept open.</li>
     <li>Nov 14, 8:13 PM CT — Closed five finished exceptions.</li>
@@ -282,6 +295,6 @@
   <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
 </div>
 
-<p class="muted">Last updated: 2026-11-15 6:16 PM CT by Chief of Staff.</p>
+<p class="muted">Last updated: 2026-11-15 10:11 PM CT by Chief of Staff.</p>
 </body>
 </html>
