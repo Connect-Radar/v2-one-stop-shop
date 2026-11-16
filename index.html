@@ -39,16 +39,17 @@
 </head>
 <body>
 <h1>Connect-Radar V2 — One-Stop Shop</h1>
-<p class="muted">Premium hub · Tesla-ready · CoS keeps it live · Decisions record automatically</p>
+<p class="muted">Premium hub · Tesla-ready · CoS keeps it live</p>
+<p class="muted">Public summary. Details are in the private Notion page. <a href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Details (private, sign-in required)</a></p>
 
 <h2>Progress</h2>
 <div class="card">
   <p><strong>Overall:</strong> 3% — 30 of 1,054 Master List items complete</p>
   <div class="progress"><div class="bar"></div></div>
-  <p class="muted">GitHub: 89 open issues in connect-radar-v2 (as of 2:16 PM CT)</p>
-  <p class="muted">Source: Master List = <a href="https://app.notion.com/p/41457419b0fb81f7990ff6b4a081e893">Connect-Radar V2 Development Blueprint</a> v1.2 (Nov 12, 2026, 10:55 PM CT). 1,054 items: 29 Done + 1 Obsolete = 30 complete; 1,024 open (1,019 Open, 2 Decision needed, 3 Deferred). Linear (separate): 0 of 36 V2 issues done. Checked 1:35 PM CT, Nov 15, 2026.</p>
+  <p class="muted">GitHub: 89 open issues in the V2 code repo (as of 2:16 PM CT)</p>
+  <p class="muted">Source: Master List v1.2 (Nov 12, 2026, 10:55 PM CT). 1,054 items: 29 Done + 1 Obsolete = 30 complete; 1,024 open (1,019 Open, 2 Decision needed, 3 Deferred). Issue tracker (separate): 0 of 36 V2 issues done. Checked 1:35 PM CT, Nov 15, 2026.</p>
   <p><strong>Phase:</strong> Pre-development, freeze ON</p>
-  <p><strong>Critical path:</strong> M1 CI → M2 staging/security → M4 prod/DR → M5 USN parity → M7 cutover</p>
+  <p><strong>Critical path:</strong> M1 CI → M2 staging → M4 production → M5 product parity → M7 cutover</p>
   <p>
     Freeze: <span class="status on">ON</span> &nbsp;
     Cloud Agents: <span class="status idle">None running</span> &nbsp;
@@ -60,8 +61,7 @@
 
 <h2>Open Draft PRs</h2>
 <div class="card">
-  <p class="muted">None open right now. CoS updates this when a Cloud Agent opens a PR.</p>
-  <p><a href="https://github.com/Connect-Radar/connect-radar-v2/pulls">View all PRs</a></p>
+  <p class="muted">None open right now.</p>
 </div>
 
 <h2>Auto Status</h2>
@@ -71,13 +71,13 @@
 </div>
 <h2>Master List — Next 5</h2>
 <div class="card">
-  <p>Next unfinished items in Blueprint execution order. Source: <a href="https://app.notion.com/p/41457419b0fb81f7990ff6b4a081e893">Connect-Radar V2 Development Blueprint</a> v1.2.</p>
+  <p>Next unfinished items in Blueprint execution order. Source: Master List v1.2.</p>
   <ul>
-    <li><strong>BP-001</strong> — Epic M0 tracker: gates & access waiting on Shyam (#147)<br /><span class="muted">Status: Open (items: Open 1, Done 1, Obsolete 1) · Phase: P0 — Governance, decisions & access</span></li>
-    <li><strong>BP-002</strong> — Confirm app install scope is connect-radar-v2 only.<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions & access</span></li>
-    <li><strong>BP-003</strong> — Draft bot git author/committer + 'Bot: <name>' trailer + PR label config.<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions & access</span></li>
-    <li><strong>BP-004</strong> — Migrate bots to the app, one batch at a time.<br /><span class="muted">Status: Open (items: Open 3) · Phase: P0 — Governance, decisions & access</span></li>
-    <li><strong>BP-005</strong> — Test PR/issue/comment show as connect-radar-grokbot-app[bot].<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions & access</span></li>
+    <li><strong>BP-001</strong> — Epic M0 tracker: gates and access waiting on Shyam<br /><span class="muted">Status: Open (items: Open 1, Done 1, Obsolete 1) · Phase: P0 — Governance, decisions and access</span></li>
+    <li><strong>BP-002</strong> — Confirm app install scope is the V2 code repo only.<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions and access</span></li>
+    <li><strong>BP-003</strong> — Draft bot git author settings and PR label config.<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions and access</span></li>
+    <li><strong>BP-004</strong> — Migrate bots to the app, one batch at a time.<br /><span class="muted">Status: Open (items: Open 3) · Phase: P0 — Governance, decisions and access</span></li>
+    <li><strong>BP-005</strong> — Test that PR, issue, and comment attribution uses the approved bot identity.<br /><span class="muted">Status: Open · Phase: P0 — Governance, decisions and access</span></li>
   </ul>
 </div>
 
@@ -92,21 +92,17 @@
 
 <h2>Ask CoS</h2>
 <div class="card">
-  <p>Send a request to Chief of Staff. Opens a pre-filled GitHub issue in the hub repo.</p>
-  <a class="btn" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Ask%20CoS&body=Request%3A%0A%0APriority%20%28now%2Ftoday%2Fthis%20week%29%3A%0A%0ASent%20from%20the%20V2%20One-Stop%20Shop.%20Chief%20of%20Staff%20will%20pick%20this%20up.">Ask CoS</a>
+  <p>Send a request to Chief of Staff in Grok Bot chat. A no-login button is being added.</p>
 </div>
 
 <h2>Start a Task</h2>
 <div class="card">
-  <a class="btn" href="https://github.com/Connect-Radar/connect-radar-v2/issues/new">New GitHub Issue</a>
-  <a class="btn" href="https://linear.app/connect-radar">Open Linear</a>
-  <a class="btn" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Architecture & Decisions</a>
-  <a class="btn" href="https://app.notion.com/p/40f57419b0fb81bca692ee70fd1eb2ef">Roadmap</a>
-  <a class="btn" href="https://github.com/Connect-Radar/connect-radar-v2">V2 Repo</a>
+  <p class="muted">To start a task, message Chief of Staff in Grok Bot chat. Details are in the private Notion page linked at the top.</p>
 </div>
 
 <h2 id="decisions">1. Decisions Waiting</h2>
 <p class="muted">Sorted by priority: Breaking first, then Should-fix, then Nice-to-have (Auditor Production Readiness Plan buckets). Buckets are CoS-assigned unless the Auditor's plan sets one; tell CoS to change any.</p>
+<p class="muted">Buttons are being switched to a no-login option. Until then, reply to Chief of Staff in Grok Bot chat.</p>
 <div class="card">
   <h3 class="bucket">Breaking (Must-fix)</h3>
   <div class="item" id="decision-freeze">
@@ -115,21 +111,21 @@
       <div class="muted">Overall development freeze. No coding or Cloud Agents until this is lifted.</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Lift%20the%20development%20freeze%20-%20Approve&body=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
-      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Lift%20the%20development%20freeze%20-%20Modify&body=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
-      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Lift%20the%20development%20freeze%20-%20Defer&body=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
+      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%20-%20Approve&body=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
+      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%20-%20Modify&body=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
+      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%20-%20Defer&body=Decision%3A%20Lift%20the%20development%20freeze%20%28overall%29%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
   <h3 class="bucket">Should-fix</h3>
-  <div class="item" id="decision-t912">
+  <div class="item" id="decision-staging-crawl">
     <div class="item-text">
-      <strong><span class="badge should-fix">Should-fix</span> Start the signed-in V2 staging crawl (open exception t912)</strong>
-      <div class="muted">Open exception t912. Do not start until approved.</div>
+      <strong><span class="badge should-fix">Should-fix</span> Start the signed-in V2 staging review</strong>
+      <div class="muted">Do not start until approved.</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20crawl%20%28t912%29%20-%20Approve&body=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20crawl%20%28open%20exception%20t912%29%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
-      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20crawl%20%28t912%29%20-%20Modify&body=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20crawl%20%28open%20exception%20t912%29%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
-      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20crawl%20%28t912%29%20-%20Defer&body=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20crawl%20%28open%20exception%20t912%29%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
+      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20review%20-%20Approve&body=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20review%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
+      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20review%20-%20Modify&body=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20review%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
+      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20review%20-%20Defer&body=Decision%3A%20Start%20the%20signed-in%20V2%20staging%20review%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
   <div class="item" id="decision-404s">
@@ -143,63 +139,62 @@
       <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Re-file%20the%20six%20candidate%20404s%20-%20Defer&body=Decision%3A%20Re-file%20the%20six%20candidate%20404s%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
-  <div class="item" id="decision-aws-role">
+  <div class="item" id="decision-staging-access">
     <div class="item-text">
-      <strong><span class="badge should-fix">Should-fix</span> New read-only AWS check of the staging-bot role/tags</strong>
-      <div class="muted">Earlier attempts t727, t742, and t745 hit connector errors and were closed. A new exception is required.</div>
+      <strong><span class="badge should-fix">Should-fix</span> New read-only staging access check</strong>
+      <div class="muted">A previous check did not finish. A new approval is required.</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20New%20read-only%20AWS%20staging-bot%20role%20check%20-%20Approve&body=Decision%3A%20New%20read-only%20AWS%20check%20of%20the%20staging-bot%20role%2Ftags%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
-      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20New%20read-only%20AWS%20staging-bot%20role%20check%20-%20Modify&body=Decision%3A%20New%20read-only%20AWS%20check%20of%20the%20staging-bot%20role%2Ftags%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
-      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20New%20read-only%20AWS%20staging-bot%20role%20check%20-%20Defer&body=Decision%3A%20New%20read-only%20AWS%20check%20of%20the%20staging-bot%20role%2Ftags%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
+      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20New%20read-only%20staging%20access%20check%20-%20Approve&body=Decision%3A%20New%20read-only%20staging%20access%20check%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
+      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20New%20read-only%20staging%20access%20check%20-%20Modify&body=Decision%3A%20New%20read-only%20staging%20access%20check%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
+      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20New%20read-only%20staging%20access%20check%20-%20Defer&body=Decision%3A%20New%20read-only%20staging%20access%20check%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
   <h3 class="bucket">Nice-to-have</h3>
-  <div class="item" id="decision-t852">
+  <div class="item" id="decision-drafts">
     <div class="item-text">
-      <strong><span class="badge nice">Nice-to-have</span> Start the t852 drafts</strong>
+      <strong><span class="badge nice">Nice-to-have</span> Start the pending record drafts</strong>
       <div class="muted">Held until you approve starting the drafts.</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20t852%20drafts%20-%20Approve&body=Decision%3A%20Start%20the%20t852%20drafts%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
-      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20t852%20drafts%20-%20Modify&body=Decision%3A%20Start%20the%20t852%20drafts%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
-      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20t852%20drafts%20-%20Defer&body=Decision%3A%20Start%20the%20t852%20drafts%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
+      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20pending%20record%20drafts%20-%20Approve&body=Decision%3A%20Start%20the%20pending%20record%20drafts%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
+      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20pending%20record%20drafts%20-%20Modify&body=Decision%3A%20Start%20the%20pending%20record%20drafts%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
+      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Start%20the%20pending%20record%20drafts%20-%20Defer&body=Decision%3A%20Start%20the%20pending%20record%20drafts%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
-  <div class="item" id="decision-gap7">
+  <div class="item" id="decision-issue-labels">
     <div class="item-text">
-      <strong><span class="badge nice">Nice-to-have</span> Gap 7: GitHub links and labels on issues #171–#179 (on HOLD)</strong>
-      <div class="muted">Currently on HOLD.</div>
+      <strong><span class="badge nice">Nice-to-have</span> Add missing links and labels on a set of older issues (on hold)</strong>
+      <div class="muted">Currently on hold.</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Gap%207%20GitHub%20links%20and%20labels%20%28%23171-%23179%29%20-%20Approve&body=Decision%3A%20Gap%207%3A%20GitHub%20links%20and%20labels%20on%20issues%20%23171%E2%80%93%23179%20%28on%20HOLD%29%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
-      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Gap%207%20GitHub%20links%20and%20labels%20%28%23171-%23179%29%20-%20Modify&body=Decision%3A%20Gap%207%3A%20GitHub%20links%20and%20labels%20on%20issues%20%23171%E2%80%93%23179%20%28on%20HOLD%29%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
-      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Gap%207%20GitHub%20links%20and%20labels%20%28%23171-%23179%29%20-%20Defer&body=Decision%3A%20Gap%207%3A%20GitHub%20links%20and%20labels%20on%20issues%20%23171%E2%80%93%23179%20%28on%20HOLD%29%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
+      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Add%20missing%20links%20and%20labels%20on%20a%20set%20of%20older%20issues%20%28on%20hold%29%20-%20Approve&body=Decision%3A%20Add%20missing%20links%20and%20labels%20on%20a%20set%20of%20older%20issues%20%28on%20hold%29%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
+      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Add%20missing%20links%20and%20labels%20on%20a%20set%20of%20older%20issues%20%28on%20hold%29%20-%20Modify&body=Decision%3A%20Add%20missing%20links%20and%20labels%20on%20a%20set%20of%20older%20issues%20%28on%20hold%29%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
+      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Add%20missing%20links%20and%20labels%20on%20a%20set%20of%20older%20issues%20%28on%20hold%29%20-%20Defer&body=Decision%3A%20Add%20missing%20links%20and%20labels%20on%20a%20set%20of%20older%20issues%20%28on%20hold%29%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
   <div class="item" id="decision-po-cleanup">
     <div class="item-text">
-      <strong><span class="badge nice">Nice-to-have</span> Product Owner cleanup of stale t857/t860 ticket lines</strong>
+      <strong><span class="badge nice">Nice-to-have</span> Product Owner cleanup of stale ticket lines</strong>
       <div class="muted">Cleanup is waiting on your go-ahead.</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20PO%20cleanup%20of%20stale%20t857%2Ft860%20ticket%20lines%20-%20Approve&body=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20t857%2Ft860%20ticket%20lines%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
-      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20PO%20cleanup%20of%20stale%20t857%2Ft860%20ticket%20lines%20-%20Modify&body=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20t857%2Ft860%20ticket%20lines%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
-      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20PO%20cleanup%20of%20stale%20t857%2Ft860%20ticket%20lines%20-%20Defer&body=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20t857%2Ft860%20ticket%20lines%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
+      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20ticket%20lines%20-%20Approve&body=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20ticket%20lines%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
+      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20ticket%20lines%20-%20Modify&body=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20ticket%20lines%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
+      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20ticket%20lines%20-%20Defer&body=Decision%3A%20Product%20Owner%20cleanup%20of%20stale%20ticket%20lines%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
   <div class="item" id="decision-gameplan">
     <div class="item-text">
-      <strong><span class="badge nice">Nice-to-have</span> Write the t732/t733 game-plan note on the staging-bot role</strong>
+      <strong><span class="badge nice">Nice-to-have</span> Write the game-plan note on the staging bot</strong>
       <div class="muted">The game-plan note has not been written.</div>
     </div>
     <div class="actions">
-      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Write%20the%20t732%2Ft733%20game-plan%20note%20-%20Approve&body=Decision%3A%20Write%20the%20t732%2Ft733%20game-plan%20note%20on%20the%20staging-bot%20role%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
-      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Write%20the%20t732%2Ft733%20game-plan%20note%20-%20Modify&body=Decision%3A%20Write%20the%20t732%2Ft733%20game-plan%20note%20on%20the%20staging-bot%20role%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
-      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Write%20the%20t732%2Ft733%20game-plan%20note%20-%20Defer&body=Decision%3A%20Write%20the%20t732%2Ft733%20game-plan%20note%20on%20the%20staging-bot%20role%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
+      <a class="btn small approve" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Write%20the%20game-plan%20note%20on%20the%20staging%20bot%20-%20Approve&body=Decision%3A%20Write%20the%20game-plan%20note%20on%20the%20staging%20bot%0AChoice%3A%20Approve%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Approve</a>
+      <a class="btn small modify" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Write%20the%20game-plan%20note%20on%20the%20staging%20bot%20-%20Modify&body=Decision%3A%20Write%20the%20game-plan%20note%20on%20the%20staging%20bot%0AChoice%3A%20Modify%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Modify</a>
+      <a class="btn small defer" href="https://github.com/Connect-Radar/v2-one-stop-shop/issues/new?title=Decision%3A%20Write%20the%20game-plan%20note%20on%20the%20staging%20bot%20-%20Defer&body=Decision%3A%20Write%20the%20game-plan%20note%20on%20the%20staging%20bot%0AChoice%3A%20Defer%0A%0AModify%20notes%3A%0A%0ARecorded%20via%20One-Stop%20Shop%3B%20CoS%20will%20log%20this%20on%20Architecture%20%26%20Decisions.%0A&labels=decision">Defer</a>
     </div>
   </div>
-  <p class="muted">Clicking records your choice. CoS logs it automatically.</p>
   <p class="muted">Or tell CoS in chat or Tesla.</p>
 </div>
 
@@ -207,15 +202,15 @@
 
 <h2>Decision history</h2>
 <div class="card">
-  <p><strong>Via the hub buttons:</strong> None yet via the hub. No issues with the “decision” label in <a href="https://github.com/Connect-Radar/v2-one-stop-shop">v2-one-stop-shop</a>.</p>
-  <p><strong>Recently locked on Architecture & Decisions (Nov 14–15):</strong></p>
+  <p><strong>Via the hub buttons:</strong> None recorded via the hub yet.</p>
+  <p><strong>Recently locked (Nov 14–15):</strong></p>
   <ul>
-    <li>Nov 15, 12:24 PM CT — Granted CoS write access to the hub only (t1023).</li>
-    <li>Nov 15, 10:24 AM CT — Closed 20 older exceptions; t582 kept open (t1017).</li>
-    <li>Nov 14, 8:13 PM CT — Closed t1004, t854, t857, t907, t918 (t1012).</li>
-    <li>Nov 14, 2:10 PM CT — Locked 7 V1 parity decisions as Linear CON-41 (t1004).</li>
+    <li>Nov 15, 12:24 PM CT — Granted Chief of Staff write access to the hub only.</li>
+    <li>Nov 15, 10:24 AM CT — Closed 20 older exceptions; one earlier item kept open.</li>
+    <li>Nov 14, 8:13 PM CT — Closed five finished exceptions.</li>
+    <li>Nov 14, 2:10 PM CT — Locked 7 V1 parity decisions.</li>
   </ul>
-  <p class="muted">Nov 15 (t1029): Progress source on this hub switched to the Master List.</p>
+  <p class="muted">Nov 15: Progress source on this hub switched to the Master List.</p>
 </div>
 
 <h2>2. Blockers</h2>
@@ -228,14 +223,14 @@
   </div>
   <div class="item">
     <div class="item-text">
-      <strong>Locked Nov 4 order for staging / E2E secrets</strong>
-      <div class="muted">Rotate the exposed staging password, then fresh E2E passwords, then create the E2E secrets. Completion status unverified.</div>
+      <strong>Staging test sign-in setup pending</strong>
+      <div class="muted">Completion status unverified.</div>
     </div>
   </div>
   <div class="item">
     <div class="item-text">
-      <strong>Open exceptions still Open</strong>
-      <div class="muted">t582 (V1 targeted checks, paused), t912 (signed-in staging crawl), t925 (close the eleven documentation gaps), t860 (Journey Builder critical path through Phase 4).</div>
+      <strong>Open work items still waiting</strong>
+      <div class="muted">Several approved items remain open, including a paused check, a signed-in staging review, documentation gaps, and a Journey Builder path. Details are in the private Notion page.</div>
     </div>
   </div>
 </div>
@@ -246,85 +241,57 @@
     <div class="item-text"><a href="#decisions">Answer pending decisions (8)</a></div>
   </div>
   <div class="item">
-    <div class="item-text"><a href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Review open exceptions on Architecture & Decisions</a></div>
+    <div class="item-text">Review open items — details are in the private Notion page linked at the top.</div>
   </div>
   <p class="muted">No coding tasks are ready while the freeze is on.</p>
 </div>
 
 <h2>4. Cloud Agent Status</h2>
 <div class="card">
-  <p>2 cloud agents on the account, both finished, none running. No new Cloud Agents while the freeze is on.</p>
-  <ul>
-    <li><a href="https://cursor.com/agents/bc-16d425e2-11e7-4f18-b000-75e7b8942436">Initial dev environment</a> — finished</li>
-    <li>Fix staging critical-alerts SNS policy (#95) — finished; opened <a href="https://github.com/Connect-Radar/connect-radar-v2/pull/160">PR #160</a>, which is merged</li>
-  </ul>
+  <p>2 Cloud Agents finished, none running. No new Cloud Agents while the freeze is on.</p>
 </div>
 
 
 <h2>Cloud Agent / PR feed</h2>
 <div class="card">
-  <p><strong>Last Cloud Agent run:</strong> <a href="https://cursor.com/agents/bc-0f8cc665-bfab-5ff2-833e-80534c009c58">Fix staging critical-alerts SNS policy (#95)</a> — finished. Opened <a href="https://github.com/Connect-Radar/connect-radar-v2/pull/160">PR #160</a>, merged Nov 4, 2026, 3:25 AM CT.</p>
-  <p><strong>Earlier:</strong> <a href="https://cursor.com/agents/bc-16d425e2-11e7-4f18-b000-75e7b8942436">Initial dev environment</a> — finished. No agents are running now.</p>
+  <p><strong>Last Cloud Agent run:</strong> finished. None are running now.</p>
   <p><strong>Open draft PRs:</strong> None.</p>
-  <p><strong>Open PRs in connect-radar-v2</strong> (16, none are drafts):</p>
-  <ul>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/170">#170</a> — chore(deps): bump the all-others group across 1 directory with 49 updates <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/169">#169</a> — chore(deps-dev): bump aws-cdk from 2.1147.0 to 2.1148.0 in the aws-cdk group <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/167">#167</a> — chore(deps): bump the react group with 5 updates <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/166">#166</a> — chore(deps): bump @tanstack/react-query from 5.100.14 to 5.105.1 in the tanstack group <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/165">#165</a> — chore(deps): bump the actions-updates group with 9 updates <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/164">#164</a> — chore(deps): bump the aws-sdk group with 15 updates <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/163">#163</a> — fix(e2e): Cognito sign-in helper + per-account password secrets for functional spec <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/159">#159</a> — ci(deploy): remove no-op auto-rollback step; document manual rollback (review only — do not auto-merge) <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/72">#72</a> — fix(scripts): contract check handles multi-line optional Zod fields (appointments false positive) <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/71">#71</a> — fix(backend): timezone-safe maintenance nextDueDate (UTC) + real-helper test <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/70">#70</a> — test(frontend): raise coverage above thresholds (upload, vitals, usePageTitle, useTour) <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/69">#69</a> — chore: prettier pass over packages/*/src with eslint-disable fixes <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/68">#68</a> — perf(frontend): lazy-load heavy tabs and split vendor chunks under 500KB <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/67">#67</a> — fix(db): idempotent 0055 reconcile migration for 0031/0033 (fresh runs pass; committed migrations untouched) <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/66">#66</a> — fix(security): bump vulnerable transitive deps to clear Trivy scan <span class="muted">(not a draft)</span></li>
-    <li><a href="https://github.com/Connect-Radar/connect-radar-v2/pull/64">#64</a> — docs(roadmap): add V2 Game Plan (decisions, M0–M7, readiness additions, review gaps) <span class="muted">(not a draft)</span></li>
-  </ul>
-  <p><strong>Can a new agent start?</strong> No — development freeze is ON (needs Shyam to lift it).</p>
+  <p><strong>Open PRs in the V2 code repo:</strong> 16 (none are drafts). Details are in the private Notion page.</p>
+  <p><strong>Can a new Cloud Agent start?</strong> No — development freeze is ON (needs Shyam to lift it).</p>
 </div>
 
 <h2>5. Recent Activity</h2>
 <div class="card">
   <ul>
     <li>Nov 15, 12:26 PM CT — Hub rule: V2 bots report status changes to CoS; they do not edit the hub themselves.</li>
-    <li>Nov 15, ~12:30 PM CT — CoS hub write permission is being logged on Architecture & Decisions.</li>
-    <li>Nov 15, 10:24 AM CT — 20 older Nov 6–10 exceptions closed on Architecture & Decisions (t582 kept open).</li>
-    <li>Nov 14, 8:13 PM CT — Five finished exceptions closed (t1004, t854, t857, t907, t918).</li>
-    <li>Nov 14, 2:10 PM CT — Linear CON-41 “V1 Parity Decisions — Locked (7 items)” created.</li>
-    <li>Nov 14, 12:38 PM CT — Item 788 baseline ACCEPTED (40 tickets, 80 links).</li>
+    <li>Nov 15, ~12:30 PM CT — CoS hub write permission is being logged.</li>
+    <li>Nov 15, 10:24 AM CT — 20 older Nov 6–10 exceptions closed; one earlier item kept open.</li>
+    <li>Nov 14, 8:13 PM CT — Five finished exceptions closed.</li>
+    <li>Nov 14, 2:10 PM CT — V1 parity decisions locked (7 items).</li>
+    <li>Nov 14, 12:38 PM CT — A baseline of 40 tickets and 80 links was accepted.</li>
   </ul>
 </div>
 
 <h2>6. Next 3 Actions</h2>
 <div class="card">
   <div class="item">
-    <div class="item-text">1. Shyam answers pending decisions (start with freeze lift / t912)</div>
+    <div class="item-text">1. Answer pending decisions (start with lifting the freeze)</div>
     <a class="btn small" href="#decisions">Start</a>
   </div>
   <div class="item">
-    <div class="item-text">2. CoS logs each choice on Architecture & Decisions and updates this hub</div>
-    <a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">A&D</a>
+    <div class="item-text">2. CoS logs each choice and updates this hub</div>
   </div>
   <div class="item">
-    <div class="item-text">3. Keep exceptions t912, t925, t860 moving only on Shyam's GO</div>
-    <a class="btn small" href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Exceptions</a>
+    <div class="item-text">3. Keep pending approved work moving only on a go-ahead</div>
   </div>
 </div>
 
 <h2>Quick Links</h2>
 <div class="card">
   <p><a href="https://connect-radar.github.io/v2-one-stop-shop/">Public hub</a></p>
-  <p><a href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Notion mirror</a></p>
-  <p><a href="https://app.notion.com/p/40f57419b0fb81fab1a1d30bb0663aaa">Architecture & Decisions</a></p>
-  <p><a href="https://github.com/Connect-Radar/connect-radar-v2">V2 repo</a></p>
   <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
 </div>
 
-<p class="muted">Last updated: 2026-11-15 2:16 PM CT by Chief of Staff.</p>
+<p class="muted">Last updated: 2026-11-15 6:06 PM CT by Chief of Staff.</p>
 </body>
 </html>
