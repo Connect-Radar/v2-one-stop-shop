@@ -60,11 +60,12 @@
 
 <h2>Unlocked next (each waiting for Shyam's go-ahead)</h2>
 <div class="card">
+  <p><strong>Done:</strong> Production deploy safety gate merged to stage, Nov 17. Production deploys now run only after a merge to main. The production environment itself is not created yet.</p>
   <ol>
-    <li><strong>Stop prod deploy from PRs.</strong> Shyam approved the fix. The branch and commit are ready: one file changed, the workflow linter passes. The pull request into stage is waiting on Shyam pressing Submit in the V2 Infra Engineer chat. Nothing merges without Shyam.</li>
+    <li><strong>Remove the old stage approval rule and fix the stuck required check name.</strong> Approved; up next (not started). This will let future stage merges go through without a special override.</li>
+    <li><strong>Restart the AI help draft.</strong> Approved; next after the stage-rule fix (not started). The security review draft is done. No AWS changes yet.</li>
     <li><strong>Fix nightly CI failures.</strong> The failures from Nov 5 to 15 are sorted into 9 groups (A to I). The group A fix draft (API tests login, about 30 failures a night) is ready, with no pushes. 3 decisions are waiting for Shyam: supersede old PR #163 or fix it, use a dedicated E2E test user or Shyam's own account, and confirm freshly rotated test passwords. Shyam picks the next group after A.</li>
-    <li><strong>Stage is idle and healthy:</strong> no merges since Nov 4 (nothing has been approved to merge), the stack is in a good state, nothing to fix. A small CI Postgres version bump to match Aurora 17.9 is noted for later.</li>
-    <li><strong>AI help Bedrock.</strong> Security review draft done. The Infra fix draft is paused until the deploy-gate PR is opened. No AWS changes. A few items need Shyam's read-only AWS go-ahead to check.</li>
+    <li><strong>Stage:</strong> the safety gate landed on stage Nov 17. A small CI Postgres version bump to match Aurora 17.9 is noted for later. The production environment is not created yet.</li>
     <li>Onboarding auto-configure route</li>
     <li>Email unsubscribe (CAN-SPAM)</li>
     <li>Stripe/QuickBooks key verification</li>
@@ -80,7 +81,7 @@
 <h2>Auto Status</h2>
 <div class="card">
   <p>CoS checks for new decision issues and updates this page on a short cadence. Freeze lifted on Nov 15, 2026; no blocker work has started yet; each item waits for Shyam's go-ahead.</p>
-  <p class="muted">Last CoS check: Nov 15, ~10 PM CT status refresh. See timestamp at bottom.</p>
+  <p class="muted">Last CoS check: Nov 17, 10:05 AM CT status refresh. See timestamp at bottom.</p>
 </div>
 <h2>Master List — Next 5</h2>
 <div class="card">
@@ -204,8 +205,9 @@
 <h2>Decision history</h2>
 <div class="card">
   <p><strong>Via the hub buttons:</strong> None recorded via the hub yet.</p>
-  <p><strong>Recently locked (Nov 14–15):</strong></p>
+  <p><strong>Recently locked (Nov 14–17):</strong></p>
   <ul>
+    <li>Nov 17, ~9:55 AM CT — Production deploy safety gate merged to stage. Production deploys now run only after a merge to main. The production environment itself is not created yet.</li>
     <li>Nov 15, ~10 PM CT status refresh — Stage is idle and healthy; deploy-gate waiting on Submit in the V2 Infra Engineer chat; nightly CI sorted into 9 groups (group A draft ready); AI help security review draft done.</li>
     <li>Nov 15, 12:24 PM CT — Granted Chief of Staff write access to the hub only.</li>
     <li>Nov 15, 10:24 AM CT — Closed 20 older exceptions; one earlier item kept open.</li>
@@ -258,13 +260,14 @@
 <div class="card">
   <p><strong>Last Cloud Agent run:</strong> finished. None are running now.</p>
   <p><strong>Open draft PRs:</strong> None.</p>
-  <p><strong>Open PRs in the V2 code repo:</strong> 16 (none are drafts). Details are in the private Notion page.</p>
+  <p><strong>Open PRs in the V2 code repo:</strong> 16 (none are drafts), checked Nov 17, 10:05 AM CT. Details are in the private Notion page.</p>
   <p><strong>Can a new Cloud Agent start?</strong> No — freeze lifted on Nov 15, 2026; no blocker work has started yet; each item waits for Shyam's go-ahead.</p>
 </div>
 
 <h2>5. Recent Activity</h2>
 <div class="card">
   <ul>
+    <li>Nov 17, ~9:55 AM CT — Production deploy safety gate merged to stage. Production deploys now run only after a merge to main.</li>
     <li>Nov 15, 6:12 PM CT — Freeze lifted on paper (status only); no blocker work has started yet; each item waits for Shyam's go-ahead.</li>
     <li>Nov 15, 12:26 PM CT — Hub rule: V2 bots report status changes to CoS; they do not edit the hub themselves.</li>
     <li>Nov 15, ~12:30 PM CT — CoS hub write permission is being logged.</li>
@@ -278,14 +281,14 @@
 <h2>6. Next 3 Actions</h2>
 <div class="card">
   <div class="item">
-    <div class="item-text">1. Answer the remaining pending decisions</div>
+    <div class="item-text">1. Remove the old stage approval rule and fix the stuck required check name (approved; up next)</div>
+  </div>
+  <div class="item">
+    <div class="item-text">2. Restart the AI help draft (approved; next after the stage-rule fix)</div>
+  </div>
+  <div class="item">
+    <div class="item-text">3. Answer the remaining pending decisions</div>
     <a class="btn small" href="#decisions">Start</a>
-  </div>
-  <div class="item">
-    <div class="item-text">2. CoS logs each choice and updates this hub</div>
-  </div>
-  <div class="item">
-    <div class="item-text">3. Keep pending approved work moving only on a go-ahead</div>
   </div>
 </div>
 
@@ -295,6 +298,6 @@
   <p><a href="https://github.com/Connect-Radar/v2-one-stop-shop">This hub repo</a></p>
 </div>
 
-<p class="muted">Last updated: 2026-11-15 10:11 PM CT by Chief of Staff.</p>
+<p class="muted">Last updated: 2026-11-17 10:05 AM CT by Chief of Staff.</p>
 </body>
 </html>
