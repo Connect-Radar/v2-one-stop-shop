@@ -60,12 +60,43 @@
   .jv-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
   .jv-chips .btn { min-height: 48px; font-size: 1rem; margin: 0; background: #333; }
   .jv-hidden { display: none !important; }
+  .amb { border-radius: 12px; padding: 16px; margin: 0 0 12px; background: #1e1e1e; border: 3px solid #555; }
+  .amb-row { display: flex; gap: 16px; align-items: center; }
+  .amb-light { flex: none; width: 64px; height: 64px; border-radius: 50%; background: #7f8c8d; box-shadow: 0 0 24px rgba(0,0,0,.5); }
+  .amb-red { border-color: #c0392b; } .amb-red .amb-light { background: #e74c3c; box-shadow: 0 0 28px #e74c3c; }
+  .amb-yellow { border-color: #f1c40f; } .amb-yellow .amb-light { background: #f1c40f; box-shadow: 0 0 28px #f1c40f; }
+  .amb-green { border-color: #27ae60; } .amb-green .amb-light { background: #2ecc71; box-shadow: 0 0 28px #2ecc71; }
+  .amb-headline { font-size: 1.7rem; font-weight: 800; line-height: 1.2; }
+  .amb-sub { font-size: 1.25rem; margin-top: 4px; }
+  .amb-next { font-size: 1.25rem; margin-top: 4px; color: #ddd; }
+  .amb-updated { font-size: 0.85rem; color: #999; margin-top: 8px; }
+  @media (min-width: 700px) { .amb-headline { font-size: 2.1rem; } .amb-light { width: 84px; height: 84px; } }
+  .jv-notices { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 0; }
+  .jv-notice { background: #2a2212; border-left: 5px solid #f39c12; border-radius: 8px; padding: 10px 12px; white-space: pre-wrap; font-size: 1.05rem; }
+  .jv-notice.blocker { background: #2a1414; border-left-color: #e74c3c; }
+  .jv-notice.nothing { background: #142a1a; border-left-color: #2ecc71; }
+  .jv-hint { font-size: 0.9rem; color: #aaa; margin: 6px 0 0; }
+  .jv-offline { background: #2a1414; border-left: 5px solid #e74c3c; border-radius: 8px; padding: 12px; font-size: 1.1rem; margin: 10px 0; }
+  .usage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .usage-box { background: #151515; border-radius: 8px; padding: 12px; }
+  .usage-big { font-size: 1.6rem; font-weight: 800; }
   .jv-note-box { width: 100%; margin-top: 8px; }
   .jv-sent { width: 100%; color: #8fd19e; font-size: 0.95rem; margin-top: 6px; }
   .jv-decide { min-height: 44px; min-width: 84px; font-size: 1rem; }
 </style>
 </head>
 <body>
+<div id="ambient" class="amb amb-red" role="status" aria-live="polite">
+  <div class="amb-row">
+    <span class="amb-light" aria-hidden="true"></span>
+    <div class="amb-text">
+      <div id="amb-headline" class="amb-headline">Blocker: GitHub Actions is blocked until about Dec 1 (+3 more)</div>
+      <div id="amb-sub" class="amb-sub">10 decisions waiting</div>
+      <div id="amb-next" class="amb-next">Next decision: Start the signed-in staging review (Should-fix)</div>
+    </div>
+  </div>
+  <div id="amb-updated" class="amb-updated">Status as of Nov 21, 2026, 1:15 PM CT</div>
+</div>
 <h1>Connect-Radar V2 — One-Stop Shop</h1>
 <p class="muted">The only V2 front door · Tesla-ready · Chief of Staff keeps it current</p>
 <p class="muted">Public summary. Details are in the private Notion page. <a href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Details (private, sign-in required)</a></p>
@@ -73,6 +104,7 @@
 <div class="card" id="jarvis">
   <h2>Talk to Jarvis</h2>
   <p class="muted">Type or speak a message to Jarvis (Chief of Staff). Replies come back here as text plus a Jarvis voice clip you tap to play. Jarvis only surfaces decisions, blockers, or &#8220;Nothing needs you.&#8221;</p>
+  <div id="jv-offline" class="jv-offline jv-hidden">Jarvis chat is offline. Open the Grok Bot app and message Jarvis.</div>
   <div id="jv-lock">
     <p>Enter your passcode once on this device.</p>
     <div class="jv-row">
@@ -81,12 +113,14 @@
     </div>
   </div>
   <div id="jv-chat" class="jv-hidden">
+    <div id="jv-notices" class="jv-notices"></div>
     <div id="jv-log" class="jv-log" aria-live="polite"></div>
     <div class="jv-row">
       <textarea id="jv-text" class="jv-input" rows="2" maxlength="2000" placeholder="Message Jarvis&#8230;" aria-label="Message to Jarvis"></textarea>
       <button id="jv-mic" class="btn jv-big jv-mic jv-hidden" type="button" aria-label="Speak your message">&#127908; Speak</button>
       <button id="jv-send" class="btn jv-big" type="button">Send</button>
     </div>
+    <p id="jv-hint" class="jv-hint jv-hidden">No mic button in this browser. Tap the box and use your keyboard&#8217;s dictation key. In the Tesla, use the car&#8217;s voice-to-text into the box.</p>
     <div class="jv-chips">
       <button class="btn jv-chip" type="button">What needs me?</button>
       <button class="btn jv-chip" type="button">Any blockers?</button>
@@ -728,6 +762,21 @@
 </div>
 
 <h2>Usage</h2>
+<div class="card" id="usage-live">
+  <div class="usage-grid">
+    <div class="usage-box">
+      <div class="muted">Grok weekly usage (shared Super plan)</div>
+      <div id="u-grok" class="usage-big">38.5%</div>
+      <div id="u-grok-sub" class="muted">Resets Thu Nov 26, 9:24 PM CT &#183; checked Nov 21, 1:11 PM CT</div>
+    </div>
+    <div class="usage-box">
+      <div class="muted">ElevenLabs credits (Jarvis voice)</div>
+      <div id="u-el" class="usage-big">Not yet reported</div>
+      <div id="u-el-sub" class="muted">Jarvis will fill this in once it can read the ElevenLabs plan.</div>
+    </div>
+  </div>
+  <p class="muted">Live from this page&#8217;s status file, refreshed every minute.</p>
+</div>
 <div class="card">
   <p><strong>Current week:</strong> 29.1% of the weekly limit used (shared with other apps on the Super plan), checked 10:20 AM CT, Nov 21, 2026</p>
   <p><strong>Resets:</strong> Thu Nov 26, 2026, 9:24 PM CT</p>
@@ -804,6 +853,49 @@
 <p class="muted">Last updated by CoS: Nov 21, 2026, 10:56 AM CT.</p>
 <script>
 (function () {
+  function $(id) { return document.getElementById(id); }
+  function ct(iso, withDay) {
+    if (!iso) return '';
+    try { var d = new Date(iso); if (isNaN(d)) return '';
+      var o = { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit' };
+      if (withDay) { o.weekday = 'short'; o.month = 'short'; o.day = 'numeric'; }
+      return d.toLocaleString('en-US', o) + ' CT'; } catch (e) { return ''; }
+  }
+  function apply(s) {
+    if (!s || typeof s !== 'object') return;
+    var light = ['red', 'yellow', 'green'].indexOf(s.light) >= 0 ? s.light : 'yellow';
+    $('ambient').className = 'amb amb-' + light;
+    if (s.headline) $('amb-headline').textContent = s.headline;
+    var n = Number(s.decisions_waiting) || 0, b = (s.blockers || []).length;
+    var parts = [];
+    if (n) parts.push(n + (n === 1 ? ' decision waiting' : ' decisions waiting'));
+    if (b) parts.push(b + (b === 1 ? ' blocker' : ' blockers'));
+    $('amb-sub').textContent = parts.length ? parts.join(' \u00B7 ') : (s.headline && /nothing needs you/i.test(s.headline) ? '' : 'Nothing needs you');
+    var nd = s.next_decision;
+    $('amb-next').textContent = nd && nd.title ? 'Next decision: ' + nd.title + (nd.bucket ? ' (' + nd.bucket + ')' : '') : 'No decision waiting';
+    $('amb-updated').textContent = 'Status as of ' + (s.updated_at_label || ct(s.updated_at, true));
+    var u = s.usage || {}, g = u.grok, el = u.elevenlabs;
+    if (g && g.percent_week != null) {
+      $('u-grok').textContent = g.percent_week + '%';
+      $('u-grok-sub').textContent = (g.resets_at ? 'Resets ' + ct(g.resets_at, true) : '') + (g.checked_at ? ' \u00B7 checked ' + ct(g.checked_at, true) : '');
+    } else { $('u-grok').textContent = 'Not yet reported'; $('u-grok-sub').textContent = ''; }
+    if (el && el.used != null && el.limit != null) {
+      var pct = el.percent != null ? el.percent : Math.round(el.used / el.limit * 1000) / 10;
+      $('u-el').textContent = Number(el.used).toLocaleString('en-US') + ' / ' + Number(el.limit).toLocaleString('en-US') + ' (' + pct + '%)';
+      $('u-el-sub').textContent = (el.resets_at ? 'Resets ' + ct(el.resets_at, true) : '') + (el.checked_at ? ' \u00B7 checked ' + ct(el.checked_at, true) : '');
+    } else { $('u-el').textContent = 'Not yet reported'; $('u-el-sub').textContent = 'Jarvis will fill this in once it can read the ElevenLabs plan.'; }
+  }
+  function load() {
+    fetch('status.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+      .then(apply).catch(function () {});
+  }
+  load(); setInterval(function () { if (!document.hidden) load(); }, 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) load(); });
+})();
+</script>
+<script>
+(function () {
   var RELAY = 'https://v2-hub-chat.w53dc149404.workers.dev';
   var KEY = 'v2hubchat.token';
   var $ = function (id) { return document.getElementById(id); };
@@ -816,6 +908,7 @@
     if (token) opts.headers['Authorization'] = 'Bearer ' + token;
     if (opts.body) opts.headers['Content-Type'] = 'application/json';
     return fetch(RELAY + path, opts).then(function (r) {
+      offline(false);
       if (r.status === 401 && path !== '/api/login') { lock('Please enter the passcode again.'); throw new Error('locked'); }
       return r;
     });
@@ -853,6 +946,18 @@
     if (sig === lastSig) return; lastSig = sig;
     var log = $('jv-log'), atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 60;
     log.textContent = ''; pending = false;
+    var nb = $('jv-notices'); nb.textContent = '';
+    list.filter(function (m) { return m.type === 'push' && m.reply_text; }).slice(-3).reverse().forEach(function (m) {
+      var k = KIND[m.reply_kind] || 'Notice';
+      var d = document.createElement('div'); d.className = 'jv-notice ' + (m.reply_kind || '');
+      var badge = document.createElement('span'); badge.className = 'badge ' + (m.reply_kind === 'blocker' ? 'breaking' : (m.reply_kind === 'nothing' ? 'nice' : 'should-fix'));
+      badge.textContent = k; d.appendChild(badge);
+      d.appendChild(document.createTextNode(m.reply_text));
+      var meta = document.createElement('div'); meta.className = 'jv-meta'; meta.textContent = 'Jarvis notice \u00B7 ' + time(m.reply_at); d.appendChild(meta);
+      if (m.has_audio) attachAudio(d, m.id);
+      nb.appendChild(d);
+    });
+    list = list.filter(function (m) { return m.type !== 'push'; });
     list.forEach(function (m) {
       if (m.text) log.appendChild(bubble('jv-me', m.text, time(m.created)));
       if (m.reply_text) {
@@ -878,7 +983,7 @@
     if (document.hidden) { pollTimer = setTimeout(poll, 30000); return; }
     api('/api/messages').then(function (r) { return r.json(); })
       .then(function (d) { if (d.messages) render(d.messages); status(''); })
-      .catch(function (e) { if (e.message !== 'locked') status('Can\u2019t reach the chat relay right now. Retrying\u2026'); })
+      .catch(function (e) { if (e.message !== 'locked') { status(''); health(); } })
       .then(function () { if (token) pollTimer = setTimeout(poll, pending ? 4000 : 30000); });
   }
   function send(text) {
@@ -887,7 +992,7 @@
     api('/api/messages', { method: 'POST', body: JSON.stringify({ text: text }) })
       .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.message || 'Send failed'); return d; }); })
       .then(function () { $('jv-text').value = ''; status(''); pending = true; poll(); })
-      .catch(function (e) { if (e.message !== 'locked') status(e.message); })
+      .catch(function (e) { if (e instanceof TypeError) { status(''); offline(true); } else if (e.message !== 'locked') status(e.message); })
       .then(function () { $('jv-send').disabled = false; });
   }
   $('jv-unlock').addEventListener('click', function () {
@@ -895,7 +1000,7 @@
     fetch(RELAY + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passcode: p }) })
       .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.token) throw new Error(d.message || 'Could not unlock'); return d; }); })
       .then(function (d) { token = d.token; try { localStorage.setItem(KEY, token); } catch (e) {} $('jv-pass').value = ''; show(false); status(''); poll(); })
-      .catch(function (e) { status(e.message === 'Failed to fetch' ? 'Can\u2019t reach the chat relay.' : e.message); });
+      .catch(function (e) { if (e instanceof TypeError) { status(''); offline(true); } else status(e.message); });
   });
   $('jv-pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('jv-unlock').click(); });
   $('jv-send').addEventListener('click', function () { send($('jv-text').value); });
@@ -935,6 +1040,7 @@
     });
   });
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) $('jv-hint').classList.remove('jv-hidden');
   if (SR) {
     var mic = $('jv-mic'), rec = null; mic.classList.remove('jv-hidden');
     mic.addEventListener('click', function () {
@@ -942,11 +1048,18 @@
       rec = new SR(); rec.lang = 'en-US'; rec.interimResults = true; rec.continuous = false;
       var base = $('jv-text').value ? $('jv-text').value + ' ' : '';
       rec.onresult = function (ev) { var t = ''; for (var i = 0; i < ev.results.length; i++) t += ev.results[i][0].transcript; $('jv-text').value = base + t; };
-      rec.onerror = function (ev) { status(ev.error === 'not-allowed' ? 'Microphone not allowed in this browser. Use keyboard dictation instead.' : 'Didn\u2019t catch that. Try again.'); };
+      rec.onerror = function (ev) {
+        if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed' || ev.error === 'audio-capture') { $('jv-hint').classList.remove('jv-hidden'); status('Mic not available here. Use your keyboard\u2019s dictation instead.'); }
+        else status('Didn\u2019t catch that. Try again.'); };
       rec.onend = function () { rec = null; mic.classList.remove('listening'); mic.textContent = '\uD83C\uDFA4 Speak'; };
       try { rec.start(); mic.classList.add('listening'); mic.textContent = '\u25A0 Stop'; status('Listening\u2026 tap Stop when done, then Send.'); } catch (e) { rec = null; }
     });
   }
+  function offline(on) { $('jv-offline').classList.toggle('jv-hidden', !on); }
+  function health() {
+    fetch(RELAY + '/api/health', { cache: 'no-store' }).then(function (r) { offline(!r.ok); }).catch(function () { offline(true); });
+  }
+  health(); setInterval(function () { if (!document.hidden) health(); }, 60000);
   if (token) { show(false); poll(); } else { show(true); }
 })();
 </script>
