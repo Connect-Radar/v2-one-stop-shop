@@ -45,12 +45,54 @@
   td, th { text-align:left; padding: 4px 6px; border-bottom: 1px solid #2a2a2a; vertical-align: top; }
   ul { padding-left: 20px; }
   li { margin: 4px 0; }
+  #jarvis { border: 2px solid #2d7ff9; }
+  #jarvis h2 { margin-top: 0; border: none; padding: 0; font-size: 1.25rem; }
+  .jv-log { max-height: 55vh; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+  .jv-msg { padding: 10px 12px; border-radius: 10px; max-width: 88%; white-space: pre-wrap; word-wrap: break-word; line-height: 1.4; font-size: 1.05rem; }
+  .jv-me { align-self: flex-end; background: #2d7ff9; color: #fff; }
+  .jv-bot { align-self: flex-start; background: #2a2a2a; }
+  .jv-meta { font-size: 0.8rem; color: #aaa; margin-top: 4px; }
+  .jv-bot audio { width: 100%; margin-top: 8px; }
+  .jv-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+  .jv-input { flex: 1; min-width: 180px; min-height: 56px; font-size: 1.1rem; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #151515; color: #eee; font-family: inherit; resize: vertical; }
+  .jv-big { min-height: 56px; min-width: 96px; font-size: 1.1rem; font-weight: 600; border-radius: 10px; margin: 0; }
+  .jv-mic.listening { background: #c0392b; }
+  .jv-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .jv-chips .btn { min-height: 48px; font-size: 1rem; margin: 0; background: #333; }
+  .jv-hidden { display: none !important; }
 </style>
 </head>
 <body>
 <h1>Connect-Radar V2 — One-Stop Shop</h1>
 <p class="muted">The only V2 front door · Tesla-ready · Chief of Staff keeps it current</p>
 <p class="muted">Public summary. Details are in the private Notion page. <a href="https://app.notion.com/p/41957419b0fb8175ba10e2ddb60ef656">Details (private, sign-in required)</a></p>
+
+<div class="card" id="jarvis">
+  <h2>Talk to Jarvis</h2>
+  <p class="muted">Type or speak a message to Jarvis (Chief of Staff). Replies come back here as text plus a Jarvis voice clip you tap to play. Jarvis only surfaces decisions, blockers, or &#8220;Nothing needs you.&#8221;</p>
+  <div id="jv-lock">
+    <p>Enter your passcode once on this device.</p>
+    <div class="jv-row">
+      <input id="jv-pass" class="jv-input" type="password" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode">
+      <button id="jv-unlock" class="btn jv-big" type="button">Unlock</button>
+    </div>
+  </div>
+  <div id="jv-chat" class="jv-hidden">
+    <div id="jv-log" class="jv-log" aria-live="polite"></div>
+    <div class="jv-row">
+      <textarea id="jv-text" class="jv-input" rows="2" maxlength="2000" placeholder="Message Jarvis&#8230;" aria-label="Message to Jarvis"></textarea>
+      <button id="jv-mic" class="btn jv-big jv-mic jv-hidden" type="button" aria-label="Speak your message">&#127908; Speak</button>
+      <button id="jv-send" class="btn jv-big" type="button">Send</button>
+    </div>
+    <div class="jv-chips">
+      <button class="btn jv-chip" type="button">What needs me?</button>
+      <button class="btn jv-chip" type="button">Any blockers?</button>
+      <button class="btn jv-chip" type="button">Give me a status update</button>
+    </div>
+    <p class="muted"><a href="#" id="jv-logout">Lock this device</a></p>
+  </div>
+  <p id="jv-status" class="muted" aria-live="polite"></p>
+</div>
 
 <div class="card alert" id="cos-stamp">
   <p><strong>Last updated by CoS:</strong> Nov 21, 2026, 10:56 AM CT</p>
@@ -724,7 +766,7 @@
 
 <h2>Ask CoS</h2>
 <div class="card">
-  <p>Message Chief of Staff in the Grok Bot app, or ask from the Tesla. To start a task, give a clear go-ahead there. (A one-tap button needs a web link to that chat, which doesn't exist yet.)</p>
+  <p>Use <a href="#jarvis">Talk to Jarvis</a> at the top of this page (works on phone, Tesla and desktop), or message Chief of Staff in the Grok Bot app. To start a task, give a clear go-ahead.</p>
 </div>
 
 <h2>How this page works</h2>
@@ -757,5 +799,120 @@
 </div>
 
 <p class="muted">Last updated by CoS: Nov 21, 2026, 10:56 AM CT.</p>
+<script>
+(function () {
+  var RELAY = 'https://v2-hub-chat.w53dc149404.workers.dev';
+  var KEY = 'v2hubchat.token';
+  var $ = function (id) { return document.getElementById(id); };
+  var token = null, pending = false, pollTimer = null, lastSig = '', audioUrls = {};
+  try { token = localStorage.getItem(KEY); } catch (e) {}
+  function status(t) { $('jv-status').textContent = t || ''; }
+  function show(locked) { $('jv-lock').classList.toggle('jv-hidden', !locked); $('jv-chat').classList.toggle('jv-hidden', locked); }
+  function api(path, opts) {
+    opts = opts || {}; opts.headers = opts.headers || {};
+    if (token) opts.headers['Authorization'] = 'Bearer ' + token;
+    if (opts.body) opts.headers['Content-Type'] = 'application/json';
+    return fetch(RELAY + path, opts).then(function (r) {
+      if (r.status === 401 && path !== '/api/login') { lock('Please enter the passcode again.'); throw new Error('locked'); }
+      return r;
+    });
+  }
+  function lock(msg) { token = null; try { localStorage.removeItem(KEY); } catch (e) {} show(true); status(msg || ''); if (pollTimer) clearTimeout(pollTimer); }
+  function time(ms) { try { return new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
+  function bubble(cls, text, meta) {
+    var d = document.createElement('div'); d.className = 'jv-msg ' + cls; d.textContent = text;
+    if (meta) { var m = document.createElement('div'); m.className = 'jv-meta'; m.textContent = meta; d.appendChild(m); }
+    return d;
+  }
+  function attachAudio(el, id) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn jv-big'; b.style.marginTop = '8px';
+    b.textContent = '\u25B6 Play Jarvis';
+    var a = document.createElement('audio'); a.controls = true; a.preload = 'auto'; a.className = 'jv-hidden';
+    el.appendChild(b); el.appendChild(a);
+    function load() {
+      if (audioUrls[id]) return Promise.resolve(audioUrls[id]);
+      return api('/api/audio/' + id).then(function (r) { if (!r.ok) throw new Error('audio'); return r.blob(); })
+        .then(function (blob) { audioUrls[id] = URL.createObjectURL(blob); return audioUrls[id]; });
+    }
+    load().then(function (u) { a.src = u; }).catch(function () {});
+    b.addEventListener('click', function () {
+      b.textContent = 'Loading\u2026';
+      load().then(function (u) {
+        if (a.src !== u) a.src = u;
+        a.classList.remove('jv-hidden'); b.classList.add('jv-hidden');
+        var p = a.play(); if (p && p.catch) p.catch(function () { status('Tap the play arrow on the player to listen.'); });
+      }).catch(function () { b.textContent = 'Voice clip not available'; });
+    });
+  }
+  var KIND = { decision: 'Decision', blocker: 'Blocker', nothing: 'Nothing needs you', answer: '' };
+  function render(list) {
+    var sig = JSON.stringify(list.map(function (m) { return [m.id, m.status, m.reply_at, m.has_audio]; }));
+    if (sig === lastSig) return; lastSig = sig;
+    var log = $('jv-log'), atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 60;
+    log.textContent = ''; pending = false;
+    list.forEach(function (m) {
+      if (m.text) log.appendChild(bubble('jv-me', m.text, time(m.created)));
+      if (m.reply_text) {
+        var k = KIND[m.reply_kind] || '';
+        var b = bubble('jv-bot', m.reply_text, 'Jarvis \u00B7 ' + time(m.reply_at) + (k ? ' \u00B7 ' + k : ''));
+        if (m.has_audio) attachAudio(b, m.id);
+        log.appendChild(b);
+      } else if (m.text) {
+        var wait = m.status === 'not_connected' ? 'Saved, but the Jarvis link isn\u2019t switched on yet.'
+          : (m.status.indexOf('forward_failed') === 0 ? 'Couldn\u2019t reach Jarvis. Try again later.' : 'Jarvis is thinking\u2026 (usually 30 seconds to a few minutes)');
+        if (m.status === 'sending' || m.status === 'forwarded') pending = true;
+        log.appendChild(bubble('jv-bot', wait));
+      }
+    });
+    if (!list.length) log.appendChild(bubble('jv-bot', 'Ask me anything about V2. I\u2019ll answer here, with a voice clip.'));
+    if (atBottom || pending) log.scrollTop = log.scrollHeight;
+  }
+  function poll() {
+    if (pollTimer) clearTimeout(pollTimer);
+    if (!token) return;
+    if (document.hidden) { pollTimer = setTimeout(poll, 30000); return; }
+    api('/api/messages').then(function (r) { return r.json(); })
+      .then(function (d) { if (d.messages) render(d.messages); status(''); })
+      .catch(function (e) { if (e.message !== 'locked') status('Can\u2019t reach the chat relay right now. Retrying\u2026'); })
+      .then(function () { if (token) pollTimer = setTimeout(poll, pending ? 4000 : 30000); });
+  }
+  function send(text) {
+    text = (text || '').trim(); if (!text) return;
+    $('jv-send').disabled = true; status('Sending\u2026');
+    api('/api/messages', { method: 'POST', body: JSON.stringify({ text: text }) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.message || 'Send failed'); return d; }); })
+      .then(function () { $('jv-text').value = ''; status(''); pending = true; poll(); })
+      .catch(function (e) { if (e.message !== 'locked') status(e.message); })
+      .then(function () { $('jv-send').disabled = false; });
+  }
+  $('jv-unlock').addEventListener('click', function () {
+    var p = $('jv-pass').value; if (!p) return; status('Checking\u2026');
+    fetch(RELAY + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passcode: p }) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.token) throw new Error(d.message || 'Could not unlock'); return d; }); })
+      .then(function (d) { token = d.token; try { localStorage.setItem(KEY, token); } catch (e) {} $('jv-pass').value = ''; show(false); status(''); poll(); })
+      .catch(function (e) { status(e.message === 'Failed to fetch' ? 'Can\u2019t reach the chat relay.' : e.message); });
+  });
+  $('jv-pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('jv-unlock').click(); });
+  $('jv-send').addEventListener('click', function () { send($('jv-text').value); });
+  $('jv-text').addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send($('jv-text').value); } });
+  Array.prototype.forEach.call(document.querySelectorAll('.jv-chip'), function (c) { c.addEventListener('click', function () { send(c.textContent); }); });
+  $('jv-logout').addEventListener('click', function (e) { e.preventDefault(); lock('Locked. Enter the passcode to chat.'); });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && token) poll(); });
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SR) {
+    var mic = $('jv-mic'), rec = null; mic.classList.remove('jv-hidden');
+    mic.addEventListener('click', function () {
+      if (rec) { rec.stop(); return; }
+      rec = new SR(); rec.lang = 'en-US'; rec.interimResults = true; rec.continuous = false;
+      var base = $('jv-text').value ? $('jv-text').value + ' ' : '';
+      rec.onresult = function (ev) { var t = ''; for (var i = 0; i < ev.results.length; i++) t += ev.results[i][0].transcript; $('jv-text').value = base + t; };
+      rec.onerror = function (ev) { status(ev.error === 'not-allowed' ? 'Microphone not allowed in this browser. Use keyboard dictation instead.' : 'Didn\u2019t catch that. Try again.'); };
+      rec.onend = function () { rec = null; mic.classList.remove('listening'); mic.textContent = '\uD83C\uDFA4 Speak'; };
+      try { rec.start(); mic.classList.add('listening'); mic.textContent = '\u25A0 Stop'; status('Listening\u2026 tap Stop when done, then Send.'); } catch (e) { rec = null; }
+    });
+  }
+  if (token) { show(false); poll(); } else { show(true); }
+})();
+</script>
 </body>
 </html>
