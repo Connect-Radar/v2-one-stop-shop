@@ -4,7 +4,11 @@
   "updated_at_label": "Nov 21, 2026, 1:15 PM CT",
   "light": "red",
   "headline": "Blocker: GitHub Actions is blocked until about Dec 1 (+3 more)",
-  "next_decision": { "id": "start-the-signed-in-staging-review", "title": "Start the signed-in staging review", "bucket": "Should-fix" },
+  "next_decision": {
+    "id": "start-the-signed-in-staging-review",
+    "title": "Start the signed-in staging review",
+    "bucket": "Should-fix"
+  },
   "decisions_waiting": 10,
   "blockers": [
     "GitHub Actions blocked by the $0 budget until about Dec 1",
@@ -13,7 +17,17 @@
     "AI model form pending"
   ],
   "usage": {
-    "grok": { "percent_week": 38.5, "resets_at": "2026-11-26T21:24:00-06:00", "checked_at": "2026-11-21T13:11:00-06:00" },
-    "elevenlabs": { "used": null, "limit": null, "percent": null, "resets_at": null, "checked_at": null }
+    "grok": {
+      "percent_week": 39.8,
+      "resets_at": "2026-11-26T21:24:00-06:00",
+      "checked_at": "2026-11-21T16:12:29-06:00"
+    },
+    "elevenlabs": {
+      "used": null,
+      "limit": null,
+      "percent": null,
+      "resets_at": null,
+      "checked_at": null
+    }
   }
 }
