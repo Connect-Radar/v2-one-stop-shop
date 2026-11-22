@@ -131,6 +131,56 @@
   <p id="jv-status" class="muted" aria-live="polite"></p>
 </div>
 
+<h2 id="bots">Bot status</h2>
+<div class="card">
+  <div class="item">
+    <div class="item-text">
+      <strong>Ping Jarvis (status check, read-only)</strong>
+      <div class="muted">Read-only. Changes nothing. Checks the chat relay is up, how fast it answers, and when this page&#8217;s status was last updated.</div>
+      <div id="ping-out" class="muted" aria-live="polite"></div>
+    </div>
+    <button id="ping-btn" class="btn" type="button">Ping Jarvis</button>
+  </div>
+  <p id="bots-asof" class="muted">Snapshot as of Nov 21, 2026, 6:02 PM CT</p>
+  <table>
+    <thead><tr><th>Bot</th><th>Status</th><th>Last box activity</th></tr></thead>
+    <tbody id="bots-body">
+      <tr><td>AWS Cost &#38; Resources Manager</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Compliance</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Connect-Radar Analytics</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Connect-Radar Auditor</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Connect-Radar Dev</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Finance</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Fun &#38; Travel</td><td>unknown</td><td>Nov 21, 12:49 PM CT</td></tr>
+      <tr><td>H&#38;B</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>H&#38;B Finance</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Health &#38; Fitness</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Hobbies</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Jarvis</td><td>unknown</td><td>Nov 21, 12:52 PM CT</td></tr>
+      <tr><td>Legal &#38; Support</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Proposal</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>Trading</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 API Contract Guardian</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Backend Developer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Bug Hunter</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Changelog Bot</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Code Reviewer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Data Migration Engineer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Documentation Writer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Frontend Developer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Infra Engineer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Observability Engineer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Preview Environment Manager</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Product Owner</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 QA Engineer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Release Manager</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Security Engineer</td><td>unknown</td><td>&#8212;</td></tr>
+      <tr><td>V2 Training Bot</td><td>unknown</td><td>&#8212;</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">Status shows &#8220;unknown&#8221; because the box can&#8217;t see whether a bot is mid-turn. Last box activity is the newest file change seen on the box; a dash means nothing changed since the box last synced. Read-only snapshot, no controls.</p>
+</div>
+
 <div class="card alert" id="cos-stamp">
   <p><strong>Last updated by CoS:</strong> Nov 21, 2026, 10:56 AM CT</p>
   <p><strong>&#9888; Stalled:</strong> Master List progress hasn&#x27;t moved since Nov 10, 2026 (more than 48 hours): still 30 of 1,054.</p>
@@ -897,7 +947,44 @@
 <script>
 (function () {
   var RELAY = 'https://v2-hub-chat.w53dc149404.workers.dev';
+  function $(id) { return document.getElementById(id); }
+  function td(t) { var c = document.createElement('td'); c.textContent = t; return c; }
+  function loadBots() {
+    fetch('bots.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+      .then(function (d) {
+        if (!d || !d.bots) return;
+        var body = $('bots-body'); body.textContent = '';
+        d.bots.forEach(function (b) {
+          var tr = document.createElement('tr');
+          tr.appendChild(td(b.name)); tr.appendChild(td(b.status || 'unknown')); tr.appendChild(td(b.last_turn_label || '\u2014'));
+          body.appendChild(tr);
+        });
+        $('bots-asof').textContent = 'Snapshot as of ' + (d.generated_at_label || '') + ' \u00B7 ' + d.bots.length + ' bots';
+      }).catch(function () {});
+  }
+  loadBots(); setInterval(function () { if (!document.hidden) loadBots(); }, 30000);
+  $('ping-btn').addEventListener('click', function () {
+    var out = $('ping-out'), t0 = Date.now(); out.textContent = 'Checking\u2026';
+    var relay = fetch(RELAY + '/api/health', { cache: 'no-store' })
+      .then(function (r) { var ms = Date.now() - t0; return r.json().then(function (h) { return { ok: r.ok, ms: ms, h: h }; }); })
+      .catch(function () { return { ok: false }; });
+    var st = fetch('status.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; });
+    Promise.all([relay, st]).then(function (v) {
+      var a = v[0], s = v[1], parts = [];
+      parts.push(a.ok ? 'Relay up (' + a.ms + ' ms)' : 'Relay down');
+      if (a.ok && a.h && a.h.configured) parts.push(a.h.configured.passcode && a.h.configured.jarvis_webhook ? 'chat switched on' : 'chat not switched on yet');
+      parts.push('status updated ' + (s && (s.updated_at_label || s.updated_at) || 'unknown'));
+      out.textContent = parts.join(' \u00B7 ');
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  var RELAY = 'https://v2-hub-chat.w53dc149404.workers.dev';
   var KEY = 'v2hubchat.token';
+  var NOT_ON = 'Jarvis chat isn\u2019t switched on yet. Shyam needs to add the passcode in Cloudflare.';
   var $ = function (id) { return document.getElementById(id); };
   var token = null, pending = false, pollTimer = null, lastSig = '', audioUrls = {};
   try { token = localStorage.getItem(KEY); } catch (e) {}
@@ -998,7 +1085,7 @@
   $('jv-unlock').addEventListener('click', function () {
     var p = $('jv-pass').value; if (!p) return; status('Checking\u2026');
     fetch(RELAY + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passcode: p }) })
-      .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.token) throw new Error(d.message || 'Could not unlock'); return d; }); })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.token) throw new Error(d.error === 'not_configured' ? NOT_ON : (d.message || 'Could not unlock')); return d; }); })
       .then(function (d) { token = d.token; try { localStorage.setItem(KEY, token); } catch (e) {} $('jv-pass').value = ''; show(false); status(''); poll(); })
       .catch(function (e) { if (e instanceof TypeError) { status(''); offline(true); } else status(e.message); });
   });
@@ -1057,7 +1144,9 @@
   }
   function offline(on) { $('jv-offline').classList.toggle('jv-hidden', !on); }
   function health() {
-    fetch(RELAY + '/api/health', { cache: 'no-store' }).then(function (r) { offline(!r.ok); }).catch(function () { offline(true); });
+    fetch(RELAY + '/api/health', { cache: 'no-store' }).then(function (r) { offline(!r.ok); return r.ok ? r.json() : null; })
+      .then(function (h) { if (h && h.configured && !h.configured.passcode && !token) status(NOT_ON); })
+      .catch(function () { offline(true); });
   }
   health(); setInterval(function () { if (!document.hidden) health(); }, 60000);
   if (token) { show(false); poll(); } else { show(true); }

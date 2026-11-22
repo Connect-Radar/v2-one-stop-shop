@@ -1,0 +1,196 @@
+{
+  "schema": 1,
+  "generated_at": "2026-11-21T18:02:37-06:00",
+  "generated_at_label": "Nov 21, 2026, 6:02 PM CT",
+  "source": "box snapshot",
+  "note": "Status is unknown: the box can't see whether a bot is mid-turn. Last activity = newest file change seen on the box; blank when nothing changed since the box last synced.",
+  "count": 31,
+  "bots": [
+    {
+      "name": "AWS Cost & Resources Manager",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Compliance",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Connect-Radar Analytics",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Connect-Radar Auditor",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Connect-Radar Dev",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Finance",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Fun & Travel",
+      "status": "unknown",
+      "last_turn": "2026-11-21T12:49:53-06:00",
+      "last_turn_label": "Nov 21, 12:49 PM CT"
+    },
+    {
+      "name": "H&B",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "H&B Finance",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Health & Fitness",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Hobbies",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Jarvis",
+      "status": "unknown",
+      "last_turn": "2026-11-21T12:52:45-06:00",
+      "last_turn_label": "Nov 21, 12:52 PM CT"
+    },
+    {
+      "name": "Legal & Support",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Proposal",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "Trading",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 API Contract Guardian",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Backend Developer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Bug Hunter",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Changelog Bot",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Code Reviewer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Data Migration Engineer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Documentation Writer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Frontend Developer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Infra Engineer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Observability Engineer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Preview Environment Manager",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Product Owner",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 QA Engineer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Release Manager",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Security Engineer",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    },
+    {
+      "name": "V2 Training Bot",
+      "status": "unknown",
+      "last_turn": null,
+      "last_turn_label": null
+    }
+  ]
+}
