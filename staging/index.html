@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#111111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="V2 Hub">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>V2 One-Stop Shop &#8212; Staging</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 16px; background: #111; color: #eee; }
+  @media (min-width: 1400px) { body { max-width: 1120px; } }
+  body.big { font-size: 1.2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.2em; }
+  h2 { font-size: 1.1rem; margin-top: 1.5em; border-bottom: 1px solid #333; padding-bottom: 4px; }
+  h2:first-child { margin-top: 0.4em; }
+  .card { background: #1e1e1e; border-radius: 8px; padding: 12px; margin: 8px 0; }
+  .btn { background: #2d7ff9; color: white; border: none; padding: 8px 14px; border-radius: 6px; margin: 4px 4px 4px 0; cursor: pointer; text-decoration: none; display: inline-block; font-size: 0.9rem; font-family: inherit; }
+  .btn:hover { background: #1a6ae0; }
+  .btn:disabled { opacity: .55; cursor: default; }
+  .btn.small { padding: 6px 12px; font-size: 0.85rem; }
+  .btn.approve { background: #27ae60; } .btn.approve:hover { background: #1e8449; }
+  .btn.modify { background: #f39c12; } .btn.modify:hover { background: #d68910; }
+  .btn.defer { background: #7f8c8d; } .btn.defer:hover { background: #626567; }
+  .btn.ghost { background: #333; } .btn.ghost:hover { background: #444; }
+  .btn.armed { background: #c0392b; }
+  a { color: #5dade2; }
+  .muted { color: #888; font-size: 0.9rem; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-right: 8px; vertical-align: 1px; letter-spacing: 0.02em; text-transform: uppercase; }
+  .badge.breaking { background: #c0392b; color: #fff; } .badge.should-fix { background: #f39c12; color: #111; } .badge.nice { background: #7f8c8d; color: #fff; }
+  .badge.stage { background: #8e44ad; color: #fff; font-size: .75rem; }
+  .tone { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700; white-space:nowrap; }
+  .tone.danger { background:#c0392b; color:#fff; } .tone.warning { background:#f39c12; color:#111; } .tone.success { background:#27ae60; color:#fff; } .tone.info { background:#2d7ff9; color:#fff; } .tone.idle { background:#555; color:#fff; }
+  table { width:100%; border-collapse: collapse; font-size: 0.9rem; }
+  td, th { text-align:left; padding: 6px; border-bottom: 1px solid #2a2a2a; vertical-align: top; }
+  th { color: #aaa; font-weight: 600; }
+  ul { padding-left: 20px; } li { margin: 4px 0; }
+  .hide { display: none !important; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .top-tools { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .stage-note { background: #241a2e; border-left: 4px solid #8e44ad; padding: 8px 12px; border-radius: 6px; font-size: .9rem; margin-bottom: 10px; }
+  /* ambient */
+  .amb { border-radius: 12px; padding: 16px; margin: 0 0 12px; background: #1e1e1e; border: 3px solid #555; }
+  .amb-row { display: flex; gap: 16px; align-items: center; }
+  .amb-light { flex: none; width: 64px; height: 64px; border-radius: 50%; background: #7f8c8d; box-shadow: 0 0 24px rgba(0,0,0,.5); }
+  .amb-red { border-color: #c0392b; } .amb-red .amb-light { background: #e74c3c; box-shadow: 0 0 28px #e74c3c; animation: pulse 2.4s ease-in-out infinite; }
+  .amb-yellow { border-color: #f1c40f; } .amb-yellow .amb-light { background: #f1c40f; box-shadow: 0 0 28px #f1c40f; }
+  .amb-green { border-color: #27ae60; } .amb-green .amb-light { background: #2ecc71; box-shadow: 0 0 28px #2ecc71; }
+  @keyframes pulse { 50% { opacity: .55; } }
+  @media (prefers-reduced-motion: reduce) { .amb-red .amb-light { animation: none; } }
+  .amb-headline { font-size: 1.6rem; font-weight: 800; line-height: 1.2; }
+  .amb-sub { font-size: 1.2rem; margin-top: 4px; } .amb-next { font-size: 1.2rem; margin-top: 4px; color: #ddd; }
+  .amb-updated { font-size: 0.85rem; color: #999; margin-top: 8px; }
+  @media (min-width: 700px) { .amb-headline { font-size: 2rem; } .amb-light { width: 84px; height: 84px; } }
+  /* tabs */
+  .tabs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0 8px; position: sticky; top: 0; background: #111; z-index: 5; scrollbar-width: thin; }
+  @media (min-width: 1000px) { .tabs { flex-wrap: wrap; overflow: visible; } }
+  .tab { flex: none; min-height: 48px; padding: 0 16px; border-radius: 10px; border: 1px solid #333; background: #1e1e1e; color: #ddd; font-size: 1rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .tab[aria-selected="true"] { background: #2d7ff9; border-color: #2d7ff9; color: #fff; }
+  .tab .lock { font-size: .8em; opacity: .7; margin-left: 4px; }
+  .tab .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #e74c3c; margin-left: 6px; vertical-align: 1px; }
+  .panel { min-height: 40vh; }
+  /* alerts */
+  .alertbar { background: #2a2212; border-left: 5px solid #f39c12; border-radius: 8px; padding: 12px; margin: 0 0 10px; font-size: 1.05rem; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .alertbar.blocker { background: #2a1414; border-left-color: #e74c3c; } .alertbar.nothing { background: #142a1a; border-left-color: #2ecc71; }
+  .alertbar .txt { flex: 1; min-width: 200px; white-space: pre-wrap; }
+  /* grid + chips */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+  .box { background: #151515; border-radius: 8px; padding: 12px; }
+  .big-num { font-size: 1.7rem; font-weight: 800; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .chips .btn { min-height: 48px; font-size: 1rem; margin: 0; background: #333; }
+  .chips .btn:hover { background: #444; }
+  .bot { background: #151515; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 4px; }
+  .bot-name { font-weight: 600; }
+  .bars { display: flex; flex-direction: column; gap: 6px; }
+  .barrow { display: grid; grid-template-columns: minmax(120px, 34%) 1fr 64px; gap: 8px; align-items: center; font-size: .95rem; }
+  .bartrack { background: #333; border-radius: 6px; height: 16px; overflow: hidden; }
+  .barfill { background: #2d7ff9; height: 100%; }
+  .barfill.stale { background: repeating-linear-gradient(45deg, #2d7ff9, #2d7ff9 6px, #1b4c96 6px, #1b4c96 12px); }
+  .empty { background: #151515; border: 1px dashed #444; border-radius: 8px; padding: 14px; color: #bbb; }
+  .fresh { font-size: .85rem; color: #999; margin: 4px 0 8px; }
+  .fresh.stale { color: #f39c12; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .spacer { flex: 1; }
+  /* chat */
+  .jv-log { max-height: 55vh; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+  .jv-msg { padding: 10px 12px; border-radius: 10px; max-width: 88%; white-space: pre-wrap; word-wrap: break-word; line-height: 1.4; font-size: 1.05rem; }
+  .jv-me { align-self: flex-end; background: #2d7ff9; color: #fff; }
+  .jv-bot { align-self: flex-start; background: #2a2a2a; }
+  .jv-meta { font-size: 0.8rem; color: #aaa; margin-top: 4px; }
+  .jv-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+  .jv-input { flex: 1; min-width: 180px; min-height: 56px; font-size: 1.1rem; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #151515; color: #eee; font-family: inherit; resize: vertical; box-sizing: border-box; }
+  .jv-big { min-height: 56px; min-width: 96px; font-size: 1.1rem; font-weight: 600; border-radius: 10px; margin: 0; }
+  .jv-mic.listening { background: #c0392b; }
+  .notice { background: #2a2212; border-left: 5px solid #f39c12; border-radius: 8px; padding: 10px 12px; white-space: pre-wrap; font-size: 1.05rem; margin: 8px 0; }
+  .notice.blocker { background: #2a1414; border-left-color: #e74c3c; } .notice.nothing { background: #142a1a; border-left-color: #2ecc71; }
+  .offline { background: #2a1414; border-left: 5px solid #e74c3c; border-radius: 8px; padding: 12px; font-size: 1.05rem; margin: 10px 0; }
+  /* approvals */
+  .appr { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #2a2a2a; flex-wrap: wrap; }
+  .appr input[type=checkbox] { width: 26px; height: 26px; margin-top: 2px; flex: none; }
+  .appr-text { flex: 1; min-width: 200px; }
+  .appr-acts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .appr-acts .btn { min-height: 44px; min-width: 72px; font-size: 1rem; margin: 0; }
+  .sent { width: 100%; color: #8fd19e; font-size: .95rem; margin-top: 4px; }
+  .batch { position: sticky; bottom: 0; background: #1e1e1e; border-top: 2px solid #2d7ff9; padding: 10px; border-radius: 8px 8px 0 0; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .confirm-note { background: #14202a; border-left: 4px solid #2d7ff9; padding: 8px 12px; border-radius: 6px; font-size: .95rem; margin: 8px 0; }
+  .lockcard { border: 2px solid #2d7ff9; }
+  .lockcard .jv-row { margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <h1>V2 One-Stop Shop <span class="badge stage">Staging</span></h1>
+    <div class="muted">Talk to Jarvis, see what needs you, decide in one tap. Text only.</div>
+  </div>
+  <div class="top-tools">
+    <button type="button" class="btn ghost small" id="bigtext" aria-pressed="false">Aa Bigger text</button>
+    <button type="button" class="btn ghost small hide" id="alerts-on">Turn on alerts</button>
+    <button type="button" class="btn ghost small hide" id="lock-btn">Lock</button>
+  </div>
+</div>
+<div class="stage-note">This is the <strong>staging</strong> version of the hub for Shyam to try. The live hub is <a href="../">here</a>. Nothing on this page sends, books, or changes anything by itself: every action goes to Jarvis in chat, and Jarvis confirms with you first.</div>
+
+<div id="ambient" class="amb" role="status" aria-live="polite">
+  <div class="amb-row">
+    <div class="amb-light" aria-hidden="true"></div>
+    <div>
+      <div class="amb-headline" id="amb-headline">Loading status&#8230;</div>
+      <div class="amb-sub" id="amb-sub"></div>
+      <div class="amb-next" id="amb-next"></div>
+      <div class="amb-updated" id="amb-updated"></div>
+    </div>
+  </div>
+</div>
+<div id="alertbar" class="alertbar hide" role="alert">
+  <span class="badge should-fix" id="alert-kind">New</span><span class="txt" id="alert-text"></span>
+  <button type="button" class="btn small" id="alert-open">Open chat</button>
+  <button type="button" class="btn small ghost" id="alert-dismiss">Dismiss</button>
+</div>
+<div id="offline" class="offline hide">Jarvis&#8217;s relay can&#8217;t be reached right now. Ask in the Grok Bot app instead; the hub will reconnect on its own.</div>
+
+<nav class="tabs" role="tablist" aria-label="Hub sections" id="tabs">
+  <button class="tab" role="tab" data-tab="home">Command Center</button>
+  <button class="tab" role="tab" data-tab="today">Today<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="approvals">Approvals</button>
+  <button class="tab" role="tab" data-tab="chat">Chat<span class="dot hide" id="chat-dot"></span></button>
+  <button class="tab" role="tab" data-tab="costs">Costs<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="bots">Bot Usage<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="grok">Grok Dashboard</button>
+  <button class="tab" role="tab" data-tab="cursor">Cursor<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="finance">Finance<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="health">Health<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="travel">Tesla &amp; Travel<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="chicago">Chicago<span class="lock">&#128274;</span></button>
+</nav>
+
+<!-- shared unlock card, moved into whichever gated panel is open -->
+<div id="lockcard" class="card lockcard hide">
+  <strong>&#128274; Private section.</strong> <span class="muted">Enter the hub passcode once on this device (same passcode as Talk to Jarvis).</span>
+  <div class="jv-row">
+    <input id="pass" class="jv-input" type="password" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode">
+    <button type="button" class="btn jv-big" id="unlock">Unlock</button>
+  </div>
+  <div class="muted" id="lock-status" aria-live="polite"></div>
+</div>
+
+<section class="panel" id="p-home" role="tabpanel" hidden data-gated="partial">
+  <h2>Morning brief</h2>
+  <div id="digest"><div class="muted">Unlock to see the brief.</div></div>
+  <h2>Quick asks</h2>
+  <p class="muted">Each button only puts the question in the chat box. You tap Send. Jarvis answers in text.</p>
+  <div class="chips" id="quick"></div>
+  <h2>What Jarvis remembers</h2>
+  <div id="ctx"><div class="muted">Unlock to see saved context.</div></div>
+  <h2 id="bots">Bot status</h2>
+  <div class="row"><button type="button" class="btn" id="ping-btn">Ping Jarvis (read-only)</button><span class="muted" id="ping-out" aria-live="polite">Checks the relay and status. Sends nothing.</span></div>
+  <p class="muted" id="bots-asof"></p>
+  <div class="grid" id="bots-grid"></div>
+</section>
+
+<section class="panel" id="p-today" role="tabpanel" hidden data-gated="1">
+  <h2>Today</h2>
+  <div id="today"></div>
+</section>
+
+<section class="panel" id="p-approvals" role="tabpanel" hidden data-gated="partial">
+  <h2>Approvals</h2>
+  <div class="confirm-note"><strong>Jarvis confirms before anything changes.</strong> Yes or No goes to Jarvis in chat. Jarvis repeats it back, and only after you confirm does anything get written to GitHub or Notion. Order: Breaking, then Should-fix, then Nice-to-have.</div>
+  <div id="appr-list" class="card"></div>
+  <div class="batch hide" id="batch">
+    <span id="batch-count">0 selected</span><span class="spacer"></span>
+    <button type="button" class="btn approve jv-big" id="batch-yes">Yes to selected</button>
+    <button type="button" class="btn defer jv-big" id="batch-no">No to selected</button>
+    <button type="button" class="btn ghost jv-big" id="batch-clear">Clear</button>
+  </div>
+</section>
+
+<section class="panel" id="p-chat" role="tabpanel" hidden data-gated="1">
+  <h2>Talk to Jarvis</h2>
+  <div id="notices"></div>
+  <div class="card">
+    <div class="jv-log" id="log" aria-live="polite"></div>
+    <div class="jv-row">
+      <textarea id="text" class="jv-input" rows="2" maxlength="2000" placeholder="Ask Jarvis&#8230;" aria-label="Message to Jarvis"></textarea>
+      <button type="button" class="btn jv-big jv-mic hide" id="mic">&#127908; Speak</button>
+      <button type="button" class="btn jv-big" id="send">Send</button>
+    </div>
+    <div class="muted" id="chat-status" aria-live="polite"></div>
+    <div class="muted hide" id="mic-hint">No mic button here? Use your keyboard&#8217;s dictation key, or the car&#8217;s voice button, then tap Send.</div>
+    <div class="chips" id="chat-chips"></div>
+  </div>
+</section>
+
+<section class="panel" id="p-costs" role="tabpanel" hidden data-gated="1"><h2>Costs</h2><div id="costs"></div></section>
+<section class="panel" id="p-bots" role="tabpanel" hidden data-gated="1"><h2>Bot Usage</h2><div id="usage"></div></section>
+<section class="panel" id="p-grok" role="tabpanel" hidden data-gated="partial">
+  <h2>Grok Dashboard</h2>
+  <div class="grid">
+    <div class="box"><div class="muted">Relay</div><div class="big-num" id="g-relay">&#8230;</div><div class="muted" id="g-relay-sub"></div></div>
+    <div class="box"><div class="muted">Weekly usage</div><div class="big-num" id="g-week">&#8230;</div><div class="muted" id="g-week-sub"></div></div>
+  </div>
+  <div id="grok"></div>
+</section>
+<section class="panel" id="p-cursor" role="tabpanel" hidden data-gated="1"><h2>Cursor &amp; code</h2><div id="cursor"></div></section>
+<section class="panel" id="p-finance" role="tabpanel" hidden data-gated="1"><h2>Finance</h2><div id="finance"></div></section>
+<section class="panel" id="p-health" role="tabpanel" hidden data-gated="1"><h2>Health</h2><div id="health"></div></section>
+<section class="panel" id="p-travel" role="tabpanel" hidden data-gated="1"><h2>Tesla &amp; Travel</h2><div id="travel"></div></section>
+<section class="panel" id="p-chicago" role="tabpanel" hidden data-gated="1"><h2>Chicago</h2><div id="chicago"></div></section>
+
+<p class="muted" style="margin-top:24px">Staging build v3 &#183; Private sections load only after unlock and come from Jarvis&#8217;s relay, never from this public page. <a href="../">Live hub</a></p>
+
+<script>
+(function () {
+  'use strict';
+  var RELAY = 'https://v2-hub-chat.w53dc149404.workers.dev';
+  var KEY = 'v2hubchat.token', SEEN = 'v2hub.v3.seenNotice', BIG = 'v2hub.v3.big';
+  var token = null; try { token = localStorage.getItem(KEY); } catch (e) {}
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function add(parent) { for (var i = 1; i < arguments.length; i++) if (arguments[i]) parent.appendChild(arguments[i]); return parent; }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); return n; }
+  function ct(iso, withDay) {
+    if (!iso) return ''; var d = new Date(iso); if (isNaN(d)) return '';
+    var o = { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit' };
+    if (withDay) { o.weekday = 'short'; o.month = 'short'; o.day = 'numeric'; }
+    try { return d.toLocaleString('en-US', o) + ' CT'; } catch (e) { return d.toLocaleString(); }
+  }
+  function money(n) { return n == null ? '\u2014' : '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function offline(on) { $('offline').classList.toggle('hide', !on); }
+
+  /* ---------- big text ---------- */
+  function setBig(on) { document.body.classList.toggle('big', on); $('bigtext').setAttribute('aria-pressed', on ? 'true' : 'false'); try { localStorage.setItem(BIG, on ? '1' : '0'); } catch (e) {} }
+  try { if (localStorage.getItem(BIG) === '1') setBig(true); } catch (e) {}
+  $('bigtext').addEventListener('click', function () { setBig(!document.body.classList.contains('big')); });
+
+  /* ---------- relay api ---------- */
+  function api(path, opts) {
+    opts = opts || {}; opts.headers = opts.headers || {}; opts.cache = 'no-store';
+    if (token) opts.headers['Authorization'] = 'Bearer ' + token;
+    if (opts.body) opts.headers['Content-Type'] = 'application/json';
+    return fetch(RELAY + path, opts).then(function (r) {
+      offline(false);
+      if (r.status === 401 && path !== '/api/login') { lock('Please enter the passcode again.'); throw new Error('locked'); }
+      return r;
+    }, function (e) { offline(true); throw e; });
+  }
+  function getJSON(path) { return api(path).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }); }
+  function feed(name) { return getJSON('/api/feed/' + name).then(function (j) { return j.data; }); }
+
+  /* ---------- lock / unlock ---------- */
+  var loaded = {};
+  function lock(msg) {
+    token = null; try { localStorage.removeItem(KEY); } catch (e) {}
+    loaded = {}; $('lock-btn').classList.add('hide'); $('lock-status').textContent = msg || '';
+    if (pollTimer) clearTimeout(pollTimer);
+    show(current, true);
+  }
+  $('lock-btn').addEventListener('click', function () { lock('Locked on this device.'); });
+  $('unlock').addEventListener('click', function () {
+    var p = $('pass').value; if (!p) return; $('lock-status').textContent = 'Checking\u2026';
+    fetch(RELAY + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passcode: p }) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.token) throw new Error(d.message || 'Could not unlock'); return d; }); })
+      .then(function (d) { token = d.token; try { localStorage.setItem(KEY, token); } catch (e) {} $('pass').value = ''; $('lock-status').textContent = ''; afterUnlock(); show(current, true); })
+      .catch(function (e) { if (e instanceof TypeError) offline(true); $('lock-status').textContent = e instanceof TypeError ? '' : e.message; });
+  });
+  $('pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('unlock').click(); });
+  function afterUnlock() { $('lock-btn').classList.remove('hide'); poll(); loadHomePrivate(); }
+
+  /* ---------- tabs (lazy load) ---------- */
+  var LOADERS = {}, current = 'home', loadedAt = {};
+  function show(name, force) {
+    if (!$('p-' + name)) name = 'home';
+    current = name;
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (t) { t.setAttribute('aria-selected', t.getAttribute('data-tab') === name ? 'true' : 'false'); });
+    Array.prototype.forEach.call(document.querySelectorAll('.panel'), function (p) { p.hidden = p.id !== 'p-' + name; });
+    var panel = $('p-' + name), gated = panel.getAttribute('data-gated') === '1', partial = panel.getAttribute('data-gated') === 'partial', lc = $('lockcard');
+    if (partial && !token) { Array.prototype.forEach.call(panel.children, function (c) { c.classList.remove('hide'); }); panel.insertBefore(lc, panel.children[1] || null); lc.classList.remove('hide'); }
+    else if (gated && !token) { panel.insertBefore(lc, panel.children[1] || null); lc.classList.remove('hide'); Array.prototype.forEach.call(panel.children, function (c) { if (c !== lc && c.tagName !== 'H2') c.classList.add('hide'); }); }
+    else { lc.classList.add('hide'); Array.prototype.forEach.call(panel.children, function (c) { if (c !== lc) c.classList.remove('hide'); }); }
+    if (name === 'chat') { $('chat-dot').classList.add('hide'); markSeen(); }
+    if ((!gated || token) && LOADERS[name] && (force || !loadedAt[name] || Date.now() - loadedAt[name] > 300000)) { loadedAt[name] = Date.now(); LOADERS[name](); }
+    if (location.hash !== '#' + name) { try { history.replaceState(null, '', '#' + name); } catch (e) {} }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (t) { t.addEventListener('click', function () { show(t.getAttribute('data-tab')); }); });
+  window.addEventListener('hashchange', function () { var h = location.hash.slice(1); if (h && h !== current) show(h); });
+
+  function freshness(parent, d) {
+    if (!d) return;
+    var at = d.generated_at ? new Date(d.generated_at) : null, old = at && (Date.now() - at.getTime() > 26 * 3600 * 1000);
+    add(parent, el('div', 'fresh' + (old ? ' stale' : ''), 'Updated ' + (d.generated_at_label || ct(d.generated_at, true)) + (old ? ' \u00B7 more than a day old' : '') + (d.source ? ' \u00B7 ' + d.source : '')));
+  }
+  function emptyBox(parent, text, needs) {
+    var b = el('div', 'empty'); add(b, el('div', null, text));
+    if (needs) add(b, el('div', 'muted', 'To turn it on: ' + needs));
+    add(parent, b); return b;
+  }
+  function failBox(parent, e) { if (e && e.message === 'locked') return; emptyBox(clear(parent), 'Couldn\u2019t load this right now. Try again in a minute.'); }
+  function loading(id) { return add(clear($(id)), el('div', 'muted', 'Loading\u2026')); }
+  function bars(rows, max) {
+    var w = el('div', 'bars'); max = max || Math.max.apply(null, rows.map(function (r) { return r.value || 0; }).concat([1]));
+    rows.forEach(function (r) {
+      var row = el('div', 'barrow'), tr = el('div', 'bartrack'), f = el('div', 'barfill' + (r.stale ? ' stale' : ''));
+      f.style.width = Math.max(1, Math.round((r.value || 0) / max * 100)) + '%';
+      add(tr, f); add(row, el('div', null, r.label), tr, el('div', null, r.text != null ? r.text : String(r.value))); add(w, row);
+    });
+    return w;
+  }
+  function table(head, rows) {
+    var t = el('table'), th = el('tr'); head.forEach(function (h) { add(th, el('th', null, h)); }); add(t, add(el('thead'), th));
+    var tb = el('tbody'); rows.forEach(function (r) { var tr = el('tr'); r.forEach(function (c) { var td = el('td'); if (c && c.nodeType) td.appendChild(c); else td.textContent = c == null ? '\u2014' : c; add(tr, td); }); add(tb, tr); }); add(t, tb);
+    return t;
+  }
+  function tone(cls, text) { return el('span', 'tone ' + cls, text); }
+
+  /* ---------- status banner (public) ---------- */
+  var statusData = null;
+  function applyStatus(s) {
+    if (!s || typeof s !== 'object') return; statusData = s;
+    var light = ['red', 'yellow', 'green'].indexOf(s.light) >= 0 ? s.light : 'yellow';
+    $('ambient').className = 'amb amb-' + light;
+    $('amb-headline').textContent = s.headline || '';
+    var n = Number(s.decisions_waiting) || 0, b = (s.blockers || []).length, parts = [];
+    if (n) parts.push(n + (n === 1 ? ' decision waiting' : ' decisions waiting'));
+    if (b) parts.push(b + (b === 1 ? ' blocker' : ' blockers'));
+    $('amb-sub').textContent = parts.length ? parts.join(' \u00B7 ') : 'Nothing needs you';
+    var nd = s.next_decision;
+    $('amb-next').textContent = nd && nd.title ? 'Next decision: ' + nd.title + (nd.bucket ? ' (' + nd.bucket + ')' : '') : 'No decision waiting';
+    $('amb-updated').textContent = 'Status as of ' + (s.updated_at_label || ct(s.updated_at, true));
+    var g = s.usage && s.usage.grok;
+    if (g && g.percent_week != null && !grokFeed) { $('g-week').textContent = g.percent_week + '%'; $('g-week-sub').textContent = g.resets_at ? 'Resets ' + ct(g.resets_at, true) : ''; }
+  }
+  function loadStatus() { fetch('../status.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(applyStatus).catch(function () {}); }
+  loadStatus(); setInterval(function () { if (!document.hidden) loadStatus(); }, 60000);
+
+  /* ---------- Command Center ---------- */
+  var QUICK = ['What needs me?', 'Summarize overnight', 'Costs this month', 'Any blockers?', 'What did the bots do today?', 'Draft a reply to\u2026', 'Remember this: ', 'Plan my evening in Chicago'];
+  function prefill(t) { show('chat'); var x = $('text'); x.value = t; try { x.focus(); x.setSelectionRange(t.length, t.length); } catch (e) {} chatStatus(token ? 'Check the text, then tap Send.' : ''); }
+  QUICK.forEach(function (q) { var b = el('button', 'btn', q); b.type = 'button'; b.addEventListener('click', function () { prefill(q); }); add($('quick'), b); });
+  ['What needs me?', 'Summarize overnight', 'Any blockers?'].forEach(function (q) { var b = el('button', 'btn', q); b.type = 'button'; b.addEventListener('click', function () { prefill(q); }); add($('chat-chips'), b); });
+
+  function loadHomePrivate() {
+    if (!token) return;
+    feed('digest').then(function (d) {
+      var box = clear($('digest'));
+      if (!d) { emptyBox(box, 'No brief yet. Jarvis posts one each morning.'); return; }
+      var c = el('div', 'card'); add(c, el('strong', null, d.title || 'Brief'));
+      var ul = el('ul'); (d.lines || []).forEach(function (l) { add(ul, el('li', null, l)); }); add(c, ul);
+      freshness(c, d); add(box, c);
+    }).catch(function (e) { failBox($('digest'), e); });
+    getJSON('/api/context').then(function (j) {
+      var box = clear($('ctx')), items = j.items || [];
+      if (!items.length) { emptyBox(box, 'Nothing saved yet. Tell Jarvis "Remember this: \u2026" in chat or from the car.'); return; }
+      var ul = el('ul'); items.forEach(function (it) { var li = el('li'); add(li, el('span', 'badge nice', it.category || 'note'), document.createTextNode(it.text), el('span', 'muted', it.at_label ? ' \u00B7 ' + it.at_label : '')); add(ul, li); });
+      add(box, add(el('div', 'card'), ul));
+    }).catch(function (e) { failBox($('ctx'), e); });
+  }
+  function loadBots() {
+    fetch('../bots.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+      var g = clear($('bots-grid'));
+      (d.bots || []).forEach(function (b) {
+        var c = el('div', 'bot'); add(c, el('div', 'bot-name', b.name));
+        var st = (b.status || 'unknown').toLowerCase();
+        add(c, add(el('div'), tone(st === 'busy' ? 'warning' : st === 'idle' ? 'success' : 'idle', st)));
+        add(c, el('div', 'muted', b.last_turn_label ? 'Last activity ' + b.last_turn_label : 'No recent activity seen'));
+        add(g, c);
+      });
+      $('bots-asof').textContent = 'Snapshot as of ' + (d.generated_at_label || '') + ' \u00B7 ' + (d.bots || []).length + ' bots \u00B7 status shows "unknown" because nothing can see whether a bot is mid-turn.';
+    }).catch(function () { $('bots-asof').textContent = 'Bot list not available.'; });
+  }
+  LOADERS.home = function () { loadBots(); loadHomePrivate(); if (!token) { clear($('digest')); add($('digest'), el('div', 'muted', 'Unlock above to see the brief.')); clear($('ctx')); add($('ctx'), el('div', 'muted', 'Unlock to see saved context.')); } };
+  $('ping-btn').addEventListener('click', function () {
+    var out = $('ping-out'), t0 = Date.now(); out.textContent = 'Checking\u2026';
+    var a = fetch(RELAY + '/api/health', { cache: 'no-store' }).then(function (r) { var ms = Date.now() - t0; return r.json().then(function (h) { return { ok: r.ok, ms: ms, h: h }; }); }).catch(function () { return { ok: false }; });
+    var b = fetch('../status.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; });
+    Promise.all([a, b]).then(function (v) {
+      var p = [v[0].ok ? 'Relay up (' + v[0].ms + ' ms)' : 'Relay down'];
+      if (v[0].ok && v[0].h && v[0].h.configured) p.push(v[0].h.configured.passcode && v[0].h.configured.jarvis_webhook ? 'Jarvis link on' : 'Jarvis link off');
+      p.push('status from ' + (v[1] && (v[1].updated_at_label || v[1].updated_at) || 'unknown'));
+      p.push('nothing sent'); out.textContent = p.join(' \u00B7 ');
+    });
+  });
+
+  /* ---------- Chat ---------- */
+  var pending = false, pollTimer = null, lastSig = '', lastList = [];
+  var KIND = { decision: 'Decision', blocker: 'Blocker', nothing: 'Nothing needs you', answer: '' };
+  function chatStatus(t) { $('chat-status').textContent = t || ''; }
+  function time(ms) { try { return new Date(ms).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago' }) + ' CT'; } catch (e) { return ''; } }
+  function bubble(cls, text, meta) { var d = el('div', 'jv-msg ' + cls, text); if (meta) add(d, el('div', 'jv-meta', meta)); return d; }
+  function render(list) {
+    lastList = list;
+    var sig = JSON.stringify(list.map(function (m) { return [m.id, m.status, m.reply_at]; }));
+    if (sig === lastSig) return; lastSig = sig;
+    var log = $('log'), atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 60;
+    clear(log); pending = false;
+    var nb = clear($('notices'));
+    var pushes = list.filter(function (m) { return m.type === 'push' && m.reply_text; });
+    pushes.slice(-3).reverse().forEach(function (m) {
+      var d = el('div', 'notice ' + (m.reply_kind || ''));
+      add(d, el('span', 'badge ' + (m.reply_kind === 'blocker' ? 'breaking' : m.reply_kind === 'nothing' ? 'nice' : 'should-fix'), KIND[m.reply_kind] || 'Notice'), document.createTextNode(m.reply_text), el('div', 'jv-meta', 'Jarvis notice \u00B7 ' + time(m.reply_at)));
+      add(nb, d);
+    });
+    checkAlert(pushes);
+    list.filter(function (m) { return m.type !== 'push'; }).forEach(function (m) {
+      if (m.text) add(log, bubble('jv-me', m.text, time(m.created)));
+      if (m.reply_text) { var k = KIND[m.reply_kind] || ''; add(log, bubble('jv-bot', m.reply_text, 'Jarvis \u00B7 ' + time(m.reply_at) + (k ? ' \u00B7 ' + k : ''))); }
+      else if (m.text) {
+        var st = m.status || '', dec = m.type === 'decision';
+        var wait = st === 'not_connected' ? 'Saved, but the Jarvis link isn\u2019t switched on yet.' : st.indexOf('forward_failed') === 0 ? 'Couldn\u2019t reach Jarvis. Try again later.' : dec ? 'Sent to Jarvis, awaiting confirmation\u2026' : 'Jarvis is thinking\u2026 (usually under a minute)';
+        if (st === 'sending' || st === 'forwarded') pending = true;
+        add(log, bubble('jv-bot', wait));
+      }
+    });
+    if (!log.children.length) add(log, bubble('jv-bot', 'Ask me anything. I answer here in text.'));
+    if (atBottom || pending) log.scrollTop = log.scrollHeight;
+  }
+  function poll() {
+    if (pollTimer) clearTimeout(pollTimer);
+    if (!token) return;
+    if (document.hidden) { pollTimer = setTimeout(poll, 60000); return; }
+    getJSON('/api/messages').then(function (d) { if (d.messages) render(d.messages); })
+      .catch(function () {})
+      .then(function () { if (token) pollTimer = setTimeout(poll, pending ? 4000 : 30000); });
+  }
+  function send(text) {
+    text = (text || '').trim(); if (!text) return;
+    if (!token) { show('chat'); return; }
+    $('send').disabled = true; chatStatus('Sending\u2026');
+    api('/api/messages', { method: 'POST', body: JSON.stringify({ text: text }) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.message || 'Send failed'); return d; }); })
+      .then(function () { $('text').value = ''; chatStatus(''); pending = true; poll(); })
+      .catch(function (e) { if (e.message !== 'locked') chatStatus(e instanceof TypeError ? '' : e.message); })
+      .then(function () { $('send').disabled = false; });
+  }
+  $('send').addEventListener('click', function () { stopMic(); send($('text').value); });
+  $('text').addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); stopMic(); send($('text').value); } });
+  LOADERS.chat = function () { poll(); };
+
+  /* ---------- mic: continuous, auto-restart, 2-minute cap ---------- */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition, rec = null, listening = false, micBase = '', micFinal = '', micStart = 0, capTimer = null, tick = null, restarts = [];
+  var CAP_MS = 120000;
+  if (!SR) $('mic-hint').classList.remove('hide'); else $('mic').classList.remove('hide');
+  function micUI(on) { var m = $('mic'); m.classList.toggle('listening', on); m.textContent = on ? '\u25A0 Stop' : '\uD83C\uDFA4 Speak'; }
+  function micTick() { if (!listening) return; var left = Math.max(0, Math.ceil((CAP_MS - (Date.now() - micStart)) / 1000)); chatStatus('Listening\u2026 pauses are fine. Tap Stop when done (' + Math.floor(left / 60) + ':' + ('0' + left % 60).slice(-2) + ' left).'); }
+  function micBegin() {
+    try {
+      rec = new SR(); rec.lang = 'en-US'; rec.continuous = true; rec.interimResults = true;
+      rec.onresult = function (ev) {
+        var interim = '';
+        for (var i = ev.resultIndex; i < ev.results.length; i++) { var t = ev.results[i][0].transcript; if (ev.results[i].isFinal) micFinal += t.replace(/^\s+/, '') + ' '; else interim += t; }
+        $('text').value = micBase + micFinal + interim;
+      };
+      rec.onerror = function (ev) {
+        if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed' || ev.error === 'audio-capture') { listening = false; $('mic-hint').classList.remove('hide'); chatStatus('Mic not available here. Use the keyboard or car dictation instead.'); }
+      };
+      rec.onend = function () {
+        rec = null;
+        if (!listening) { micDone(); return; }
+        if (Date.now() - micStart >= CAP_MS) { micDone('Stopped after 2 minutes. Tap Send, or Speak to add more.'); return; }
+        var now = Date.now(); restarts = restarts.filter(function (t) { return now - t < 10000; }); restarts.push(now);
+        if (restarts.length > 8) { micDone('The mic keeps stopping on this device. Tap Speak to try again.'); return; }
+        setTimeout(function () { if (listening) micBegin(); }, 120);
+      };
+      rec.start();
+    } catch (e) { micDone('Couldn\u2019t start the mic.'); }
+  }
+  function micDone(msg) {
+    listening = false; if (capTimer) clearTimeout(capTimer); if (tick) clearInterval(tick); capTimer = tick = null;
+    micUI(false); chatStatus(msg || ($('text').value.trim() ? 'Got it. Tap Send.' : ''));
+  }
+  function stopMic() { if (!listening) return; listening = false; try { if (rec) rec.stop(); else micDone(); } catch (e) { micDone(); } }
+  $('mic').addEventListener('click', function () {
+    if (listening) { stopMic(); return; }
+    micBase = $('text').value ? $('text').value.replace(/\s*$/, ' ') : ''; micFinal = ''; restarts = [];
+    listening = true; micStart = Date.now(); micUI(true); micTick();
+    capTimer = setTimeout(function () { if (listening) { listening = false; try { if (rec) rec.stop(); } catch (e) {} micDone('Stopped after 2 minutes. Tap Send, or Speak to add more.'); } }, CAP_MS);
+    tick = setInterval(micTick, 1000); micBegin();
+  });
+
+  /* ---------- proactive alerts ---------- */
+  function seenId() { try { return localStorage.getItem(SEEN) || ''; } catch (e) { return ''; } }
+  function markSeen() { var p = lastList.filter(function (m) { return m.type === 'push' && m.reply_text; }); if (p.length) { try { localStorage.setItem(SEEN, p[p.length - 1].id); } catch (e) {} } $('alertbar').classList.add('hide'); document.title = document.title.replace(/^\(\d+\) /, ''); }
+  function checkAlert(pushes) {
+    if (!pushes.length) return;
+    var last = pushes[pushes.length - 1], seen = seenId();
+    if (last.id === seen) return;
+    var unseen = 0; for (var i = pushes.length - 1; i >= 0 && pushes[i].id !== seen; i--) unseen++;
+    if (current === 'chat' && !document.hidden) { markSeen(); return; }
+    var bar = $('alertbar'); bar.className = 'alertbar ' + (last.reply_kind || '');
+    $('alert-kind').textContent = KIND[last.reply_kind] || 'Notice'; $('alert-text').textContent = last.reply_text;
+    $('chat-dot').classList.remove('hide');
+    document.title = '(' + unseen + ') ' + document.title.replace(/^\(\d+\) /, '');
+    if (document.hidden && window.Notification && Notification.permission === 'granted' && last.id !== notified) {
+      notified = last.id;
+      try { new Notification('Jarvis: ' + (KIND[last.reply_kind] || 'New notice'), { body: 'Open the hub to read it.', tag: 'v2hub' }); } catch (e) {}
+    }
+  }
+  var notified = '';
+  $('alert-open').addEventListener('click', function () { show('chat'); });
+  $('alert-dismiss').addEventListener('click', markSeen);
+  if (window.Notification && Notification.permission === 'default') $('alerts-on').classList.remove('hide');
+  $('alerts-on').addEventListener('click', function () { try { Notification.requestPermission().then(function () { $('alerts-on').classList.add('hide'); }); } catch (e) { $('alerts-on').classList.add('hide'); } });
+
+  /* ---------- Approvals ---------- */
+  var BUCKETS = ['Breaking', 'Should-fix', 'Nice-to-have'];
+  function badgeFor(b) { return el('span', 'badge ' + (b === 'Breaking' ? 'breaking' : b === 'Should-fix' ? 'should-fix' : 'nice'), b || 'Item'); }
+  function decide(item, choice, note) {
+    var d = { id: item.id, title: item.title, choice: choice }; if (note) d.note = note;
+    return api('/api/messages', { method: 'POST', body: JSON.stringify({ type: 'decision', decision: d }) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.message || 'Send failed'); return j; }); });
+  }
+  var LABEL = { approve: 'Yes', defer: 'No', modify: 'Change' };
+  function sendOne(item, row, choice, note) {
+    var mark = row.querySelector('.sent') || add(row, el('div', 'sent'));
+    if (!token) { mark.textContent = 'Unlock at the top of this tab, then tap again.'; return Promise.resolve(false); }
+    var btns = row.querySelectorAll('button'); Array.prototype.forEach.call(btns, function (b) { b.disabled = true; });
+    mark.textContent = 'Sending\u2026';
+    return decide(item, choice, note).then(function () {
+      mark.textContent = '\u2713 ' + LABEL[choice] + ' sent to Jarvis. Jarvis will confirm in Chat before anything changes.';
+      var cb = row.querySelector('input[type=checkbox]'); if (cb) { cb.checked = false; cb.disabled = true; } pending = true; poll(); updateBatch(); return true;
+    }).catch(function (e) { mark.textContent = e.message === 'locked' ? 'Unlock first, then tap again.' : e.message; Array.prototype.forEach.call(btns, function (b) { b.disabled = false; }); return false; });
+  }
+  var apprItems = [];
+  function renderApprovals(d) {
+    var box = clear($('appr-list')); apprItems = (d && d.items) || [];
+    if (!apprItems.length) { add(box, el('div', null, 'Nothing waiting for you. \u2705')); return; }
+    BUCKETS.concat(['Other']).forEach(function (bk) {
+      var its = apprItems.filter(function (i) { return (BUCKETS.indexOf(i.bucket) < 0 ? 'Other' : i.bucket) === bk; });
+      if (!its.length) return; add(box, el('h3', 'muted', bk + ' (' + its.length + ')'));
+      its.forEach(function (it) {
+        var row = el('div', 'appr'), cb = el('input'); cb.type = 'checkbox'; cb.setAttribute('aria-label', 'Select ' + it.title); cb.addEventListener('change', updateBatch); cb._item = it;
+        var tx = el('div', 'appr-text'); add(tx, add(el('strong'), badgeFor(it.bucket), document.createTextNode(it.title)), it.detail ? el('div', 'muted', it.detail) : null);
+        var acts = el('div', 'appr-acts');
+        var y = el('button', 'btn approve', 'Yes'), n = el('button', 'btn defer', 'No'), m = el('button', 'btn modify', 'Change');
+        y.type = n.type = m.type = 'button';
+        y.addEventListener('click', function () { sendOne(it, row, 'approve'); });
+        n.addEventListener('click', function () { sendOne(it, row, 'defer', 'No (from the Approvals tab)'); });
+        m.addEventListener('click', function () {
+          if (row.querySelector('textarea')) { row.querySelector('textarea').focus(); return; }
+          var ta = el('textarea', 'jv-input'); ta.rows = 2; ta.maxLength = 1000; ta.placeholder = 'What should change?'; ta.style.width = '100%';
+          var go = el('button', 'btn modify jv-big', 'Send change'); go.type = 'button';
+          go.addEventListener('click', function () { if (ta.value.trim()) sendOne(it, row, 'modify', ta.value.trim()).then(function (ok) { if (ok) { ta.remove(); go.remove(); } }); else ta.focus(); });
+          add(row, ta, go); ta.focus();
+        });
+        add(acts, y, n, m); add(row, cb, tx, acts); add(box, row);
+      });
+    });
+    freshness(box, d);
+  }
+  function selected() { return Array.prototype.filter.call(document.querySelectorAll('#appr-list input[type=checkbox]'), function (c) { return c.checked; }); }
+  function updateBatch() { var s = selected(); $('batch').classList.toggle('hide', !s.length); $('batch-count').textContent = s.length + ' selected'; disarm(); }
+  var armed = null, armTimer = null;
+  function disarm() { armed = null; if (armTimer) clearTimeout(armTimer); $('batch-yes').textContent = 'Yes to selected'; $('batch-no').textContent = 'No to selected'; $('batch-yes').classList.remove('armed'); $('batch-no').classList.remove('armed'); }
+  function batch(choice, btn) {
+    var s = selected(); if (!s.length) return;
+    if (armed !== choice) { disarm(); armed = choice; btn.classList.add('armed'); btn.textContent = 'Tap again to send ' + LABEL[choice] + ' \u00D7 ' + s.length; armTimer = setTimeout(disarm, 5000); return; }
+    disarm(); var chain = Promise.resolve();
+    s.forEach(function (c) { chain = chain.then(function () { return sendOne(c._item, c.closest('.appr'), choice, choice === 'defer' ? 'No (batch, from the Approvals tab)' : null); }); });
+    chain.then(updateBatch);
+  }
+  $('batch-yes').addEventListener('click', function () { batch('approve', this); });
+  $('batch-no').addEventListener('click', function () { batch('defer', this); });
+  $('batch-clear').addEventListener('click', function () { selected().forEach(function (c) { c.checked = false; }); updateBatch(); });
+  LOADERS.approvals = function () {
+    loading('appr-list');
+    var pub = function () { return fetch('approvals.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }); };
+    (token ? feed('approvals').then(function (d) { return d && d.items ? d : pub(); }, pub) : pub())
+      .then(renderApprovals).catch(function (e) { failBox($('appr-list'), e); });
+  };
+
+  /* ---------- Today ---------- */
+  LOADERS.today = function () {
+    loading('today');
+    feed('today').then(function (d) {
+      var box = clear($('today')); if (!d) { emptyBox(box, 'No Today snapshot yet.'); return; }
+      var g = el('div', 'grid');
+      var a = el('div', 'box'); add(a, el('div', 'muted', d.date_label || 'Today'));
+      if (d.weather) { add(a, el('div', 'big-num', d.weather.now_f + '\u00B0F'), el('div', null, d.weather.sky || '')); if (d.weather.today) add(a, el('div', 'muted', 'High ' + d.weather.today.hi + '\u00B0 / low ' + d.weather.today.lo + '\u00B0 \u00B7 rain ' + d.weather.today.rain_pct + '% \u00B7 sunset ' + d.weather.today.sunset)); }
+      add(g, a);
+      var t = el('div', 'box'); add(t, el('div', 'muted', 'Top 3 for you')); var ol = el('ol'); (d.top3 || []).forEach(function (x) { add(ol, el('li', null, x)); }); if (!(d.top3 || []).length) add(ol, el('li', null, 'Nothing needs you.')); add(t, ol); add(g, t);
+      add(box, g);
+      add(box, el('h2', null, 'Agenda'));
+      if (d.agenda && d.agenda.length) { var ul = el('ul'); d.agenda.forEach(function (x) { add(ul, el('li', null, (x.time ? x.time + ' \u2014 ' : '') + x.title)); }); add(box, ul); }
+      else { emptyBox(box, d.agenda_note || 'Calendar not connected.'); var ul2 = el('ul', 'muted'); (d.placeholders || []).forEach(function (x) { add(ul2, el('li', null, x)); }); add(box, ul2); }
+      var c = el('div', 'chips'); ['What\u2019s on my calendar today?', 'Plan my day', 'Anything urgent in email?'].forEach(function (q) { var b = el('button', 'btn', q); b.type = 'button'; b.addEventListener('click', function () { prefill(q); }); add(c, b); }); add(box, c);
+      freshness(box, d);
+    }).catch(function (e) { failBox($('today'), e); });
+  };
+
+  /* ---------- Costs ---------- */
+  LOADERS.costs = function () {
+    loading('costs');
+    feed('costs').then(function (d) {
+      var box = clear($('costs')); if (!d || d.empty) { emptyBox(box, (d && d.empty) || 'No cost data yet.'); return; }
+      var a = d.aws || {}, g = el('div', 'grid');
+      var b1 = el('div', 'box'); add(b1, el('div', 'muted', 'AWS this month'), el('div', 'big-num', a.live && a.mtd != null ? money(a.mtd) : 'No live number'), el('div', 'muted', a.live ? 'as of ' + (a.mtd_as_of || '') : (a.last_attempt_result || 'Not checked'))); add(g, b1);
+      var b2 = el('div', 'box'); add(b2, el('div', 'muted', 'AWS November forecast'), el('div', 'big-num', money(a.nov_forecast)), el('div', 'muted', a.live ? 'live' : 'stale \u00B7 from ' + (a.last_good_label || 'last good check'))); add(g, b2);
+      var b3 = el('div', 'box'); add(b3, el('div', 'muted', 'AWS October (actual)'), el('div', 'big-num', money(a.oct_total)), el('div', 'muted', a.oct_total ? '\u2248 ' + money(a.oct_total / 31) + '/day' : '')); add(g, b3);
+      add(box, g);
+      if (a.note) add(box, el('div', 'confirm-note', a.note));
+      if ((d.burn || []).length) { add(box, el('h2', null, 'Burn rate')); add(box, bars(d.burn.map(function (x) { return { label: x.label, value: x.usd, text: money(x.usd), stale: x.stale }; }))); add(box, el('div', 'muted', 'Striped bar = stale estimate. Per day: ' + d.burn.map(function (x) { return x.label.split(' (')[0] + ' ' + money(x.per_day); }).join(' \u00B7 '))); }
+      if ((a.top || []).length) { add(box, el('h2', null, 'Top AWS lines' + (a.live ? '' : ' (October, last good data)'))); add(box, bars(a.top.map(function (x) { return { label: x.name, value: x.usd, text: money(x.usd) }; }))); }
+      add(box, el('h2', null, 'H&B ledger'));
+      var hb = d.hb || {}; if (hb.live) { add(box, table(['Item', 'Amount'], (hb.rows || []).map(function (r) { return [r.label, money(r.usd)]; }))); } else emptyBox(box, hb.note || 'No H&B ledger connected.');
+      add(box, el('h2', null, 'Other running costs'));
+      var rows = []; if (d.github) rows.push(['GitHub Actions (Nov)', money(d.github.nov_usd) + ' of ' + money(d.github.included_usd) + ' included', d.github.note || '']);
+      if (d.grok) rows.push(['Grok Bot extra credits', money(d.grok.credits_left_usd) + ' left', 'Weekly limit only; see Grok Dashboard']);
+      add(box, table(['What', 'Amount', 'Note'], rows));
+      freshness(box, d);
+    }).catch(function (e) { failBox($('costs'), e); });
+  };
+
+  /* ---------- Bot Usage ---------- */
+  LOADERS.bots = function () {
+    loading('usage');
+    feed('usage').then(function (d) {
+      var box = clear($('usage')); if (!d || d.empty) { emptyBox(box, (d && d.empty) || 'No usage data yet.'); return; }
+      add(box, el('h2', null, 'Leaderboard, last 7 days'));
+      add(box, el('div', 'muted', (d.window_7d || '') + ' \u00B7 share of all Grok Bot usage \u00B7 active days = days with any usage'));
+      add(box, bars((d.leaderboard || []).map(function (x) { return { label: x.bot, value: x.share, text: (x.share < 1 ? '<1' : x.share) + '% \u00B7 ' + x.active_days + 'd' }; }), 100));
+      add(box, el('h2', null, 'This week so far'));
+      add(box, bars((d.this_week || []).map(function (x) { return { label: x.bot, value: x.share, text: (x.share < 1 ? '<1' : x.share) + '%' }; }), 100));
+      add(box, el('h2', null, 'Idle (no usage in 7 days)'));
+      if ((d.idle_7d || []).length) add(box, el('div', 'card', d.idle_7d.join(' \u00B7 '))); else add(box, el('div', 'muted', 'Every bot was active.'));
+      add(box, el('h2', null, 'Tokens and live busy/idle'));
+      add(box, el('div', 'empty', d.tokens_note || 'Not available.')); add(box, el('div', 'muted', d.busy_note || ''));
+      freshness(box, d);
+    }).catch(function (e) { failBox($('usage'), e); });
+  };
+
+  /* ---------- Grok Dashboard ---------- */
+  var grokFeed = null;
+  function relayHealth() {
+    var t0 = Date.now();
+    fetch(RELAY + '/api/health', { cache: 'no-store' }).then(function (r) { var ms = Date.now() - t0; return r.json().then(function (h) { return { ok: r.ok, ms: ms, h: h }; }); })
+      .then(function (v) { offline(!v.ok); $('g-relay').textContent = v.ok ? 'Up' : 'Down'; var c = v.h && v.h.configured || {}; $('g-relay-sub').textContent = v.ms + ' ms \u00B7 passcode ' + (c.passcode ? 'on' : 'off') + ' \u00B7 Jarvis link ' + (c.jarvis_webhook ? 'on' : 'off') + ' \u00B7 text replies'; })
+      .catch(function () { offline(true); $('g-relay').textContent = 'Down'; $('g-relay-sub').textContent = 'Use the Grok Bot app until it\u2019s back.'; });
+  }
+  LOADERS.grok = function () {
+    relayHealth(); var box = clear($('grok'));
+    if (!token) { add(box, el('div', 'muted', 'Unlock above for routines, per-feed freshness, and full usage.')); return; }
+    add(box, el('div', 'muted', 'Loading\u2026'));
+    Promise.all([feed('grok').catch(function () { return null; }), getJSON('/api/feeds').catch(function () { return { feeds: [] }; })]).then(function (v) {
+      var d = v[0], fl = v[1].feeds || []; clear(box); grokFeed = d;
+      if (d && !d.empty) {
+        $('g-week').textContent = d.week_percent + '%';
+        $('g-week-sub').textContent = 'Grok Bot ' + d.week_percent_grok_bot + '% of it' + (d.shared_with_other_apps ? ' (limit shared with other apps)' : '') + ' \u00B7 resets ' + d.resets_label;
+        var g = el('div', 'grid');
+        var c1 = el('div', 'box'); add(c1, el('div', 'muted', 'Weekly limit'), bars([{ label: 'Used', value: d.week_percent, text: d.week_percent + '%' }], 100), el('div', 'muted', d.light === 'red' ? 'Near the limit' : d.light === 'yellow' ? 'Watch it' : 'Plenty left')); add(g, c1);
+        var c2 = el('div', 'box'); add(c2, el('div', 'muted', 'Extra credits'), el('div', 'big-num', money(d.credits_left_usd)), el('div', 'muted', d.credits_left_usd === 0 ? 'When the weekly limit runs out, bots pause until reset.' : '')); add(g, c2);
+        add(box, g);
+        add(box, el('h2', null, 'Routines'));
+        if (d.routines && d.routines.length) add(box, table(['Routine', 'On', 'Last run', 'Result'], d.routines.map(function (r) { return [r.name, r.enabled === true ? 'yes' : r.enabled === false ? 'no' : '?', r.last_run_label, r.last_status]; })));
+        else add(box, el('div', 'empty', d.routines_note || 'No routine snapshot yet.'));
+        if ((d.routine_usage || []).length) { add(box, el('div', 'muted', 'Usage by routine this week:')); add(box, table(['Routine', 'Share', 'Runs'], d.routine_usage.map(function (r) { return [r.name, (r.share < 1 ? '<1' : r.share) + '%', r.runs_per_week]; }))); }
+        add(box, el('div', 'muted', d.rate_limits_note || ''));
+        freshness(box, d);
+      } else emptyBox(box, 'No usage snapshot yet.');
+      add(box, el('h2', null, 'Feed health'));
+      if (fl.length) add(box, table(['Feed', 'Updated', 'Age'], fl.map(function (f) { var h = (Date.now() - new Date(f.updated_at).getTime()) / 3600000; return [f.name, ct(f.updated_at, true), h < 1 ? 'fresh' : h < 26 ? Math.round(h) + 'h' : el('span', 'tone warning', Math.round(h / 24) + 'd old')]; })));
+      else add(box, el('div', 'muted', 'No feeds yet.'));
+    });
+  };
+
+  /* ---------- Cursor ---------- */
+  LOADERS.cursor = function () {
+    loading('cursor');
+    feed('cursor').then(function (d) {
+      var box = clear($('cursor')); if (!d || d.empty) { emptyBox(box, (d && d.empty) || 'No GitHub snapshot yet.'); return; }
+      var g = el('div', 'grid');
+      var h = d.heads || {};
+      ['stage', 'main'].forEach(function (k) { var x = h[k] || {}; var b = el('div', 'box'); add(b, el('div', 'muted', k === 'stage' ? 'Staging (stage branch)' : 'Production (main)'), el('div', 'big-num', x.sha || '\u2014'), el('div', null, x.title || ''), el('div', 'muted', x.date_label || '')); add(g, b); });
+      var ci = el('div', 'box'); add(ci, el('div', 'muted', 'CI'), add(el('div', 'big-num'), tone(d.ci_light === 'red' ? 'danger' : d.ci_light === 'green' ? 'success' : 'idle', d.ci_light === 'red' ? 'Failing' : d.ci_light === 'green' ? 'Passing' : 'Unknown')), el('div', 'muted', d.ci_note || '')); add(g, ci);
+      add(box, g);
+      add(box, el('div', 'confirm-note', 'Stage vs prod: ' + (d.stage_vs_prod || 'unknown') + '. ' + (d.prod_note || '')));
+      add(box, el('h2', null, 'Open PRs (' + d.open_prs + ', ' + d.drafts + ' drafts)'));
+      add(box, table(['#', 'Title', 'State', 'Updated'], (d.prs || []).map(function (p) { return ['#' + p.number, p.title, p.draft ? tone('idle', 'Draft') : tone('info', p.author === 'Dependabot' ? 'Dependabot' : 'Open'), p.updated_label]; })));
+      add(box, el('h2', null, 'Recent CI runs'));
+      add(box, table(['Workflow', 'Where', 'Result', 'When'], (d.ci || []).map(function (r) { return [r.name + ' (' + r.event + ')', r.where, tone(r.result === 'success' ? 'success' : r.result === 'failure' ? 'danger' : 'idle', r.result || '?'), r.at_label]; })));
+      var c = el('div', 'chips'); ['Which PRs need me?', 'Why is CI failing?', 'What\u2019s on stage but not in prod?'].forEach(function (q) { var b = el('button', 'btn', q); b.type = 'button'; b.addEventListener('click', function () { prefill(q); }); add(c, b); }); add(box, c);
+      freshness(box, d);
+    }).catch(function (e) { failBox($('cursor'), e); });
+  };
+
+  /* ---------- personal tabs ---------- */
+  function personal(name, prompts) {
+    return function () {
+      loading(name);
+      feed(name).then(function (d) {
+        var box = clear($(name));
+        if (!d || d.empty || !d.live) emptyBox(box, (d && d.empty) || 'Not connected yet.', d && d.needs);
+        else if (d.rows) add(box, table(['Item', 'Value'], d.rows.map(function (r) { return [r.label, r.value]; })));
+        var c = el('div', 'chips'); prompts.forEach(function (q) { var b = el('button', 'btn', q); b.type = 'button'; b.addEventListener('click', function () { prefill(q); }); add(c, b); }); add(box, el('div', 'muted', 'Ask Jarvis instead:'), c);
+        freshness(box, d);
+      }).catch(function (e) { failBox($(name), e); });
+    };
+  }
+  LOADERS.finance = personal('finance', ['How\u2019s my spending this month?', 'Any bills due this week?', 'Net worth check']);
+  LOADERS.health = personal('health', ['How did I sleep?', 'Should I train hard today?', 'Weekly workout summary']);
+  LOADERS.travel = personal('travel', ['Plan a weekend road trip', 'Charging stops to ', 'Upcoming trips']);
+  LOADERS.chicago = function () {
+    loading('chicago');
+    feed('chicago').then(function (d) {
+      var box = clear($('chicago')); if (!d) { emptyBox(box, 'No Chicago snapshot yet.'); return; }
+      var w = d.weather;
+      if (w) {
+        var g = el('div', 'grid'); var n = el('div', 'box'); add(n, el('div', 'muted', 'Now'), el('div', 'big-num', w.now_f + '\u00B0F'), el('div', null, w.sky + ' \u00B7 feels ' + w.feels_f + '\u00B0 \u00B7 wind ' + w.wind_mph + ' mph')); add(g, n);
+        (w.days || []).forEach(function (x) { var b = el('div', 'box'); add(b, el('div', 'muted', x.date_label), el('div', 'big-num', x.hi + '\u00B0 / ' + x.lo + '\u00B0'), el('div', null, x.sky + ' \u00B7 rain ' + x.rain_pct + '%'), el('div', 'muted', 'Sunset ' + x.sunset)); add(g, b); });
+        add(box, g);
+      } else emptyBox(box, 'Weather not available right now.');
+      add(box, el('h2', null, 'CTA trains'));
+      var al = (d.cta && d.cta.alerts) || [];
+      if (al.length) add(box, table(['Alert', 'Lines', 'Impact'], al.map(function (a) { var t = el('div'); add(t, el('strong', null, a.headline), el('div', 'muted', a.short)); return [t, a.lines || '\u2014', a.impact]; })));
+      else add(box, el('div', 'muted', d.cta && d.cta.ok ? 'No train alerts right now.' : 'CTA alerts not available.'));
+      add(box, el('h2', null, 'Going out'));
+      emptyBox(box, d.events_note || 'Events not connected.');
+      var c = el('div', 'chips'); ['Plan a Chicago night out', 'Good spot for dinner tonight?', 'Anything fun this weekend?'].forEach(function (q) { var b = el('button', 'btn', q); b.type = 'button'; b.addEventListener('click', function () { prefill(q); }); add(c, b); }); add(box, c);
+      freshness(box, d);
+    }).catch(function (e) { failBox($('chicago'), e); });
+  };
+
+  /* ---------- start ---------- */
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && token) { poll(); } });
+  if (token) afterUnlock();
+  show((location.hash || '#home').slice(1) || 'home');
+  setInterval(function () { if (!document.hidden) relayHealth(); }, 120000); relayHealth();
+})();
+</script>
+</body>
+</html>

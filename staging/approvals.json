@@ -1,0 +1,67 @@
+{
+ "schema": 1,
+ "source": "Decisions waiting on the prod hub (already public)",
+ "generated_at_label": "Nov 21, 2026, 6:12 PM CT",
+ "items": [
+  {
+   "id": "start-the-signed-in-staging-review",
+   "title": "Start the signed-in staging review",
+   "bucket": "Should-fix",
+   "detail": "Finds breakage behind sign-in on staging. The login bug is why it got stuck before. CoS recommends waiting until the login fix merges. Waiting: Your go (Decision 13, next)."
+  },
+  {
+   "id": "re-file-the-six-possible-broken-links",
+   "title": "Re-file the six possible broken links",
+   "bucket": "Should-fix",
+   "detail": "Pages field users can hit. Held until you approve. Waiting: Your go."
+  },
+  {
+   "id": "new-read-only-aws-check-of-the-staging-bot",
+   "title": "New read-only AWS check of the staging bot",
+   "bucket": "Should-fix",
+   "detail": "Earlier tries hit connector errors. Needs a new OK. Waiting: Your go."
+  },
+  {
+   "id": "update-the-github-hub-and-docs",
+   "title": "Update the GitHub hub and docs",
+   "bucket": "Nice-to-have",
+   "detail": "They don't show Nov 17 afternoon or Nov 18 yet. Waiting: Your go."
+  },
+  {
+   "id": "hub-button-flow",
+   "title": "Hub button flow",
+   "bucket": "Nice-to-have",
+   "detail": "Since Nov 21, 2026, buttons send decisions to Jarvis through the private chat instead of opening GitHub issues. Waiting: Parked."
+  },
+  {
+   "id": "open-review-exceptions",
+   "title": "Open review exceptions",
+   "bucket": "Nice-to-have",
+   "detail": "Older exceptions still open. Waiting: Parked."
+  },
+  {
+   "id": "start-the-notion-record-drafts",
+   "title": "Start the Notion record drafts",
+   "bucket": "Nice-to-have",
+   "detail": "Closures, retries, corrections. Record keeping. Waiting: Your go."
+  },
+  {
+   "id": "links-and-labels-on-issues-171-179",
+   "title": "Links and labels on issues #171–#179",
+   "bucket": "Nice-to-have",
+   "detail": "Tracker tidy-up. Waiting: On hold."
+  },
+  {
+   "id": "write-the-staging-bot-game-plan-note",
+   "title": "Write the staging bot game-plan note",
+   "bucket": "Nice-to-have",
+   "detail": "Not written yet. Waiting: Your go."
+  },
+  {
+   "id": "con-15-auto-added-links-keep-or-remove",
+   "title": "CON-15 auto-added links: keep or remove",
+   "bucket": "Nice-to-have",
+   "detail": "Linear added some links to CON-15 automatically. CoS recommends keeping them. Waiting: Your pick (answer in chat)."
+  }
+ ]
+}
