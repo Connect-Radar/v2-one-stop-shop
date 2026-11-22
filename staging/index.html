@@ -38,7 +38,7 @@
   td, th { text-align:left; padding: 6px; border-bottom: 1px solid #2a2a2a; vertical-align: top; }
   th { color: #aaa; font-weight: 600; }
   ul { padding-left: 20px; } li { margin: 4px 0; }
-  .hide { display: none !important; }
+  .hide, .gate-hide { display: none !important; }
   .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
   .top-tools { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
   .stage-note { background: #241a2e; border-left: 4px solid #8e44ad; padding: 8px 12px; border-radius: 6px; font-size: .9rem; margin-bottom: 10px; }
@@ -155,7 +155,7 @@
   <button class="tab" role="tab" data-tab="cursor">Cursor<span class="lock">&#128274;</span></button>
   <button class="tab" role="tab" data-tab="finance">Finance<span class="lock">&#128274;</span></button>
   <button class="tab" role="tab" data-tab="health">Health<span class="lock">&#128274;</span></button>
-  <button class="tab" role="tab" data-tab="travel">Tesla &amp; Travel<span class="lock">&#128274;</span></button>
+  <button class="tab" role="tab" data-tab="travel">Tesla & Travel<span class="lock">&#128274;</span></button>
   <button class="tab" role="tab" data-tab="chicago">Chicago<span class="lock">&#128274;</span></button>
 </nav>
 
@@ -226,10 +226,10 @@
   </div>
   <div id="grok"></div>
 </section>
-<section class="panel" id="p-cursor" role="tabpanel" hidden data-gated="1"><h2>Cursor &amp; code</h2><div id="cursor"></div></section>
+<section class="panel" id="p-cursor" role="tabpanel" hidden data-gated="1"><h2>Cursor & code</h2><div id="cursor"></div></section>
 <section class="panel" id="p-finance" role="tabpanel" hidden data-gated="1"><h2>Finance</h2><div id="finance"></div></section>
 <section class="panel" id="p-health" role="tabpanel" hidden data-gated="1"><h2>Health</h2><div id="health"></div></section>
-<section class="panel" id="p-travel" role="tabpanel" hidden data-gated="1"><h2>Tesla &amp; Travel</h2><div id="travel"></div></section>
+<section class="panel" id="p-travel" role="tabpanel" hidden data-gated="1"><h2>Tesla & Travel</h2><div id="travel"></div></section>
 <section class="panel" id="p-chicago" role="tabpanel" hidden data-gated="1"><h2>Chicago</h2><div id="chicago"></div></section>
 
 <p class="muted" style="margin-top:24px">Staging build v3 &#183; Private sections load only after unlock and come from Jarvis&#8217;s relay, never from this public page. <a href="../">Live hub</a></p>
@@ -296,12 +296,12 @@
   function show(name, force) {
     if (!$('p-' + name)) name = 'home';
     current = name;
-    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (t) { t.setAttribute('aria-selected', t.getAttribute('data-tab') === name ? 'true' : 'false'); });
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (t) { var on = t.getAttribute('data-tab') === name; t.setAttribute('aria-selected', on ? 'true' : 'false'); if (on && t.scrollIntoView) { try { t.scrollIntoView({ block: 'nearest', inline: 'center' }); } catch (e) {} } });
     Array.prototype.forEach.call(document.querySelectorAll('.panel'), function (p) { p.hidden = p.id !== 'p-' + name; });
     var panel = $('p-' + name), gated = panel.getAttribute('data-gated') === '1', partial = panel.getAttribute('data-gated') === 'partial', lc = $('lockcard');
-    if (partial && !token) { Array.prototype.forEach.call(panel.children, function (c) { c.classList.remove('hide'); }); panel.insertBefore(lc, panel.children[1] || null); lc.classList.remove('hide'); }
-    else if (gated && !token) { panel.insertBefore(lc, panel.children[1] || null); lc.classList.remove('hide'); Array.prototype.forEach.call(panel.children, function (c) { if (c !== lc && c.tagName !== 'H2') c.classList.add('hide'); }); }
-    else { lc.classList.add('hide'); Array.prototype.forEach.call(panel.children, function (c) { if (c !== lc) c.classList.remove('hide'); }); }
+    if (partial && !token) { Array.prototype.forEach.call(panel.children, function (c) { c.classList.remove('gate-hide'); }); panel.insertBefore(lc, panel.children[1] || null); lc.classList.remove('hide'); }
+    else if (gated && !token) { panel.insertBefore(lc, panel.children[1] || null); lc.classList.remove('hide'); Array.prototype.forEach.call(panel.children, function (c) { if (c !== lc && c.tagName !== 'H2') c.classList.add('gate-hide'); }); }
+    else { lc.classList.add('hide'); Array.prototype.forEach.call(panel.children, function (c) { c.classList.remove('gate-hide'); }); }
     if (name === 'chat') { $('chat-dot').classList.add('hide'); markSeen(); }
     if ((!gated || token) && LOADERS[name] && (force || !loadedAt[name] || Date.now() - loadedAt[name] > 300000)) { loadedAt[name] = Date.now(); LOADERS[name](); }
     if (location.hash !== '#' + name) { try { history.replaceState(null, '', '#' + name); } catch (e) {} }
