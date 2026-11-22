@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-root="../../" data-stage="../" data-option="a">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07111f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="V2 Hub">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<title>Connect-Radar Hub &#8212; Staging option A (Command)</title>
+<link rel="stylesheet" href="../assets/v5/inter.css">
+<link rel="stylesheet" href="../assets/v5/base.css">
+<style>
+:root{--bg:#07111f;--s1:#0c1a2e;--s2:#11233c;--s3:#1a3050;--line:#22395b;--tx:#eef3fa;--mu:#a3b4cc;--accent:#3b82f6;--onacc:#ffffff;--link:#8ab8ff;--hdrbg:rgba(7,17,31,.92);--navbg:#0a1628;--railbg:#08142a;--selbg:#12284a;--mebub:#1b3d70;--r:14px;--rs:10px;--shadow:0 1px 0 rgba(255,255,255,.03) inset,0 8px 24px rgba(0,0,0,.28)}.tile.hero{background:linear-gradient(135deg,rgba(59,130,246,.14),var(--s1) 55%)}
+</style>
+</head>
+<body class="opt-a">
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><!-- Lucide icons, ISC license: ../assets/v5/LICENSE-lucide.txt --><symbol id="i-home" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/> <rect width="7" height="5" x="14" y="3" rx="1"/> <rect width="7" height="9" x="14" y="12" rx="1"/> <rect width="7" height="5" x="3" y="16" rx="1"/></symbol><symbol id="i-today" viewBox="0 0 24 24"><path d="M8 2v3"/> <path d="M16 2v3"/> <rect x="3" y="3" width="18" height="18" rx="2"/> <path d="M3 9h18"/> <path d="M8 13h.01"/> <path d="M12 13h.01"/> <path d="M16 13h.01"/> <path d="M8 17h.01"/> <path d="M12 17h.01"/> <path d="M16 17h.01"/></symbol><symbol id="i-approvals" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/> <path d="m16 9-5.5 5.5L8 12"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></symbol><symbol id="i-costs" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol><symbol id="i-bots" viewBox="0 0 24 24"><path d="M12 8V4H8"/> <rect width="16" height="12" x="4" y="8" rx="2"/> <path d="M2 14h2"/> <path d="M20 14h2"/> <path d="M15 13v2"/> <path d="M9 13v2"/></symbol><symbol id="i-grok" viewBox="0 0 24 24"><path d="m12 14 4-4"/> <path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol><symbol id="i-cursor" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/> <circle cx="6" cy="6" r="3"/> <path d="M13 6h3a2 2 0 0 1 2 2v7"/> <line x1="6" x2="6" y1="9" y2="21"/></symbol><symbol id="i-finance" viewBox="0 0 24 24"><path d="M10 18v-7"/> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"/> <path d="M14 18v-7"/> <path d="M18 18v-7"/> <path d="M3 22h18"/> <path d="M6 18v-7"/></symbol><symbol id="i-health" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/> <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol><symbol id="i-travel" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/> <circle cx="7" cy="17" r="2"/> <path d="M9 17h6"/> <circle cx="17" cy="17" r="2"/></symbol><symbol id="i-chicago" viewBox="0 0 24 24"><path d="M10 12h4"/> <path d="M10 8h4"/> <path d="M14 21v-3a2 2 0 0 0-4 0v3"/> <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/> <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></symbol><symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/> <circle cx="19" cy="12" r="1"/> <circle cx="5" cy="12" r="1"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 19v3"/> <path d="M19 10v2a7 7 0 0 1-14 0v-2"/> <rect x="9" y="2" width="6" height="13" rx="3"/></symbol><symbol id="i-stop" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/> <path d="m21.854 2.147-10.94 10.939"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/> <path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/> <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol><symbol id="i-type" viewBox="0 0 24 24"><path d="M12 4v16"/> <path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/> <path d="M9 20h6"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8"/> <path d="M7 14h.01"/> <path d="M17 14h.01"/> <rect width="18" height="8" x="3" y="10" rx="2"/> <path d="M5 18v2"/> <path d="M19 18v2"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/> <path d="m6 6 12 12"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/> <path d="m15 5 4 4"/></symbol><symbol id="i-relay" viewBox="0 0 24 24"><path d="M4.9 16.1C1 12.2 1 5.8 4.9 1.9"/> <path d="M7.8 4.7a6.14 6.14 0 0 0-.8 7.5"/> <circle cx="12" cy="9" r="2"/> <path d="M16.2 4.8c2 2 2.26 5.11.8 7.47"/> <path d="M19.1 1.9a9.96 9.96 0 0 1 0 14.1"/> <path d="M9.5 18h5"/> <path d="m8 22 4-11 4 11"/></symbol><symbol id="i-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/> <rect width="20" height="8" x="2" y="14" rx="2" ry="2"/> <line x1="6" x2="6.01" y1="6" y2="6"/> <line x1="6" x2="6.01" y1="18" y2="18"/></symbol><symbol id="i-brief" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/> <path d="M12 2v2"/> <path d="M12 20v2"/> <path d="m4.93 4.93 1.41 1.41"/> <path d="m17.66 17.66 1.41 1.41"/> <path d="M2 12h2"/> <path d="M20 12h2"/> <path d="m6.34 17.66-1.41 1.41"/> <path d="m19.07 4.93-1.41 1.41"/></symbol><symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 18V5"/> <path d="M15 13a4.17 4.17 0 01-3-4 4.17 4.17 0 01-3 4"/> <path d="M17.707 6.294A3 3 0 1012 5a3 3 0 10-5.707 1.294"/> <path d="M17.996 5.125a4 4 0 012.526 5.77"/> <path d="M18 18a4 4 0 002-7.465"/> <path d="M19.967 17.482a4 4 0 11-7.967.517 4 4 0 11-7.967-.517"/> <path d="M6 18a4 4 0 01-2-7.465"/> <path d="M6.004 5.125a4 4 0 00-2.526 5.77"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/> <path d="M12 6v6l4 2"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/> <path d="M12 9v4"/> <path d="M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/> <path d="m9 12 2 2 4-4"/></symbol><symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/> <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol></svg>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="#home" aria-label="Connect-Radar hub, Command Center"><svg class="mark" viewBox="0 0 36 36" aria-hidden="true"><rect x=".5" y=".5" width="35" height="35" rx="9" style="fill:var(--s2);stroke:var(--line)"/><circle cx="18" cy="18" r="11.5" style="fill:none;stroke:var(--accent);stroke-opacity:.35;stroke-width:1.5"/><circle cx="18" cy="18" r="6.5" style="fill:none;stroke:var(--accent);stroke-opacity:.65;stroke-width:1.5"/><path d="M18 18 27 11" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round"/><circle cx="18" cy="18" r="2.4" style="fill:var(--accent)"/><circle cx="25.5" cy="23.5" r="1.6" style="fill:var(--tx);opacity:.8"/></svg><span class="wm"><b>Connect-Radar</b><span>V2 One-Stop Hub</span></span><span class="badge stage">Staging &#183; A</span></a>
+    <div id="ambient" class="hstat amb" role="status" aria-live="polite">
+      <span class="amb-light" aria-hidden="true"></span>
+      <div class="hstat-txt"><div class="hstat-next" id="amb-next">Loading status&#8230;</div><div class="hstat-sub" id="amb-sub"></div></div>
+    </div>
+    <div class="tools">
+      <button type="button" class="tbtn" id="carmode" aria-pressed="false" title="Car mode: big text box, keyboard dictation"><svg class="ic" aria-hidden="true"><use href="#i-car"/></svg><span class="lbl">Car mode</span></button>
+      <button type="button" class="tbtn" id="bigtext" aria-pressed="false" title="Bigger text"><svg class="ic" aria-hidden="true"><use href="#i-type"/></svg><span class="lbl">Bigger text</span></button>
+      <button type="button" class="tbtn hide" id="alerts-on" title="Turn on alerts"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="lbl">Alerts</span></button>
+      <button type="button" class="tbtn hide" id="lock-btn" title="Lock this device"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><span class="lbl">Lock</span></button>
+    </div>
+  </div>
+</header>
+<nav class="nav" role="tablist" aria-label="Hub sections" id="tabs">
+  <button class="tab" role="tab" type="button" data-tab="home" data-tier="bar"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span class="tl"><span class="ln">Command Center</span><span class="sn">Home</span></span></button><button class="tab" role="tab" type="button" data-tab="approvals" data-tier="bar"><svg class="ic" aria-hidden="true"><use href="#i-approvals"/></svg><span class="tl"><span class="ln">Approvals</span><span class="sn">Approvals</span></span></button><button class="tab" role="tab" type="button" data-tab="chat" data-tier="bar"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span class="tl"><span class="ln">Chat</span><span class="sn">Chat</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span><span class="unread hide" id="chat-dot"></span></button><button class="tab" role="tab" type="button" data-tab="costs" data-tier="bar"><svg class="ic" aria-hidden="true"><use href="#i-costs"/></svg><span class="tl"><span class="ln">Costs</span><span class="sn">Costs</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button><div class="nav-head">More sections</div><button class="tab" role="tab" type="button" data-tab="bots" data-tier="rail"><svg class="ic" aria-hidden="true"><use href="#i-bots"/></svg><span class="tl"><span class="ln">Bot Usage</span><span class="sn">Bot Usage</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button><button class="tab" role="tab" type="button" data-tab="grok" data-tier="rail"><svg class="ic" aria-hidden="true"><use href="#i-grok"/></svg><span class="tl"><span class="ln">Grok Dashboard</span><span class="sn">Grok</span></span></button><button class="tab" role="tab" type="button" data-tab="cursor" data-tier="rail"><svg class="ic" aria-hidden="true"><use href="#i-cursor"/></svg><span class="tl"><span class="ln">Cursor &#38; code</span><span class="sn">Cursor</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button><button class="tab" role="tab" type="button" data-tab="chicago" data-tier="rail"><svg class="ic" aria-hidden="true"><use href="#i-chicago"/></svg><span class="tl"><span class="ln">Chicago</span><span class="sn">Chicago</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button><button class="tab" type="button" id="more-btn" data-tier="bar" aria-expanded="false" aria-controls="tabs"><svg class="ic" aria-hidden="true"><use href="#i-more"/></svg><span class="tl"><span class="ln">Not connected</span><span class="sn">More</span></span><svg class="ic sm chev" aria-hidden="true"><use href="#i-chev"/></svg></button><div class="nav-head">Not connected yet</div><button class="tab" role="tab" type="button" data-tab="today" data-tier="more"><svg class="ic" aria-hidden="true"><use href="#i-today"/></svg><span class="tl"><span class="ln">Today</span><span class="sn">Today</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button><button class="tab" role="tab" type="button" data-tab="finance" data-tier="more"><svg class="ic" aria-hidden="true"><use href="#i-finance"/></svg><span class="tl"><span class="ln">Finance</span><span class="sn">Finance</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button><button class="tab" role="tab" type="button" data-tab="health" data-tier="more"><svg class="ic" aria-hidden="true"><use href="#i-health"/></svg><span class="tl"><span class="ln">Health</span><span class="sn">Health</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button><button class="tab" role="tab" type="button" data-tab="travel" data-tier="more"><svg class="ic" aria-hidden="true"><use href="#i-travel"/></svg><span class="tl"><span class="ln">Tesla &#38; Travel</span><span class="sn">Travel</span></span><span class="lock" title="Private"><svg class="ic sm" aria-hidden="true"><use href="#i-lock"/></svg></span></button>
+</nav>
+<main class="main" id="main">
+
+<div id="alertbar" class="alertbar hide" role="alert">
+  <span class="badge should-fix" id="alert-kind">New</span><span class="txt" id="alert-text"></span>
+  <button type="button" class="btn small" id="alert-open">Open chat</button>
+  <button type="button" class="btn small ghost" id="alert-dismiss">Dismiss</button>
+</div>
+<div id="offline" class="offline hide">Jarvis&#8217;s relay can&#8217;t be reached right now. Ask in the Grok Bot app instead; the hub reconnects on its own.</div>
+
+<div id="lockcard" class="card lockcard hide">
+  <strong><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg> Private section.</strong> <span class="muted">Enter the hub passcode once on this device (same passcode as Talk to Jarvis).</span>
+  <div class="jv-row">
+    <input id="pass" class="jv-input" type="password" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode">
+    <button type="button" class="btn jv-big" id="unlock">Unlock</button>
+  </div>
+  <div class="muted" id="lock-status" aria-live="polite"></div>
+</div>
+
+<section class="panel" id="p-home" role="tabpanel" hidden data-gated="partial">
+  <h2>Command Center</h2>
+  <div class="stage-note"><strong>Staging option A &#183; Command.</strong> A design preview for Shyam to compare: <a href="../a/">Option A</a> &#183; <a href="../b/">Option B</a> &#183; <a href="../">current staging</a> &#183; <a href="../../">live hub</a>. Nothing here sends, books or changes anything by itself; every action goes to Jarvis, who confirms first.</div>
+  <div class="headline" id="headline"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><div style="flex:1;min-width:0"><div class="headline-t" id="amb-headline"><span class="skel skel-l w2"></span></div><div class="upd" id="amb-updated"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span></span></div></div></div>
+  <h2><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg>Status</h2>
+  <div class="tiles">
+    <div class="tile hero" id="t-next">
+      <div class="label"><svg class="ic" aria-hidden="true"><use href="#i-inbox"/></svg>Next decision<span class="dot gray" id="t-next-dot"></span></div>
+      <div class="value" id="t-next-title"><span class="skel skel-v"></span></div>
+      <div class="sub" id="t-next-sub"></div>
+      <div><button type="button" class="btn" id="t-next-go"><svg class="ic" aria-hidden="true"><use href="#i-approvals"/></svg>Open Approvals</button></div>
+      <div class="upd" id="t-next-upd"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span></span></div>
+    </div>
+    <div class="tile" id="t-grok">
+      <div class="label"><svg class="ic" aria-hidden="true"><use href="#i-grok"/></svg>Grok weekly usage<span class="dot gray" id="t-grok-dot"></span></div>
+      <div class="value" id="t-grok-val"><span class="skel skel-v"></span></div>
+      <div class="progress" aria-hidden="true"><span id="t-grok-bar"></span></div>
+      <div class="sub" id="t-grok-sub"></div>
+      <div class="upd" id="t-grok-upd"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span></span></div>
+    </div>
+    <div class="tile" id="t-relay">
+      <div class="label"><svg class="ic" aria-hidden="true"><use href="#i-relay"/></svg>Jarvis relay<span class="dot gray" id="t-relay-dot"></span></div>
+      <div class="value" id="t-relay-val"><span class="skel skel-v"></span></div>
+      <div class="sub" id="t-relay-sub"></div>
+      <div class="upd" id="t-relay-upd"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span></span></div>
+    </div>
+    <div class="tile" id="t-uptime">
+      <div class="label"><svg class="ic" aria-hidden="true"><use href="#i-server"/></svg>Uptime<span class="dot gray" id="t-up-dot"></span></div>
+      <div class="value" id="t-up-val">&#8212;</div>
+      <div class="sub" id="t-up-sub">Unlock to see monitors.</div>
+      <div class="mons" id="t-up-list"></div>
+      <div class="upd" id="t-up-upd"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span></span></div>
+    </div>
+    <div class="tile" id="t-appr">
+      <div class="label"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Approvals today<span class="dot gray" id="t-appr-dot"></span></div>
+      <div class="value" id="t-appr-val"><span class="skel skel-v"></span></div>
+      <div class="progress" aria-hidden="true"><span id="t-appr-bar"></span></div>
+      <div class="sub" id="t-appr-sub">Sent from this device today</div>
+      <div class="upd" id="t-appr-upd"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span></span></div>
+    </div>
+  </div>
+  <h2><svg class="ic" aria-hidden="true"><use href="#i-brief"/></svg>Morning brief</h2>
+  <div id="digest"><div class="card"><span class="skel skel-l"></span><span class="skel skel-l w2"></span><span class="skel skel-l w3"></span></div></div>
+  <h2><svg class="ic" aria-hidden="true"><use href="#i-zap"/></svg>Quick asks</h2>
+  <p class="muted">Each button only puts the question in the chat box. You tap Send. Jarvis answers in text.</p>
+  <div class="qgrid" id="quick"></div>
+  <h2><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>What Jarvis remembers</h2>
+  <div id="ctx"><div class="card"><span class="skel skel-l"></span><span class="skel skel-l w2"></span><span class="skel skel-l w3"></span></div></div>
+  <h2 id="bots"><svg class="ic" aria-hidden="true"><use href="#i-bots"/></svg>Bot status</h2>
+  <div class="row"><button type="button" class="btn ghost" id="ping-btn"><svg class="ic" aria-hidden="true"><use href="#i-relay"/></svg>Ping Jarvis (read-only)</button><span class="muted" id="ping-out" aria-live="polite">Checks the relay and status. Sends nothing.</span></div>
+  <p class="muted" id="bots-asof"></p>
+  <div class="botgrid" id="bots-grid"><span class="skel"></span><span class="skel"></span><span class="skel"></span></div>
+</section>
+
+<section class="panel" id="p-today" role="tabpanel" hidden data-gated="1"><h2>Today</h2><div id="today"></div></section>
+
+<section class="panel" id="p-approvals" role="tabpanel" hidden data-gated="partial">
+  <h2>Approvals</h2>
+  <div class="confirm-note"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><div><strong>Jarvis confirms before anything changes.</strong> Yes or No goes to Jarvis in chat. Jarvis repeats it back, and only after you confirm does anything get written to GitHub or Notion. Order: Breaking, then Should-fix, then Nice-to-have.</div></div>
+  <div class="appr-progress"><div class="row"><span id="appr-done-label">0 of 0 sent today</span><span class="spacer"></span><span class="muted">from this device</span></div><div class="progress" aria-hidden="true"><span id="appr-done-bar"></span></div></div>
+  <div id="appr-list"><span class="skel skel-card"></span><span class="skel skel-card"></span><span class="skel skel-card"></span></div>
+  <div class="batch hide" id="batch">
+    <span id="batch-count">0 selected</span><span class="spacer"></span>
+    <button type="button" class="btn approve jv-big" id="batch-yes">Yes to selected</button>
+    <button type="button" class="btn defer jv-big" id="batch-no">No to selected</button>
+    <button type="button" class="btn ghost jv-big" id="batch-clear">Clear</button>
+  </div>
+</section>
+
+<section class="panel" id="p-chat" role="tabpanel" hidden data-gated="1">
+  <h2>Talk to Jarvis</h2>
+  <div id="notices"></div>
+  <div class="card chatcard">
+    <div class="jv-log" id="log" aria-live="polite"></div>
+    <div class="micbar hide" id="micbar">
+      <button type="button" class="mic-btn" id="mic" aria-label="Start talking"><svg class="ic" aria-hidden="true"><use href="#i-mic"/></svg></button>
+      <div class="mic-info">
+        <div class="mic-state"><span id="mic-state">Tap the mic and talk</span><span class="levels" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+        <div class="mic-time" id="mic-time">Keeps listening through pauses &#183; stops by itself at 2:00</div>
+        <div class="progress" aria-hidden="true"><span id="mic-prog"></span></div>
+      </div>
+      <button type="button" class="btn mic-stop hide" id="mic-stop"><svg class="ic" aria-hidden="true"><use href="#i-stop"/></svg>Stop</button>
+    </div>
+    <div class="composer">
+      <textarea id="text" class="jv-input" rows="2" maxlength="2000" placeholder="Ask Jarvis&#8230;" aria-label="Message to Jarvis"></textarea>
+      <button type="button" class="btn jv-big" id="send"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>Send</button>
+    </div>
+    <div class="muted" id="chat-status" aria-live="polite"></div>
+    <div class="hint hide" id="mic-hint"><svg class="ic" aria-hidden="true"><use href="#i-mic"/></svg><span id="mic-hint-t">Tap the keyboard mic to dictate, then tap Send.</span></div>
+    <div class="chips" id="chat-chips"></div>
+  </div>
+</section>
+
+<section class="panel" id="p-costs" role="tabpanel" hidden data-gated="1"><h2>Costs</h2><div id="costs"></div></section>
+<section class="panel" id="p-bots" role="tabpanel" hidden data-gated="1"><h2>Bot Usage</h2><div id="usage"></div></section>
+<section class="panel" id="p-grok" role="tabpanel" hidden data-gated="partial">
+  <h2>Grok Dashboard</h2>
+  <div class="grid">
+    <div class="box"><div class="muted"><svg class="ic" aria-hidden="true"><use href="#i-relay"/></svg>Relay</div><div class="big-num" id="g-relay">&#8230;</div><div class="muted" id="g-relay-sub"></div></div>
+    <div class="box"><div class="muted"><svg class="ic" aria-hidden="true"><use href="#i-grok"/></svg>Weekly usage</div><div class="big-num" id="g-week">&#8230;</div><div class="progress" aria-hidden="true"><span id="g-week-bar"></span></div><div class="muted" id="g-week-sub"></div></div>
+  </div>
+  <div id="grok"></div>
+</section>
+<section class="panel" id="p-cursor" role="tabpanel" hidden data-gated="1"><h2>Cursor &#38; code</h2><div id="cursor"></div></section>
+<section class="panel" id="p-finance" role="tabpanel" hidden data-gated="1"><h2>Finance</h2><div id="finance"></div></section>
+<section class="panel" id="p-health" role="tabpanel" hidden data-gated="1"><h2>Health</h2><div id="health"></div></section>
+<section class="panel" id="p-travel" role="tabpanel" hidden data-gated="1"><h2>Tesla &#38; Travel</h2><div id="travel"></div></section>
+<section class="panel" id="p-chicago" role="tabpanel" hidden data-gated="1"><h2>Chicago</h2><div id="chicago"></div></section>
+
+<p class="muted footer">Staging option A (Command) &#183; build v5 &#183; Private sections load only after unlock and come from Jarvis&#8217;s relay, never from this public page. Icons: Lucide (ISC). Font: Inter (OFL). <a href="../../">Live hub</a></p>
+</main>
+<script src="../assets/v5/hub.js"></script>
+</body>
+</html>
