@@ -535,7 +535,7 @@
   }
   var LABEL = { approve: 'Yes', defer: 'No', modify: 'Change' };
   function sendOne(item, row, choice, note) {
-    var mark = row.querySelector('.sent') || add(row, el('div', 'sent'));
+    var mark = row.querySelector('.sent'); if (!mark) { mark = el('div', 'sent'); row.appendChild(mark); }
     if (!token) { mark.textContent = 'Unlock at the top of this tab, then tap again.'; return Promise.resolve(false); }
     var btns = row.querySelectorAll('button'); Array.prototype.forEach.call(btns, function (b) { b.disabled = true; });
     mark.textContent = 'Sending\u2026';
