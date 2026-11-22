@@ -350,16 +350,22 @@
   function renderUptime(d) {
     var list = clear($('t-up-list'));
     if (!token) { $('t-up-val').textContent = '\u2014'; $('t-up-sub').textContent = 'Unlock to see monitors.'; setDot('t-up-dot', 'gray'); return; }
-    var mons = d && d.monitors;
-    if (!mons || !mons.length) { $('t-up-val').textContent = 'Starting up'; $('t-up-sub').textContent = 'Monitoring starting up. Monitors show here once they report.'; setDot('t-up-dot', 'gray'); return; }
-    var up = mons.filter(function (m) { return m.status === 'up'; }).length, down = mons.filter(function (m) { return m.status === 'down'; }).length;
-    $('t-up-val').textContent = up + ' of ' + mons.length + ' up';
-    setDot('t-up-dot', down ? 'red' : up === mons.length ? 'green' : 'yellow');
-    $('t-up-sub').textContent = d.updated_at ? 'Checked ' + ct(d.updated_at, true) : '';
+    var mons = (d && d.monitors) || [], ov = d && d.overall;
+    if (!d || (!mons.length && ov !== 'down' && ov !== 'degraded')) { $('t-up-val').textContent = 'Starting up'; $('t-up-sub').textContent = (d && d.note) || 'Monitoring starting up. Monitors show here once they report.'; setDot('t-up-dot', 'gray'); return; }
+    var c = d.counts || {}, up = c.up != null ? c.up : mons.filter(function (m) { return m.status === 'up'; }).length;
+    var down = c.down != null ? c.down : mons.filter(function (m) { return m.status === 'down'; }).length;
+    var OV = { up: ['green', 'All up'], degraded: ['yellow', 'Degraded'], down: ['red', 'Down'], unknown: ['gray', 'Unknown'] };
+    var o = OV[ov] || (down ? OV.down : up === mons.length ? OV.up : OV.degraded);
+    setDot('t-up-dot', o[0]);
+    $('t-up-val').textContent = mons.length ? up + ' of ' + mons.length + ' up' : o[1];
+    var when = d.updated_at_label || (d.updated_at ? ct(d.updated_at, true) : '');
+    var stale = d.updated_at && Date.now() - new Date(d.updated_at).getTime() > 30 * 60000;
+    $('t-up-sub').textContent = o[1] + (down ? ' \u00B7 ' + down + ' down' : '') + (c.pending ? ' \u00B7 ' + c.pending + ' pending' : '') + (when ? ' \u00B7 checked ' + when : '') + (stale ? ' (stale)' : '') + (ov === 'unknown' && d.note ? ' \u00B7 ' + d.note : '');
     mons.slice(0, 8).forEach(function (m) {
-      var r = el('div'); add(r, dot(m.status === 'up' ? 'green' : m.status === 'down' ? 'red' : 'yellow'), el('span', 'nm', m.name || 'Monitor'),
-        el('span', 'v', (m.uptime_24h != null ? Math.round(m.uptime_24h * 10) / 10 + '%' : '') + (m.latency_ms != null ? ' \u00B7 ' + Math.round(m.latency_ms) + ' ms' : '')));
-      add(list, r);
+      var col = m.status === 'up' ? 'green' : m.status === 'down' ? 'red' : m.status === 'pending' ? 'yellow' : 'gray';
+      var v = (m.uptime_24h != null ? (Math.round(m.uptime_24h * 10) / 10) + '%' : '') + (m.latency_ms != null ? (m.uptime_24h != null ? ' \u00B7 ' : '') + Math.round(m.latency_ms) + ' ms' : '') ;
+      if (!v || m.status === 'maintenance') v = (v ? v + ' \u00B7 ' : '') + (m.status === 'up' ? '' : m.status);
+      var r = el('div'); r.title = m.last_check_label ? 'Last check ' + m.last_check_label : ''; add(r, dot(col), el('span', 'nm', m.name || 'Monitor'), el('span', 'v', v)); add(list, r);
     });
   }
   function loadHomePrivate() {
