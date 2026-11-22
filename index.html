@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connect-Radar V2 — One-Stop Shop</title>
 <style>
@@ -52,7 +53,10 @@
   .jv-me { align-self: flex-end; background: #2d7ff9; color: #fff; }
   .jv-bot { align-self: flex-start; background: #2a2a2a; }
   .jv-meta { font-size: 0.8rem; color: #aaa; margin-top: 4px; }
-  .jv-bot audio { width: 100%; margin-top: 8px; }
+  .jv-mem { background: #151515; border-radius: 8px; padding: 10px 12px; margin: 0 0 10px; }
+  .jv-mem h3 { font-size: 0.85rem; color: #bbb; font-weight: 600; margin: 0 0 6px; }
+  .jv-mem ul { margin: 0; padding-left: 18px; }
+  .jv-mem li { margin: 3px 0; font-size: 0.95rem; }
   .jv-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
   .jv-input { flex: 1; min-width: 180px; min-height: 56px; font-size: 1.1rem; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #151515; color: #eee; font-family: inherit; resize: vertical; }
   .jv-big { min-height: 56px; min-width: 96px; font-size: 1.1rem; font-weight: 600; border-radius: 10px; margin: 0; }
@@ -103,7 +107,7 @@
 
 <div class="card" id="jarvis">
   <h2>Talk to Jarvis</h2>
-  <p class="muted">Type or speak a message to Jarvis (Chief of Staff). Replies come back here as text plus a Jarvis voice clip you tap to play. Jarvis only surfaces decisions, blockers, or &#8220;Nothing needs you.&#8221;</p>
+  <p class="muted">Type or speak a message to Jarvis (Chief of Staff). Replies come back here as text. Jarvis only surfaces decisions, blockers, or &#8220;Nothing needs you.&#8221;</p>
   <div id="jv-offline" class="jv-offline jv-hidden">Jarvis chat is offline. Open the Grok Bot app and message Jarvis.</div>
   <div id="jv-lock">
     <p>Enter your passcode once on this device.</p>
@@ -115,6 +119,7 @@
   <div id="jv-chat" class="jv-hidden">
     <div id="jv-notices" class="jv-notices"></div>
     <div id="jv-log" class="jv-log" aria-live="polite"></div>
+    <div id="jv-mem" class="jv-mem jv-hidden"><h3>What Jarvis remembers</h3><ul id="jv-mem-list"></ul></div>
     <div class="jv-row">
       <textarea id="jv-text" class="jv-input" rows="2" maxlength="2000" placeholder="Message Jarvis&#8230;" aria-label="Message to Jarvis"></textarea>
       <button id="jv-mic" class="btn jv-big jv-mic jv-hidden" type="button" aria-label="Speak your message">&#127908; Speak</button>
@@ -819,11 +824,6 @@
       <div id="u-grok" class="usage-big">38.5%</div>
       <div id="u-grok-sub" class="muted">Resets Thu Nov 26, 9:24 PM CT &#183; checked Nov 21, 1:11 PM CT</div>
     </div>
-    <div class="usage-box">
-      <div class="muted">ElevenLabs credits (Jarvis voice)</div>
-      <div id="u-el" class="usage-big">Not yet reported</div>
-      <div id="u-el-sub" class="muted">Jarvis will fill this in once it can read the ElevenLabs plan.</div>
-    </div>
   </div>
   <p class="muted">Live from this page&#8217;s status file, refreshed every minute.</p>
 </div>
@@ -924,16 +924,11 @@
     var nd = s.next_decision;
     $('amb-next').textContent = nd && nd.title ? 'Next decision: ' + nd.title + (nd.bucket ? ' (' + nd.bucket + ')' : '') : 'No decision waiting';
     $('amb-updated').textContent = 'Status as of ' + (s.updated_at_label || ct(s.updated_at, true));
-    var u = s.usage || {}, g = u.grok, el = u.elevenlabs;
+    var u = s.usage || {}, g = u.grok;
     if (g && g.percent_week != null) {
       $('u-grok').textContent = g.percent_week + '%';
       $('u-grok-sub').textContent = (g.resets_at ? 'Resets ' + ct(g.resets_at, true) : '') + (g.checked_at ? ' \u00B7 checked ' + ct(g.checked_at, true) : '');
     } else { $('u-grok').textContent = 'Not yet reported'; $('u-grok-sub').textContent = ''; }
-    if (el && el.used != null && el.limit != null) {
-      var pct = el.percent != null ? el.percent : Math.round(el.used / el.limit * 1000) / 10;
-      $('u-el').textContent = Number(el.used).toLocaleString('en-US') + ' / ' + Number(el.limit).toLocaleString('en-US') + ' (' + pct + '%)';
-      $('u-el-sub').textContent = (el.resets_at ? 'Resets ' + ct(el.resets_at, true) : '') + (el.checked_at ? ' \u00B7 checked ' + ct(el.checked_at, true) : '');
-    } else { $('u-el').textContent = 'Not yet reported'; $('u-el-sub').textContent = 'Jarvis will fill this in once it can read the ElevenLabs plan.'; }
   }
   function load() {
     fetch('status.json?t=' + Date.now(), { cache: 'no-store' })
@@ -986,7 +981,7 @@
   var KEY = 'v2hubchat.token';
   var NOT_ON = 'Jarvis chat isn\u2019t switched on yet. Shyam needs to add the passcode in Cloudflare.';
   var $ = function (id) { return document.getElementById(id); };
-  var token = null, pending = false, pollTimer = null, lastSig = '', audioUrls = {};
+  var token = null, pending = false, pollTimer = null, lastSig = '';
   try { token = localStorage.getItem(KEY); } catch (e) {}
   function status(t) { $('jv-status').textContent = t || ''; }
   function show(locked) { $('jv-lock').classList.toggle('jv-hidden', !locked); $('jv-chat').classList.toggle('jv-hidden', locked); }
@@ -1000,36 +995,16 @@
       return r;
     });
   }
-  function lock(msg) { token = null; try { localStorage.removeItem(KEY); } catch (e) {} show(true); status(msg || ''); if (pollTimer) clearTimeout(pollTimer); }
+  function lock(msg) { memAt = 0; $('jv-mem').classList.add('jv-hidden'); $('jv-mem-list').textContent = ''; token = null; try { localStorage.removeItem(KEY); } catch (e) {} show(true); status(msg || ''); if (pollTimer) clearTimeout(pollTimer); }
   function time(ms) { try { return new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
   function bubble(cls, text, meta) {
     var d = document.createElement('div'); d.className = 'jv-msg ' + cls; d.textContent = text;
     if (meta) { var m = document.createElement('div'); m.className = 'jv-meta'; m.textContent = meta; d.appendChild(m); }
     return d;
   }
-  function attachAudio(el, id) {
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn jv-big'; b.style.marginTop = '8px';
-    b.textContent = '\u25B6 Play Jarvis';
-    var a = document.createElement('audio'); a.controls = true; a.preload = 'auto'; a.className = 'jv-hidden';
-    el.appendChild(b); el.appendChild(a);
-    function load() {
-      if (audioUrls[id]) return Promise.resolve(audioUrls[id]);
-      return api('/api/audio/' + id).then(function (r) { if (!r.ok) throw new Error('audio'); return r.blob(); })
-        .then(function (blob) { audioUrls[id] = URL.createObjectURL(blob); return audioUrls[id]; });
-    }
-    load().then(function (u) { a.src = u; }).catch(function () {});
-    b.addEventListener('click', function () {
-      b.textContent = 'Loading\u2026';
-      load().then(function (u) {
-        if (a.src !== u) a.src = u;
-        a.classList.remove('jv-hidden'); b.classList.add('jv-hidden');
-        var p = a.play(); if (p && p.catch) p.catch(function () { status('Tap the play arrow on the player to listen.'); });
-      }).catch(function () { b.textContent = 'Voice clip not available'; });
-    });
-  }
   var KIND = { decision: 'Decision', blocker: 'Blocker', nothing: 'Nothing needs you', answer: '' };
   function render(list) {
-    var sig = JSON.stringify(list.map(function (m) { return [m.id, m.status, m.reply_at, m.has_audio]; }));
+    var sig = JSON.stringify(list.map(function (m) { return [m.id, m.status, m.reply_at]; }));
     if (sig === lastSig) return; lastSig = sig;
     var log = $('jv-log'), atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 60;
     log.textContent = ''; pending = false;
@@ -1041,7 +1016,6 @@
       badge.textContent = k; d.appendChild(badge);
       d.appendChild(document.createTextNode(m.reply_text));
       var meta = document.createElement('div'); meta.className = 'jv-meta'; meta.textContent = 'Jarvis notice \u00B7 ' + time(m.reply_at); d.appendChild(meta);
-      if (m.has_audio) attachAudio(d, m.id);
       nb.appendChild(d);
     });
     list = list.filter(function (m) { return m.type !== 'push'; });
@@ -1050,7 +1024,6 @@
       if (m.reply_text) {
         var k = KIND[m.reply_kind] || '';
         var b = bubble('jv-bot', m.reply_text, 'Jarvis \u00B7 ' + time(m.reply_at) + (k ? ' \u00B7 ' + k : ''));
-        if (m.has_audio) attachAudio(b, m.id);
         log.appendChild(b);
       } else if (m.text) {
         var isDec = m.type === 'decision';
@@ -1061,13 +1034,30 @@
         log.appendChild(bubble('jv-bot', wait));
       }
     });
-    if (!list.length) log.appendChild(bubble('jv-bot', 'Ask me anything about V2. I\u2019ll answer here, with a voice clip.'));
+    if (!list.length) log.appendChild(bubble('jv-bot', 'Ask me anything about V2. I\u2019ll answer here.'));
     if (atBottom || pending) log.scrollTop = log.scrollHeight;
+  }
+  var memAt = 0;
+  function loadMemory() {
+    memAt = Date.now();
+    api('/api/context').then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      var items = d && d.items ? d.items.slice() : [];
+      items.sort(function (a, b) { return String(b.at || '').localeCompare(String(a.at || '')); });
+      items = items.slice(0, 5);
+      var ul = $('jv-mem-list'); ul.textContent = '';
+      items.forEach(function (it) {
+        var li = document.createElement('li');
+        li.textContent = (it.at_label ? it.at_label + ' \u2014 ' : '') + it.text;
+        ul.appendChild(li);
+      });
+      $('jv-mem').classList.toggle('jv-hidden', !items.length);
+    }).catch(function () {});
   }
   function poll() {
     if (pollTimer) clearTimeout(pollTimer);
     if (!token) return;
     if (document.hidden) { pollTimer = setTimeout(poll, 30000); return; }
+    if (Date.now() - memAt > 300000) loadMemory();
     api('/api/messages').then(function (r) { return r.json(); })
       .then(function (d) { if (d.messages) render(d.messages); status(''); })
       .catch(function (e) { if (e.message !== 'locked') { status(''); health(); } })
@@ -1129,17 +1119,53 @@
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) $('jv-hint').classList.remove('jv-hidden');
   if (SR) {
-    var mic = $('jv-mic'), rec = null; mic.classList.remove('jv-hidden');
+    var mic = $('jv-mic'), rec = null, listening = false, capTimer = null, base = '', kept = '', fastEnds = 0, MIC_CAP_MS = 120000;
+    mic.classList.remove('jv-hidden');
+    function micReset(msg) {
+      listening = false; rec = null; clearTimeout(capTimer); capTimer = null; fastEnds = 0;
+      mic.classList.remove('listening'); mic.textContent = '\uD83C\uDFA4 Speak';
+      if (msg) status(msg);
+    }
+    function micSession() {
+      var r = new SR(), sessionFinal = '', startedAt = Date.now();
+      r.lang = 'en-US'; r.interimResults = true; r.continuous = true;
+      rec = r;
+      r.onresult = function (ev) {
+        var fin = '', interim = '';
+        for (var i = 0; i < ev.results.length; i++) {
+          if (ev.results[i].isFinal) fin += ev.results[i][0].transcript; else interim += ev.results[i][0].transcript;
+        }
+        sessionFinal = fin;
+        $('jv-text').value = base + kept + fin + interim;
+      };
+      r.onerror = function (ev) {
+        if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed' || ev.error === 'audio-capture') {
+          listening = false; $('jv-hint').classList.remove('jv-hidden');
+          status('Mic not available here. Use your keyboard\u2019s dictation instead.');
+        }
+      };
+      r.onend = function () {
+        if (r !== rec) return;
+        kept += sessionFinal ? sessionFinal.replace(/\s*$/, ' ') : '';
+        $('jv-text').value = base + kept;
+        if (!listening) { micReset(); return; }
+        fastEnds = (Date.now() - startedAt < 1000) ? fastEnds + 1 : 0;
+        if (fastEnds >= 5) { micReset('Mic keeps stopping here. Use your keyboard\u2019s dictation instead.'); return; }
+        try { micSession(); rec.start(); } catch (e) { micReset('Mic stopped. Tap Speak to keep going.'); }
+      };
+    }
     mic.addEventListener('click', function () {
-      if (rec) { rec.stop(); return; }
-      rec = new SR(); rec.lang = 'en-US'; rec.interimResults = true; rec.continuous = false;
-      var base = $('jv-text').value ? $('jv-text').value + ' ' : '';
-      rec.onresult = function (ev) { var t = ''; for (var i = 0; i < ev.results.length; i++) t += ev.results[i][0].transcript; $('jv-text').value = base + t; };
-      rec.onerror = function (ev) {
-        if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed' || ev.error === 'audio-capture') { $('jv-hint').classList.remove('jv-hidden'); status('Mic not available here. Use your keyboard\u2019s dictation instead.'); }
-        else status('Didn\u2019t catch that. Try again.'); };
-      rec.onend = function () { rec = null; mic.classList.remove('listening'); mic.textContent = '\uD83C\uDFA4 Speak'; };
-      try { rec.start(); mic.classList.add('listening'); mic.textContent = '\u25A0 Stop'; status('Listening\u2026 tap Stop when done, then Send.'); } catch (e) { rec = null; }
+      if (listening) { listening = false; clearTimeout(capTimer); if (rec) rec.stop(); else micReset(); return; }
+      base = $('jv-text').value ? $('jv-text').value.replace(/\s*$/, ' ') : ''; kept = ''; fastEnds = 0; listening = true;
+      try {
+        micSession(); rec.start();
+        mic.classList.add('listening'); mic.textContent = '\u25A0 Stop';
+        status('Listening\u2026 pauses are fine. Tap Stop when done, then Send.');
+        capTimer = setTimeout(function () {
+          listening = false; if (rec) rec.stop();
+          micReset('Mic stopped after 2 minutes. Tap Speak to keep going.');
+        }, MIC_CAP_MS);
+      } catch (e) { micReset(); }
     });
   }
   function offline(on) { $('jv-offline').classList.toggle('jv-hidden', !on); }
