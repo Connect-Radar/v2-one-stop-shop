@@ -18,9 +18,9 @@
   ],
   "usage": {
     "grok": {
-      "percent_week": 0,
+      "percent_week": 0.1,
       "resets_at": "2026-12-03T21:24:00-06:00",
-      "checked_at": "2026-11-27T07:17:20-06:00"
+      "checked_at": "2026-11-27T16:18:48-06:00"
     },
     "elevenlabs": null
   }
